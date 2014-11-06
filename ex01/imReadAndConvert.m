@@ -7,8 +7,3 @@ function newImage = imReadAndConvert(filename, representation)
         newImage = rgb2gray(newImage);     
     end
 end
-
-function [] = imDisplay(filename, representation)
-    image = imReadAndConvert(filename, representation);
-    imshow(image);
-end
