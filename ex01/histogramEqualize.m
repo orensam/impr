@@ -10,8 +10,8 @@ function [imEq, histOrig, histEq] = histogramEqualize(imOrig)
     end  
     
     [histOrig, bins] = imhist(imInt);
-    cumHist = cumsum(histOrig);    
-    N = prod(size(imOrig));
+    cumHist = cumsum(histOrig);
+    N = prod(size(imInt));
     cumHistInt = uint8( (cumHist * 255) / N);
     imEq = intlut(imInt, cumHistInt);       
     [histEq, bins] = imhist(imEq);
