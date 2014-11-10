@@ -8,6 +8,9 @@ function [imQuant, error] = quantizeImage(imOrig, nQuant, nIter)
     end
     
     for i = 1 : nIter
+        [h, bins] = imhist(imInt);
+        ch = cumsum(h);
+        a = round(ch * 16 / max(ch))
         
     end
     
@@ -18,3 +21,15 @@ function [imQuant, error] = quantizeImage(imOrig, nQuant, nIter)
     end
     
 end
+
+function [Q] = getQ(Z, nQuants)    
+    
+    return 
+end
+
+function [Z]  =getZ(Q)
+    
+end
+
+
+
