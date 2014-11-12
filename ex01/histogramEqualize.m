@@ -35,7 +35,6 @@ function [imEq, histOrig, histEq] = histogramEqualize(imOrig)
     % Get the new histogram
     [histEq, bins] = imhist(imEq);
     
-    
     % Handle return values and color image rebuild
     imEq = double(imEq) / 255;
     if (dims == 3)        
