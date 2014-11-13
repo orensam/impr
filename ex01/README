@@ -1,1 +1,48 @@
 orensam
+200170694
+
+=== Image Processing - Ex1 ===
+
+--- Submitted Files ---
+
+imReadAndConvert.m      - Reads and converts an image to a given representation
+imDisplay.m             - Displays an image in a given representation
+transformRGB2YIQ.m      - Transforms an RGB image to YIQ
+transformYIQ2RGB.m      - Transforms a YIQ image to RGB
+histogramEqualize.m     - Performs histogram equalization
+quantizeImage.m         - Performs optimal quantization
+testImg1.jpg            - A test image I used
+testImg2.jpg            - A test image I used
+README                  - This file
+
+
+--- MATLAB Version ---
+
+MATLAB R2014a on university computers.
+
+
+--- Functionality ---
+
+imReadAndConvert is given an image filename, and converts it from RGB to
+grayscale if requested (representation 1). If there's a problem with the file,
+0 is returned.
+
+imDisplay displays a given image in a requested representation (RGB or
+grayscale), with pixel info.
+
+transformRGB2YIQ and transformYIQ2RGB convert a given image from RGB to YIQ
+and from YIQ to RGB, respectively. If there's a problem with the input
+image, 0 is returned.
+
+histogramEqualize
+
+quantizeImage
+
+Error handling - all problems result in returning a zero value, which
+signals the receiving function that an error occured and it should exit.
+
+--- Test Images ---
+
+
+
+

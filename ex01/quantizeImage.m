@@ -33,7 +33,7 @@ function [imQuant, error] = quantizeImage(imOrig, nQuant, nIter)
     % If the image is already quantized, return it.
     if size(unique(imInt)) < nQuant
         fprintf('Error: image is already quantized\n');
-        error = -1;
+        error = 0;
         imQuant = imOrig;
         return;
     end
