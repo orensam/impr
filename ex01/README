@@ -34,14 +34,72 @@ transformRGB2YIQ and transformYIQ2RGB convert a given image from RGB to YIQ
 and from YIQ to RGB, respectively. If there's a problem with the input
 image, 0 is returned.
 
-histogramEqualize
+histogramEqualize receives an image (in doubles) and equalizes the image's
+histogram.
+If there was a problem with the image file or encoding, 
+0 is returned.
+Otherwise, the image is equalized using the algorithm 
+learned in class.
+Grayscale images are equalized straightforwardly,
+whereas RGB images have only their Y channel equalized.
+After equalization, the histogram is stretched linearly over the entire
+spectrum (0..255), in order to make sure we use up as many gray levels as 
+possible. Finally, the old and new images are displayed, and the new image
+and old and new histograms are returned.
 
-quantizeImage
+quantizeImage receives an image (in doubles), a desired number of gray levels
+nQuant and number of iterations nIter, and performs quantization of the image.
+If there was a problem with the image file or encoding, 
+0 is returned.
+If the number of gray levels in the image is already equal to or smaller 
+than nQuant, the original image is returned, with error set to 0.
+Otherwise, the image is quantized into nQuant gray levels, using a maximum
+of nIter iterations in the algorithm learned in class, in which the Z and
+Q vectors are determined. The error in each iteration is put into the error
+vector. If, at some point, the error stabilizes, the Z-Q iterations stop.
+Otherwise, nIter iterations are performed.
+Finally, the original image, the quantized image, and a graph of the error
+in each iteration are displayed.
 
-Error handling - all problems result in returning a zero value, which
-signals the receiving function that an error occured and it should exit.
+
+--- Error Handling ---
+
+All problems result in returning a zero value, which signals the receiving
+function that an error occured and it should exit.
+
 
 --- Test Images ---
+testImg1.jpg: a picture of a face painted in black, with very bright skin
+and a white backgroud.
+This is a good example of where histogram equalization fails to make an image
+better. The image's "thing" is its contrast, and the equalization algorithm
+turns the darker colors of the face into gray, and creates an aura around
+the head and collarbones which is unflattering to this great picture.
+
+testImg2.jpg: a picture of night sky with a very non-bright aurora.
+This image is great for two things:
+First, it was a good bug detector for my code - since it contains a very small
+range of intensity levels, it caused my initial Z division to fail, and
+create a vector smaller than needed, consequently failing the
+following operations.
+Second, it is a good example of an image where qauntization has a
+surprisingly small effect - since the number of levels is already small,
+the error stabilizes after very few iterations, and the returned image is
+very similar to the original one.
+
+
+--- Answers to Questions ---
+
+The question in section 3.5 asked why every segment in the initial Z division
+has to contain pixels. This is mandatory since the formula for retrieving
+Q from Z calculates every Q_i from the amount of pixels in the relevant segment.
+If there are no pixels in a segment, the resulting calcularion will be
+zero divided by zero, which is undefined, and therefore will crash the 
+program.
+
+
+
+
 
 
 

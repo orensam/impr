@@ -17,8 +17,9 @@ function [imEq, histOrig, histEq] = histogramEqualize(imOrig)
     if imInt == 0
         % Error in conversion
         fprintf('Error: file file conversion failed\n');
-        imQuant = 0;
-        error = 0;
+        imEq = 0;
+        histOrig = 0;
+        histEq = 0;
         return;
     end
     

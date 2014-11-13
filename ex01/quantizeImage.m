@@ -16,9 +16,9 @@ function [imQuant, error] = quantizeImage(imOrig, nQuant, nIter)
     dims = ndims(imOrig);
     if (dims == 3)
         imYIQ = transformRGB2YIQ(imOrig);
-        imInt = uint8(imYIQ(:,:,1) * 256);
+        imInt = uint8(imYIQ(:,:,1) * 255);
     else
-        imInt = uint8(imOrig * 256);
+        imInt = uint8(imOrig * 255);
     end
     
     % Handle conversion error
@@ -31,7 +31,7 @@ function [imQuant, error] = quantizeImage(imOrig, nQuant, nIter)
     end
     
     % If the image is already quantized, return it.
-    if size(unique(imInt)) < nQuant
+    if size(unique(imInt)) <= nQuant
         fprintf('Error: image is already quantized\n');
         error = 0;
         imQuant = imOrig;
@@ -57,10 +57,11 @@ function [imQuant, error] = quantizeImage(imOrig, nQuant, nIter)
     
     % put it into the image
     imQuant = intlut(imInt, uint8(levels));
+    imQuant = double(imQuant) / 255;
     
     % Final handling of RGV images
     if (dims == 3)
-        imYIQ(:,:,1) = double(imQuant) / 256;
+        imYIQ(:,:,1) = imQuant;
         imQuant = transformYIQ2RGB(imYIQ);        
     end
     
@@ -109,7 +110,7 @@ function [err] = getError(imInt, levels)
     % Given the array that maps the Q levels,
     % Return the current error value.
     [hist, bins] = imhist(imInt);    
-    err = sum(((levels' - bins).^2) .* hist);
+    err = sum(((levels' - bins).^2) .* (hist ./ numel(imInt)));
 end
 
 function [levels] = getLevelsArray(Q, Z, nQuant)
@@ -134,6 +135,6 @@ function [] = dispImages(imOrig, imQuant, error)
     imshow(imQuant);
     title('Quantized Image');
     subplot(1,3,3);
-    bar(1:size(error, 2), error);
+    plot(1:size(error, 2), error);
     title('Error per iteration');
 end
