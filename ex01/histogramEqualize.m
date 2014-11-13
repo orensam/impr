@@ -12,10 +12,18 @@ function [imEq, histOrig, histEq] = histogramEqualize(imOrig)
         imInt = uint8(imYIQ(:,:,1) * 255);
     else
         imInt = uint8(imOrig * 255);
-    end  
+    end
+    
+    if imInt == 0
+        % Error in conversion
+        fprintf('Error: file file conversion failed\n');
+        imQuant = 0;
+        error = 0;
+        return;
+    end
     
     % Equalize the histogram according to lecture spec
-    [histOrig, bins] = imhist(imInt);
+    [histOrig, ~] = imhist(imInt);
     cumHist = cumsum(histOrig);
     N = numel(imInt);
     cumHistInt = uint8( (cumHist * 255) / N);
@@ -33,7 +41,7 @@ function [imEq, histOrig, histEq] = histogramEqualize(imOrig)
     end
     
     % Get the new histogram
-    [histEq, bins] = imhist(imEq);
+    [histEq, ~] = imhist(imEq);
     
     % Handle return values and color image rebuild
     imEq = double(imEq) / 255;
@@ -48,7 +56,9 @@ end
 
 function [] = dispImages(imOrig, imEq)
     % Displays the original and equalized images side by side.
-    figure;
+    hFig = figure(1);
+    set(hFig, 'Position', [0 0 1000 1000])
+    
     subplot(1,2,1);
     imshow(imOrig);
     title('Original Image');
