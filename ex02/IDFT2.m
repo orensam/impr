@@ -1,9 +1,10 @@
 function [image] = IDFT2(fourierImage)
 % Converts the given fourier-represented image to a regular image.
-    
-    [height, width] = size(fourierImage);
-    image = IDFT(IDFT(fourierImage.').') ./ width;
 
+    % Transform the signal, normalization factor N*M
+    [height, width] = size(fourierImage);
+    image = IDFT(IDFT(fourierImage.').') ./ (width * height);
+    
 end
 
 
