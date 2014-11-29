@@ -3,7 +3,7 @@ function [image] = IDFT2(fourierImage)
 
     % Transform the signal, normalization factor N*M
     [height, width] = size(fourierImage);
-    image = IDFT(IDFT(fourierImage.').') ./ (width * height);
+    image = IDFT(IDFT(fourierImage.').');
     
 end
 

@@ -6,7 +6,7 @@ function [signal] = IDFT(fourierSignal)
     omegas = exp(-2*pi*i/N) .^ (0 : N-1);    
     % Create Vandermonde matrix. Normalization factor N.
     [gridX, gridY] = meshgrid(omegas, 0:N-1);
-    ivdm = inv(gridX .^ gridY) ./ N;
+    ivdm = conj(gridX .^ gridY) ./ N;
     % Transform the signal, return row vector
     signal = (ivdm * (fourierSignal.')).';
     
