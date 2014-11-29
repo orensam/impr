@@ -22,7 +22,7 @@ function blurImage = blurInFourierSpace(inImage, kernelSize)
     G = DFT2(kernelBig);
     % Blur by pointwise multiplication, and go back to image space    
     blurImage = ifftshift(IDFT2(F .* G));     
-    imshow(blurImage, []);
+    imshow(blurImage);
     
 end
 
