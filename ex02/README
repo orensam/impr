@@ -5,13 +5,26 @@ orensam
 
 --- Submitted Files ---
 
+DFT.m                   - Performs a 1D DFT of a given row vector.
+IDFT.m                  - Performs a 1D inverse DFT of a given row vector.
+DFT2.m                  - Performs a 2D DFT of a given row matrix.
+IDFT2.m                 - Performs a 2D inverse DFT of a given row vector.
+convDerivative.m        - Deriviates a given image in both axis using convolution.
+fourierDerivative.m     - Deriviates a given image in both axis using DFT.
+blurInImageSpace.m      - Blurs a given image using convolution with a gaussian kernel.
+blurInFourierSpace.m    - Blurs a given image using DFT and pointwise multiplication with a gaussian kernel.
 
 --- MATLAB Version ---
 
 MATLAB R2014a on university computers.
 
-
 --- Functionality ---
+
+--- Answers to Questions ---
+
+Section 2 (Image Derivatives): Why did you get two different magnitude images?
+
+Section 3 (Convolution Theory): What is the difference between the two results?
 
 
 
