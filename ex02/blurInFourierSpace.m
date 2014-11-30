@@ -11,17 +11,17 @@ function blurImage = blurInFourierSpace(inImage, kernelSize)
     kernel = conv2(coefs, coefs');
     kernel = kernel ./ sum(kernel(:));  
     % Pad the kernel with zeros to match image size
-    [height width] = size(inImage);
+    [height, width] = size(inImage);
     kernelBig = zeros(height, width);
-    midRow = floor(height/2)+1;
-    midCol = floor(width/2)+1;
+    midRow = floor(height/2);
+    midCol = floor(width/2);
     kernelBig(midRow-floor(kernelSize/2):midRow+floor(kernelSize/2), ...
               midCol-floor(kernelSize/2):midCol+floor(kernelSize/2)) = kernel;
     % Compute DFT of image and kernel
     F = DFT2(inImage);
-    G = DFT2(kernelBig);
+    G = DFT2(fftshift(kernelBig));
     % Blur by pointwise multiplication, and go back to image space    
-    blurImage = ifftshift(IDFT2(F .* G));     
+    blurImage = (IDFT2(F .* G));     
     imshow(blurImage);
     
 end
