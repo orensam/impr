@@ -55,10 +55,38 @@ and returns the IDFT of the result.
 
 Section 2 (Image Derivatives): Why did you get two different magnitude images?
 
+It seems, indeed, that the results are different between the two methods -
+Most of the time, the convolution derivative seems 'stronger' - the edges are more prominent,
+and more details are shown.
+
+This can be explained in several ways:
+
+a. The Fourier deriviative is only up-to-a-constant, i.e it gives us the 'general idea' of the
+derivative, but the actual values of the derivative magnitude might differ. This is a good
+conjecture, considering that the Fourier derivative was, as said before, not as prominent
+as the convolution derivative.
+
+b. The more 'natural' way to define a convolution would be with the kernels [1,-1] and [1;-1],
+and not [1,0,-1] and [1;0;-1] like we did in this implementation. I say that this is more 'natural'
+since deriviation, in general, aimes to estimate difference over as small a neighborhood 
+as possible, and this means it make more sense to use a kernel of size 2 than a kernel of size 3.
+Bottom line - maybe the switch to Fourier space made the deriviation more accurate, and this
+accueacy accounts for the differences.
+
+c. The Fourier derivative is defined for continuous functions, whereas the convolution derivative is
+more 'natural' in our case, when deriving a discrete image. This might cause out deriviation of
+the fourier-transformed image to be inaccurate.
+
 Section 3 (Convolution Theory): What is the difference between the two results?
 
+According to the convolution theorem, a convolution of two signals (in our case, an image and a
+gaussian kernel) is equivalent to performing DFT on both matrices, multiplying them pointwise,
+and then performing IDFT on the result.
+Therefore, the results are identical.
 
-
-
-
-
+A side note to that equivalence is some small artifacts that are caused by each method:
+The convolution blur has to somehow account for 'missing' edge pixels, and does so by
+convolving zero values, which results in a thin black frame around the blurred picture.
+The Fourier blur can't always allign the kernel with the middle of the image - in cases where
+one of the image's dimensions is even. This results in a small (1 pixel) cyclic shift of the
+output image compared to the original.
