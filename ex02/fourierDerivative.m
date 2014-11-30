@@ -12,6 +12,6 @@ function [magnitude] = fourierDerivative(inImage)
     derY = (2*pi*1i/height) * (IDFT2(F .* v));
     % Combine both to get magnitude
     magnitude = sqrt(derX.^2 + derY.^2);
-    imshow(magnitude);
+    imshow(real(magnitude));
     
 end
