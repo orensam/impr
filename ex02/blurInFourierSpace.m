@@ -13,8 +13,8 @@ function blurImage = blurInFourierSpace(inImage, kernelSize)
     % Pad the kernel with zeros to match image size
     [height, width] = size(inImage);
     kernelBig = zeros(height, width);
-    midRow = floor(height/2);
-    midCol = floor(width/2);
+    midRow = ceil(height/2);
+    midCol = ceil(width/2);
     kernelBig(midRow-floor(kernelSize/2):midRow+floor(kernelSize/2), ...
               midCol-floor(kernelSize/2):midCol+floor(kernelSize/2)) = kernel;
     % Compute DFT of image and kernel
