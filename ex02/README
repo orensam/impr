@@ -12,13 +12,44 @@ IDFT2.m                 - Performs a 2D inverse DFT of a given row vector.
 convDerivative.m        - Deriviates a given image in both axis using convolution.
 fourierDerivative.m     - Deriviates a given image in both axis using DFT.
 blurInImageSpace.m      - Blurs a given image using convolution with a gaussian kernel.
-blurInFourierSpace.m    - Blurs a given image using DFT and pointwise multiplication with a gaussian kernel.
+blurInFourierSpace.m    - Blurs a given image using DFT and pointwise multiplication 
+                          with a gaussian kernel.
 
 --- MATLAB Version ---
 
 MATLAB R2014a on university computers.
 
 --- Functionality ---
+
+In this exercise, I've implemented several functionalities, all revolving around 
+Fourier Transformation and convolutions:
+
+First, we have DFT, IDFT, DFT2 and IDFT2.
+These functions perform 1D/2D FT/inverse FT.
+To perform the 1D DFT/IDFT, I create the Vandermonde DFT matrix using a simple meshgrid.
+In the case of IDFT, I take its conjugate, which represents the inverse DFT operation.
+In both cases, the relevant matrix is applied to the given signal (row vector), and the output
+is the resulting Fourier signal.
+Both DFT and IDFT are height-general, i.e given a matrix, they apply the FT to the matrix's lines.
+Therefore, performing the 2D variants (DFT2/IDFT2) is simple - apply the 1D transformation
+to the image, then transpose the result and apply the 1D transformation again.
+The result is that a 1D transformation has been applied to both the rows and columns of the image,
+i.e a 2D transformation.
+The normalization factors are according to the specifications listed in the course forum -
+No normalization is done in DFT and DFT2, and a normaliztion of the vector length is done in
+IDFT, which results in a normalization of width*height in IDFT2.
+
+Second, we have convDerivative and fourierDerivative.
+Both functions perform a deriviation of the image in both axis.
+convDerivarive implements the deriviation by convolving the image with [1,0,-1],[1;0;-1].
+fourierDerivative implements the deriviation by transforming the image to the fourier space,
+and then deriving it as a function.
+
+Finally, we have blurInImageSpace and blurInFourierSpace.
+Both functions blur and image using a gaussian kernel.
+blurInImageSpace concolves the image with the kernel.
+blurInFourierSpace performs DFT on the image and kernel, multiplies them (pointwise),
+and returns the IDFT of the result.
 
 --- Answers to Questions ---
 
