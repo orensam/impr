@@ -14,6 +14,7 @@ fourierDerivative.m     - Deriviates a given image in both axis using DFT.
 blurInImageSpace.m      - Blurs a given image using convolution with a gaussian kernel.
 blurInFourierSpace.m    - Blurs a given image using DFT and pointwise multiplication 
                           with a gaussian kernel.
+README                  - This file
 
 --- MATLAB Version ---
 
