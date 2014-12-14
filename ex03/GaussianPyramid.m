@@ -23,6 +23,6 @@ function [reducedImage] = reduce(im, filter)
     kernel = filter' * filter;
     blurredImage = conv2(im, kernel, 'same');    
     [height, width] = size(blurredImage);
-    places = repmat([false false; false true], height/2, width/2);
+    places = repmat([true false; false false], height/2, width/2);
     reducedImage = reshape(blurredImage(places), height/2, width/2);
 end
