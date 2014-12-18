@@ -6,23 +6,15 @@ function [pyr, filter] = GaussianPyramid(im, maxLevels, filterSize)
 % filterSize specifies the size of the Gaussian filter used in the reduce
 % process. This filter is also returned.
     
-    pyr = {};
+    % Calculate number of levels so we don't reach an image size
+    % less than 16x16
+    nLevels = min(maxLevels, log2(min(size(im)))-3);
+    pyr = cell(1, nLevels);
     filter = getFilter(filterSize);
         
-    for i = 1:maxLevels
-        if numel(im) < 16^2
-            break;
-        end        
+    for i = 1:nLevels        
         pyr{i} = im;        
         im = reduce(im, filter);
     end
     
-end
-
-function [reducedImage] = reduce(im, filter)    
-    kernel = filter' * filter;
-    blurredImage = conv2(im, kernel, 'same');    
-    [height, width] = size(blurredImage);
-    places = repmat([true false; false false], height/2, width/2);
-    reducedImage = reshape(blurredImage(places), height/2, width/2);
 end
