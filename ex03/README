@@ -5,14 +5,77 @@ orensam
 
 --- Submitted Files ---
 
+Helper Functions:
+reduce.m                - Reduces the image size by a factor of 2 in each dimension
+expand.m                - Expands the image by a factor of 2 in each dimension
+getFilter.m             - Returns a gaussain filter of a given size
+imReadAndConvert.m      - Reads an image to RGB/grayscale (from Ex1)
+
+Pyramids:
+GaussianPyramid.m       - Creates the Gaussain pyramid of a given image
+LaplacianPyramid.m      - Creates the Laplacian pyramid of a given image
+LaplacianToImage.m      - Reconstructs the image from the given Laplacian pyramid.
+renderPyramid.m         - Blends the two given RGB images, using a given mask.
+displayPyramid.m        - Renders the given pyramid and displays the result.
+pyramidBlending.m       - Blends the two given images using the pyramid method, with the given mask
+pyramidBlendingRGB.m    - Blends the two given RGB images, using the given mask.
+
+Examples:
+blendingExample1.m      - Blends a cat and elephant into a Catephant
+cat.jpg                 - Cat image
+elephant.jpg            - Elephant image
+mask1.jpg               - Example 1 blending mask
+blendingExample2.m      - Blends Saturn into a meadow
+meadow.jpg              - Meadow image
+saturn.jpg              - Saturn image
+mask2.jpg               - Example 3 blending mask
+
+README                  - This file
 
 --- MATLAB Version ---
 
-MATLAB R2014a on university computers.
+MATLAB R2012a on MS Windows 7
 
 --- Functionality ---
 
+The files implement the pyramid blending algorithm learned in class.
+The two given examples are "Catephant" and "Saturn over Earth".
 
 --- Answers to Questions ---
 
+Q3.2: What does it mean to multiply each level in a different value? What do we try to control on?
 
+    In the Laplacian pyramid, each pyramid level corresponds to a subset of the image's
+    frequencies - as we climb up the pyramid, we see the frequencies going lower.
+    This means that changing the coefficient for the different levels allows us to reconstruct
+    the image in a weighted manner - i.e given different weights to different frequncy groups.
+    We can amplify a certain range of frequencies, or diminish it as we like.
+    This results in a change of the image's 'frequency balance' - the frequencies that will have
+    a higher weight relative to others will be more prominent after the pyramid reconstruction.
+
+Q4.2:
+a.  What happens, and why, when blending is performed with different 
+    image filters (filterSizeIm = 1,3,5,7...)?
+
+    When we use a larger filter, the expand procedure blurs the blended image at every level
+    using a a weighted sum of a larger area. 
+    This results in a better color mix of the resulting image.
+
+    For example, lets say we're trying to blend a relatively dark image with a relatively light 
+    image. If we use a smaller sized filter, the majority of light areas (those that are far from
+    the mask edge) will remain light, since they will not be blurred with any pixels from the darker
+    image. The converse is true for the darker areas. Only the small areas around the mask edge will
+    contain information from both images, and they will most likely show some 'glow' artifact.
+
+    If we enlarge the filter, we let the reconstruction process sample color from a wider area -
+    in the topmost levels of the pyramid, a large enough filter might even sample from each and
+    every pixel in the image. This results in a better balance of colors between the two parts of
+    the resulting image, and a more natural-looking result.
+
+b.  What happens, and why, when blending is performed with a varying
+    number of pyramid levels (maxLevels = 1,2,3,4,5,...)?
+
+    As we increase the number of levels in the pyramid, the two images are blended
+    across more and more frequency groups. This means that when we use more levels, we get
+    a smoother blend, and more seemless edges - since more frequency groups are blended
+    between the two images.
