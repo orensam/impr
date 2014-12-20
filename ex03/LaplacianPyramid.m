@@ -9,7 +9,7 @@ function [pyr, filter] = LaplacianPyramid(im, maxLevels, filterSize)
 
     [gpyr, filter] = GaussianPyramid(im, maxLevels, filterSize);
     nLevels = numel(gpyr);
-    pyr = cell(1, nLevels);
+    pyr = cell(nLevels, 1);
     
     for i=1:nLevels - 1
         pyr{i} = gpyr{i} - expand(gpyr{i+1}, filter);    

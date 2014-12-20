@@ -8,8 +8,8 @@ function [pyr, filter] = GaussianPyramid(im, maxLevels, filterSize)
     
     % Calculate number of levels so we don't reach an image size
     % less than 16x16
-    nLevels = min(maxLevels, log2(min(size(im)))-3);
-    pyr = cell(1, nLevels);
+    nLevels = min(maxLevels, int8(log2(min(size(im)))-3));
+    pyr = cell(nLevels, 1);
     filter = getFilter(filterSize);
         
     for i = 1:nLevels
