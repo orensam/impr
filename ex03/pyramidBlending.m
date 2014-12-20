@@ -7,7 +7,7 @@ function [imBlend] = pyramidBlending(im1, im2, mask, maxLevels, filterSizeIm, fi
     
     [mpyr, ~] = GaussianPyramid(mask, maxLevels, filterSizeMask);
     
-    nLevels = numel(mpyr);
+    nLevels = numel(lpyr1);
     respyr = cell(1, nLevels);
     for k = 1:nLevels
         respyr{k} = mpyr{k} .* lpyr1{k} + (1-mpyr{k}) .* lpyr2{k};

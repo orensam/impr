@@ -12,8 +12,8 @@ function [pyr, filter] = GaussianPyramid(im, maxLevels, filterSize)
     pyr = cell(1, nLevels);
     filter = getFilter(filterSize);
         
-    for i = 1:nLevels        
-        pyr{i} = im;        
+    for i = 1:nLevels
+        pyr{i} = im;
         im = reduce(im, filter);
     end
     
