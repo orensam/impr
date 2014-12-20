@@ -79,3 +79,5 @@ b.  What happens, and why, when blending is performed with a varying
     across more and more frequency groups. This means that when we use more levels, we get
     a smoother blend, and more seemless edges - since more frequency groups are blended
     between the two images.
+    Moreover, in the context of the previous question, when pyramid is tall enough, it can
+    let the filter sample colors from a larger area, as previously explained.    
