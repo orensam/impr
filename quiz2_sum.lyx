@@ -12,11 +12,11 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman bookman
+\font_roman default
 \font_sans default
 \font_typewriter default
 \font_math auto
-\font_default_family rmdefault
+\font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
@@ -1414,7 +1414,8 @@ lossless
 \lang hebrew
  
 \series default
-)למעשה - קידוד( היא דחיסה שבה לא מאבדים מידע - לאחר שחזור התמונה, נקבל את
+)דחיסה משמרת.
+ למעשה - קידוד( היא דחיסה שבה לא מאבדים מידע - לאחר שחזור התמונה, נקבל את
  התמונה המקורית באופן מדויק.
  נמצא בשימוש בהדמיה רפואית ובארכון.
 \end_layout
@@ -1469,8 +1470,8 @@ lossy
 \uwave default
 \noun default
 \color inherit
-היא דחיסה שבה מאפשרים איבוד מידע, ולאחר שחזור התמונה נקבל שחזור לא מדויק
- )בדרגות משתנות( של התמונה המקורית.
+)דחיסה מאבדת( היא דחיסה שבה מאפשרים איבוד מידע, ולאחר שחזור התמונה נקבל
+ שחזור לא מדויק )בדרגות משתנות( של התמונה המקורית.
  נמצא בשימוש בכל עולם הצילום הדיגיטלי.
 \end_layout
 
@@ -1998,7 +1999,7 @@ Entropy=\sum_{k=0}^{n}P\left(k\right)I\left(k\right)=-\sum_{k=0}^{n}P\left(k\rig
 \begin_inset Formula 
 \begin{eqnarray*}
 Entropy & = & -\sum_{k=0}^{n}P\left(k\right)\cdot ln\left(P\left(k\right)\right)=-\sum_{k=0}^{n}\frac{1}{n}\cdot ln\frac{1}{n}\\
- & = & -\frac{1}{n}\sum_{k=0}^{n}\cdot ln\left(1\right)-ln\left(n\right)=\frac{1}{n}\cdot n\cdot ln\left(n\right)=ln\left(n\right)
+ & = & -\frac{1}{n}\sum_{k=0}^{n}\left[ln\left(1\right)-ln\left(n\right)\right]=\frac{1}{n}\cdot n\cdot ln\left(n\right)=ln\left(n\right)
 \end{eqnarray*}
 
 \end_inset
@@ -2068,27 +2069,544 @@ LZW
 \end_layout
 
 \begin_layout Standard
-ע
+אלגוריתם דחיסה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+lossless
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שמאפשר דחיסה ושחזור בזמן אמת )
+\lang english
+online
+\lang hebrew
+(.
 \end_layout
 
 \begin_layout Standard
-ע
+האלגוריתם משתמש במילון שמקודד רצפי תוים לערכים יחידים.
+ המילון נבנה באופן זהה ובלתי תלוי בצד השולח )המקודד( ובצד המקבל )המשחזר(.
+\end_layout
+
+\begin_layout Subsubsection
+אלגוריתם הדחיסה
+\end_layout
+
+\begin_layout Enumerate
+מאתחלים מילון שבו כל המחרוזות באורך
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+.
+\end_layout
+
+\begin_layout Enumerate
+כל עוד קיים קלט:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+מוצאים את 
+\begin_inset Formula $S$
+\end_inset
+
+, המחרוזת הארוכה ביותר בקלט שנמצאת במילון.
+\end_layout
+
+\begin_layout Enumerate
+פולטים את ערך המילון של 
+\begin_inset Formula $S$
+\end_inset
+
+ ומתקדמים בקלט לתו 
+\begin_inset Formula $k$
+\end_inset
+
+ שמגיע מיד אחרי 
+\begin_inset Formula $S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+מכניסים למילון את הערך 
+\begin_inset Formula $S+k$
+\end_inset
+
+ תחת מפתח חדש.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+אלגוריתם השחזור
+\end_layout
+
+\begin_layout Enumerate
+מאתחלים מילון שבו כל המחרוזות באורך
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+.
+\end_layout
+
+\begin_layout Enumerate
+קוראים ופולטים את אות הקלט הראשונה 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+מגדירים 
+\begin_inset Formula $w=k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+כל עוד קיים מפתח 
+\begin_inset Formula $k$
+\end_inset
+
+ בקלט:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+מוצאים את 
+\begin_inset Formula $m$
+\end_inset
+
+, הערך של 
+\begin_inset Formula $k$
+\end_inset
+
+ במילון.
+\end_layout
+
+\begin_layout Enumerate
+פולטים את 
+\begin_inset Formula $m$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+מוסיפים למילון את הערך
+\begin_inset Formula $w+m\left[0\right]$
+\end_inset
+
+ תחת מפתח חדש.
+\end_layout
+
+\begin_layout Enumerate
+מגדירים 
+\begin_inset Formula $w=m$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+דחיסת
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Run-Length Encoding
 \end_layout
 
 \begin_layout Standard
-ע
+נפוץ עבור קידוד תמונות בינאריות )לדג' פקס(.
+ מתאים לקידוד תמונות עם אזורים גדולים בצבע אחיד.
 \end_layout
 
 \begin_layout Standard
-ע
+מקודד אורכי רצפים - צבע ואחריו מספר הפיקסלים הרצופים בצבע הזה.
+\end_layout
+
+\begin_layout Subsection
+מודל כללי של מערכת דחיסה
 \end_layout
 
 \begin_layout Standard
-ע
+לרוב, ניתן יהיה לתאר מערכת דחיסה באופן הבא:
+\end_layout
+
+\begin_layout Itemize
+
+\bar under
+דחיסה:
+\bar default
+ )תמונה( 
+\begin_inset Formula $\leftarrow$
+\end_inset
+
+
+\series bold
+טרנספורמציה 
+\begin_inset Formula $\leftarrow$
+\end_inset
+
+ קוונטיזציה 
+\begin_inset Formula $\leftarrow$
+\end_inset
+
+קידוד
+\series default
+
+\begin_inset Formula $\leftarrow$
+\end_inset
+
+)שליחה / שמירה(
+\end_layout
+
+\begin_layout Itemize
+
+\bar under
+שחזור:
+\bar default
+ )מידע שהתקבל / נקרא( 
+\begin_inset Formula $\leftarrow$
+\end_inset
+
+
+\series bold
+פיענוח הקידוד 
+\begin_inset Formula $\leftarrow$
+\end_inset
+
+טרנספורמציה הופכית
+\series default
+ 
+\begin_inset Formula $\leftarrow$
+\end_inset
+
+)תמונה(
 \end_layout
 
 \begin_layout Standard
-ע
+כאשר החלק בפעולה שמביא לאיבוד מידע ולשגיאות הוא הקוונטיזציה.
+\end_layout
+
+\begin_layout Subsection
+קידוד פרדיקטיבי
+\end_layout
+
+\begin_layout Standard
+קיימים אלגוריתמי דחיסה שמשתמשים בקידוד פרדיקטיבי - משתמשים בתכונות הסיגנל
+ כדי לייצר מודל שחוזה את הערך של דגימה מסויימת, ומשדרים את ההבדל בין הערך
+ החזוי לערך בפועל.
+ אפשרות אחת היא לבצע חיזוי לינארי - הערך החזוי עבור דגימה 
+\begin_inset Formula $x$
+\end_inset
+
+ הוא סכימה ממושקלת של מספר דגימות לפני 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+הצד המקבל יכול לבצע חיזוי לפי אותו מודל, ואז להוסיף לחיזוי הזה את השגיאה
+ שנשלחה.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+קידוד 
+\lang english
+DPCM
+\lang hebrew
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+הוא דוגמה למקודד כזה - 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+הוא מבצע קידוד פרדיקטיבי, ולפני שליחת ההפרשים מבצע עליהם קוונטיזציה.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+קידוד 
+\lang english
+Delta Modultion
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+הוא מקרה פרטי של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DPCM
+\lang hebrew
+, שבו מבצעים קוונטזציה לשני ערכים אפשריים -
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+או
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+, אם הדגימה הנוכחית נמוכה יותר או גבוהה יותר )בהתאמה( מממוצע הדגימות הקודמות.
 \end_layout
 
 \begin_layout Section
