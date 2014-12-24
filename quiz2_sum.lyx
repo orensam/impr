@@ -1,0 +1,2237 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\date{}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language hebrew
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman bookman
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\topmargin 1.5cm
+\secnumdepth 3
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+טרנספורמציית
+\family roman
+\series bold
+\shape up
+\size larger
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Radon
+\end_layout
+
+\begin_layout Section
+פירמידות
+\end_layout
+
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+שיטה גנרית שניתן להשתמש בה עבור דחיסה, חיפוש וזיהוי ויזואלי, חישוב תנועה,
+ ערבוב תמונות.
+\end_layout
+
+\begin_layout Subsection
+אלגוריתם בניית פירמידות
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+קלט:
+\series default
+ תמונה 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+פלט: 
+\series default
+פירמידת לפלסיאן של התמונה.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+שלב 
+\numeric on
+1
+\numeric off
+: בניית פירמידת גאוסיאן )פירמידת
+\family roman
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+lowpass
+\lang hebrew
+(
+\end_layout
+
+\begin_layout Standard
+מבצעים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $Reduce$
+\end_inset
+
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+על התמונה 
+\begin_inset Formula $n$
+\end_inset
+
+ פעמים, ובכל פעם שומרים את התוצאה.
+ 
+\begin_inset Formula $n$
+\end_inset
+
+ נקבע מראש, או מוגבל ע"י גודל התמונה הקטן ביותר שאנו מאפשרים.
+\end_layout
+
+\begin_layout Standard
+לאחר פעולה זו, נקבל פירמידה מהצורה הבאה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+G_{n} & \_ & Reduce\left(G_{n-1}\right)\\
+\vdots & \vdots & \vdots\\
+G_{3} & \_\_\_\_ & Reduce\left(G_{2}\right)\\
+G_{2} & \_\_\_\_\_\_\_\_ & Reduce\left(G_{1}\right)\\
+G_{1} & \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & Reduce\left(G_{0}\right)\\
+G_{0} & \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \text{Original Image}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+שלב 
+\numeric on
+2
+\numeric off
+: בניית פירמידת לפלסיאן: )פירמידת
+\family roman
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+bandpass
+\lang hebrew
+(
+\end_layout
+
+\begin_layout Standard
+עוברים על פירמידת הגאוסיאן מהרמה הגבוהה ביותר )כלומר, התמונה הקטנה ביותר(
+ ועד לגדולה ביותר, ובכל פעם שומרים את 
+\begin_inset Formula $L_{k}=G_{k}-Expand\left(G_{k+1}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+הפירמידה המתקבלת היא מהצורה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+L_{n} & \_ & G_{n}\\
+\vdots & \vdots & \vdots\\
+L_{3} & \_\_\_\_ & G_{3}-Expand\left(G_{4}\right)\\
+L_{2} & \_\_\_\_\_\_\_\_ & G_{2}-Expand\left(G_{3}\right)\\
+L_{1} & \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & G_{1}-Expand\left(G_{2}\right)\\
+L_{0} & \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & G_{0}-Expand\left(G_{1}\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+פעולת 
+\begin_inset Formula $Reduce$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Reduce$
+\end_inset
+
+מוגדר באופן הבא:
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+1
+\numeric off
+.
+ טשטוש עם גרעין גאוסיאני )מנורמל לסכום
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+(
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+2
+\numeric off
+.
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+sub-sampling
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- דגימה כל פיקסל שני בכל שורה שניה.
+\end_layout
+
+\begin_layout Standard
+כלומר, הפעולה מחזירה הקטנה של התמונה המקורית, כך שכל מימד הוקטן פי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\numeric off
+.
+\end_layout
+
+\begin_layout Subsubsection
+פעולת 
+\begin_inset Formula $Expand$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Expand$
+\end_inset
+
+ מוגדר באופן הבא:
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+1
+\numeric off
+.
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+zero-padding
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- ריפוד באפסים, כך שהתמונה החדשה מכילה את פיקסלי התמונה המקורית בכל פיקסל
+ שני בכל שורה שניה.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+2
+\numeric off
+.
+ טשטוש עם גרעין גאוסיאני )מנורמל לסכום
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\numeric off
+(
+\end_layout
+
+\begin_layout Standard
+כלומר, הפעולה מחזירה הגדלה של התמונה המקורית, כך שכל מימד הוגדל פי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\numeric off
+.
+\end_layout
+
+\begin_layout Subsection
+משמעות הפירמידות
+\end_layout
+
+\begin_layout Standard
+נשים לב, שהפעלת גרעין גאוסיאני על התמונה משמעו למעשה הפעלת פילטר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+lowpass
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+מכיוון שבכל שלב בבניית פירמדית הגאוסיאן אנו מבצעים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+blur
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+נוסף, נקבל שכל רמה בפירמידה היא למעשה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+blur
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+של תמונת המקור עם גרעין גאוסיאני שהולך וגדל במרחב התמונה, או הולך וקטן במרחב
+ התדר.
+\end_layout
+
+\begin_layout Standard
+כעת, חיסור שתי רמות עוקבות בפירמידת הגאוסיאן ייתן לנו את התמונה המקורית
+ תלת הפעלת פילטר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+bandpass
+\lang hebrew
+, שהוא חיסור של פילטר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+lowpass
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+קטן )במרחב התדר( מפילטר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+bandpass
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+גדול יותר.
+\end_layout
+
+\begin_layout Standard
+כלומר, למעשה פירמידת הגאוסיאן היא פירמידת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+lowpass
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+של התמונה, ופירמידת הלפלסיאן היא פירמידת ה-
+\lang english
+bandpass
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שלה.
+\end_layout
+
+\begin_layout Subsection
+שחזור התמונה מתוך פירמידת לפלסיאן
+\end_layout
+
+\begin_layout Standard
+בהינתן פירמידת לפלסיאן של תמונה, ניתן לשחזר כל רמה בפירמידת הגאוסיאן של
+ התמונה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Sigma_{i=k}^{n}L_{i}=G_{k}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ובפרט:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Sigma_{i=0}^{n}L_{i}=G_{0}
+\]
+
+\end_inset
+
+כלומר, סכימת פירמידת הלפלסיאן כולה משחזרת את התמונה המקורית.
+\end_layout
+
+\begin_layout Standard
+נשים לב שבכל שלב סכימה, יש לבצע 
+\begin_inset Formula $Expand$
+\end_inset
+
+ על הרמה בפירמידה שמחברים )לדוגמה, בפירמידה עם שלוש רמות, יתקיים 
+\begin_inset Formula $G_{0}=L_{0}+Expand\left(L_{1}+Expand\left(L_{2}\right)\right)$
+\end_inset
+
+(
+\end_layout
+
+\begin_layout Subsection
+שימוש: דחיסה
+\end_layout
+
+\begin_layout Subsubsection
+אלגוריתם דחיסת פירמידה
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+קלט:
+\series default
+ תמונה.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+פלט: 
+\series default
+דחיסה של התמונה.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+1
+\numeric off
+.
+ בונים פירמידת לפלסיאן
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+2
+\numeric off
+.
+ מבצעים קוונטיזציה של הערכים בפירמידה )ל-
+\numeric on
+3-5
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ערכים(
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+3
+\numeric off
+.
+ דוחסים את הפירמידה בדחיסת אנטרופיה )לדג'
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+LZ
+\lang hebrew
+(
+\end_layout
+
+\begin_layout Standard
+כעת קיבלנו ייצוג דחוס של התמונה, וניתן לשחזר את התמונה ע"י פתיחת הדחיסה
+ ושחזור התמונה מהפירמידה.
+\end_layout
+
+\begin_layout Subsection
+שימוש:
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size normal
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Image Blending
+\end_layout
+
+\begin_layout Subsubsection
+אלגוריתם
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Pyramid Blending
+\end_layout
+
+\begin_layout Standard
+קלט: שתי תמונות )
+\begin_inset Formula $A,B$
+\end_inset
+
+( ומסכה בינארית )
+\begin_inset Formula $M$
+\end_inset
+
+(
+\end_layout
+
+\begin_layout Standard
+פלט: ערבוב של התמונות לפי המסכה.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+1
+\numeric off
+.
+ בונים את פירמידת הלפלסיאן של כל תמונה: 
+\begin_inset Formula $L_{A},L_{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+2
+\numeric off
+.
+ בונים את פירמידת הגאוסיאן של המסכה: 
+\begin_inset Formula $G_{M}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+3
+\numeric off
+.
+ בונים פירמידת לפלסיאן חדשה 
+\begin_inset Formula $L_{C}$
+\end_inset
+
+ כך שלכל רמה 
+\begin_inset Formula $k$
+\end_inset
+
+ בפירמידה מתקיים:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+L_{C}\left[k\right]=G_{M}\left[k\right]\cdot L_{A}\left[k\right]+\left(1-G_{M}\left[k\right]\right)\cdot L_{B}\left[k\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+4
+\numeric off
+.
+ מחזירים את שחזור התמונה מתוך הפירמידה 
+\begin_inset Formula $L_{C}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+הפירמידה המוחזרת מערבבת את התמונות )לפי המסכה הנתונה( באופן שהוא יפה לעין
+ ועם קצוות חלקים.
+\end_layout
+
+\begin_layout Section
+טרנספורמציות - 
+\lang english
+Warping
+\end_layout
+
+\begin_layout Section
+דחיסה -
+\family roman
+\series bold
+\shape up
+\size larger
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Image Compression
+\end_layout
+
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+קבצי תמונה )ובעקבותיהם, קבצי וידאו( יכולים לשקול הרבה מאד בייצוג נאיבי -
+ עשרות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+MB
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+עבור תמונות סטילס, ועד מאות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+GB
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+לשעה של וידאו.
+\end_layout
+
+\begin_layout Standard
+ברוב התמונות קיימת 
+\series bold
+קורלציה מרחבית
+\series default
+ - פיקסלים קרובים הם דומים זה לזה.
+\end_layout
+
+\begin_layout Standard
+ברוב הסרטים קיימת 
+\series bold
+קורלציה טמפורלית 
+\series default
+- פריימים סמוכים דומים זה לזה.
+\end_layout
+
+\begin_layout Standard
+תכונות אלו מאפשרות לנו לבצע דחיסה של קובץ תמונה או וידאו, באופן שיאפשר שחזור
+ אמין )או אפילו מושלם(
+\end_layout
+
+\begin_layout Subsection
+סוגי דחיסה
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+דחיסה 
+\lang english
+lossless
+\lang hebrew
+ 
+\series default
+)למעשה - קידוד( היא דחיסה שבה לא מאבדים מידע - לאחר שחזור התמונה, נקבל את
+ התמונה המקורית באופן מדויק.
+ נמצא בשימוש בהדמיה רפואית ובארכון.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+דחיסה
+\family roman
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+lossy
+\family roman
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+היא דחיסה שבה מאפשרים איבוד מידע, ולאחר שחזור התמונה נקבל שחזור לא מדויק
+ )בדרגות משתנות( של התמונה המקורית.
+ נמצא בשימוש בכל עולם הצילום הדיגיטלי.
+\end_layout
+
+\begin_layout Subsection
+קידוד
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Huffman
+\end_layout
+
+\begin_layout Standard
+דחיסה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Lossless
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מבוססת תדירויות הופעה של מקטעי ביטים.
+\end_layout
+
+\begin_layout Subsubsection
+אלגוריתם - קידוד
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Huffman
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+קלט: 
+\series default
+תמונה.
+ 
+\series bold
+פלט: 
+\series default
+התמונה הדחוסה.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+1
+\numeric off
+.
+ מבצעים מעבר ראשון על התמונה, ושומרים היסטוגרמה של הצבעים )או העוצמות( בתמונה.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+2
+\numeric off
+.
+ בונים עץ באופן איטרטיבי )מלמטה כלפי מעלה( - בהתחלה, כל ערך בהיסטוגרמה הוא
+ עלה.
+ כעת, בכל איטרציה מחברים בצומת הורה את שני הצמתים בעלי הערך הנמוך ביותר,
+ וההורה מקבל את הסכום של שני הצמתים שחיבר.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+3
+\numeric off
+.
+ מגדירים צעד ימינה בתור
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+וצעד שמאלה בתור
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+)או להיפך(, וכעת הקידוד של כל עלה )כלומר, ערך ספציפי בתמונה( הוא רצף הביטים
+ במסלול משורש העץ אל העלה.
+\end_layout
+
+\begin_layout Subsubsection
+אדפטציות
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+קידוד האפמן עבור תמונות בינאריות: 
+\series default
+בהינתן תמונה בינארית, קידוד האפמן רגיל ישאיר את התמונה בדיוק כפי שהיא )יתקבל
+ עץ עם שני עלים, עלה עבור
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ערך
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ועלה עבור ערך
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\numeric off
+, והם יתורגמו לאותם ערכים בדיוק(.
+\end_layout
+
+\begin_layout Standard
+כדי לאפשר דחיסה משמעותית לתמונה בינארית, ניתן להתייחס לקבוצות ביטים - נניח,
+ לקודד לפי תדירות ההופעה של קבוצות של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+8
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ביטים או
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+16
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ביטים.
+ שינוי כזה ייתן לנו קבוצת ערכים גדולה יותר, ולכן עץ עמוק יותר, שיאפשר דחיסה
+ טובה יותר.
+\end_layout
+
+\begin_layout Subsection
+אנטרופיה
+\end_layout
+
+\begin_layout Standard
+בתורת האינפורמציה, 
+\series bold
+אנטרופיה 
+\series default
+מהווה מדד לכמות אי-הוודאות בתוכן כלשהו.
+\end_layout
+
+\begin_layout Standard
+בהינתן מרחב הסתברות בו ייתכנו הערכים 
+\begin_inset Formula $0\dots n$
+\end_inset
+
+, האנטרופיה במרחב מוגדרת בתור תוחלת האינפורמציה במרחב:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Entropy=\sum_{k=0}^{n}P\left(k\right)I\left(k\right)=-\sum_{k=0}^{n}P\left(k\right)\cdot ln\left(P\left(k\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+במקרה של התפלגות אחידה, כלומר 
+\begin_inset Formula $P\left(k\right)=\frac{1}{n}$
+\end_inset
+
+ לכל 
+\begin_inset Formula $k\in\left[0,n\right]$
+\end_inset
+
+, אי הוודאות במרחב ההסתברות היא מקסימלית, ולכן תתקבל האנטרופיה המקסימלית:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+Entropy & = & -\sum_{k=0}^{n}P\left(k\right)\cdot ln\left(P\left(k\right)\right)=-\sum_{k=0}^{n}\frac{1}{n}\cdot ln\frac{1}{n}\\
+ & = & -\frac{1}{n}\sum_{k=0}^{n}\cdot ln\left(1\right)-ln\left(n\right)=\frac{1}{n}\cdot n\cdot ln\left(n\right)=ln\left(n\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+במקרה שבו 
+\begin_inset Formula $P\left(d\right)=1$
+\end_inset
+
+ עבור 
+\begin_inset Formula $d$
+\end_inset
+
+ יחיד, ו-
+\begin_inset Formula $P\left(k\right)=0$
+\end_inset
+
+ לכל 
+\begin_inset Formula $k\neq d$
+\end_inset
+
+, אין אי ודאות במרחב ההסתברות )שכן תמיד נקבל את אותו ערך(, תתקבל האנטרופיה
+ המינימלית:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Entropy=-1\cdot ln\left(1\right)-\sum_{k\neq d}0\cdot ln\left(0\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+דחיסת
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+LZW
+\end_layout
+
+\begin_layout Standard
+ע
+\end_layout
+
+\begin_layout Standard
+ע
+\end_layout
+
+\begin_layout Standard
+ע
+\end_layout
+
+\begin_layout Standard
+ע
+\end_layout
+
+\begin_layout Standard
+ע
+\end_layout
+
+\begin_layout Standard
+ע
+\end_layout
+
+\begin_layout Section
+יישור - 
+\lang english
+Image Alignment
+\end_layout
+
+\begin_layout Section
+זיהוי נקודות עניין -
+\family roman
+\series bold
+\shape up
+\size larger
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Feature Point Detection
+\end_layout
+
+\begin_layout Section
+תפירת תמונות -
+\family roman
+\series bold
+\shape up
+\size larger
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Image Stitching
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+h
+\end_layout
+
+\end_body
+\end_document
