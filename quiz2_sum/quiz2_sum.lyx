@@ -5258,6 +5258,156 @@ tracking
 דיוק דיסקרטי )?(
 \end_layout
 
+\begin_layout Subsection
+שיטת
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Lucas-Kanade
+\end_layout
+
+\begin_layout Standard
+אלגוריתם שמחשב טרנספורמציה בין שתי תמונות, באופן איטרטיבי, תוך שימוש במזעור-שגיא
+ה מבוסס קירוב לינארי.
+\end_layout
+
+\begin_layout Standard
+תחילה, מזעור השגיאה:
+\end_layout
+
+\begin_layout Standard
+בהינתן שתי תמונות 
+\begin_inset Formula $I,J$
+\end_inset
+
+, ערך השגיאה )מצורת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+MSE
+\lang hebrew
+( עבור פיקסל יחיד עבור הזזה של 
+\begin_inset Formula $u,v$
+\end_inset
+
+ הוא:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E\left(u,v\right)=\left[J\left(x+u,y+v\right)-I\left(x,y\right)\right]^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כעת נשתמש בקירוב טיילור מסדר ראשון, כלומר נבצע את הקירוב הבא:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f\left(x+u,y+v\right)\thickapprox f\left(x,y\right)+\frac{\partial f}{\partial x}u+\frac{\partial f}{\partial y}v
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ונקבל:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+E\left(u,v\right) & \thickapprox & \left[J\left(x,y\right)+\frac{\partial J}{\partial x}u+\frac{\partial J}{\partial y}v-I\left(x,y\right)\right]^{2}\\
+ & = & \left[J_{x}\cdot u+J_{y}\cdot v+D\right]^{2}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כאשר 
+\begin_inset Formula $J_{x},J_{y}$
+\end_inset
+
+ הן הנגזרות החלקיות של 
+\begin_inset Formula $J$
+\end_inset
+
+, ו-
+\begin_inset Formula $D=J-I$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+כעת, אם נסתכל על כל הפיקסלים בתמונה, נקבל שאנו שואפים למזער את הטעות הבאה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E\left(u,v\right)=\sum_{x,y}\left[J_{x}\left(x,y\right)\cdot u+J_{y}\left(x,y\right)\cdot v+D\left(x,y\right)\right]^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 זיהוי נקודות עניין -
 \family roman
