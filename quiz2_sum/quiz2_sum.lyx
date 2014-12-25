@@ -1326,7 +1326,7 @@ Global Parametric Warping
 \end_layout
 
 \begin_layout Subsection
-סוגי טרנספורמציות
+טרנספורמציות בסיסיות
 \end_layout
 
 \begin_layout Itemize
@@ -1383,7 +1383,7 @@ Uniform Scaling
 
 \begin_deeper
 \begin_layout Itemize
-ניתנת לייצוג ע"י מטריצה 
+במטריצה 
 \begin_inset Formula $2\times2$
 \end_inset
 
@@ -1425,7 +1425,7 @@ Rotation
 
 \begin_deeper
 \begin_layout Itemize
-ניתנת לייצוג ע"י מטריצה 
+במטריצה 
 \begin_inset Formula $2\times2$
 \end_inset
 
@@ -1467,7 +1467,1238 @@ x\cdot\sin\theta+y\cdot\cos\theta
 \lang english
 Shearing
 \lang hebrew
-( - 
+( - מתיחה בכל ציר כתלות בציר השני.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+במטריצה 
+\begin_inset Formula $2\times2$
+\end_inset
+
+: 
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'
+\end{matrix}\right)=\left(\begin{matrix}1 & sh_{x}\\
+sh_{y} & 1
+\end{matrix}\right)\left(\begin{matrix}x\\
+y
+\end{matrix}\right)=\left(\begin{matrix}x+sh_{x}y\\
+sh_{y}x+y
+\end{matrix}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+שיקוף )
+\lang english
+Mirror
+\lang hebrew
+( - סביב ציר 
+\begin_inset Formula $y$
+\end_inset
+
+ עם 
+\begin_inset Formula $\left(\begin{matrix}-1 & 0\\
+0 & 1
+\end{matrix}\right)$
+\end_inset
+
+,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+סביב ציר 
+\begin_inset Formula $x$
+\end_inset
+
+ עם 
+\begin_inset Formula $\left(\begin{matrix}1 & 0\\
+0 & -1
+\end{matrix}\right)$
+\end_inset
+
+ סביב ראשית הצירים עם 
+\begin_inset Formula $\left(\begin{matrix}-1 & 0\\
+0 & -1
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+קואורדינטות הומוגניות
+\end_layout
+
+\begin_layout Subsubsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+טרנספורמציות לינאריות מאפשרות לממש רק קומבינציות של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Scaling, Rotation
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ו-
+\lang english
+Shearing
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+כדי לאפשר הפעלת טרנסופרמציות לא לינאריות )כמו הזזה, כפי שראינו לעיל, או
+ טרנספורמציות מסובכות יותר(, משתמשים בקואורדינטות הומוגניות.
+\end_layout
+
+\begin_layout Subsubsection
+הגדרה ותכונות
+\end_layout
+
+\begin_layout Standard
+עבור קואורדינטה 
+\begin_inset Formula $\left(\begin{matrix}x\\
+y
+\end{matrix}\right)$
+\end_inset
+
+, הקואורדינטה ההומוגנית שלה היא 
+\begin_inset Formula $\left(\begin{matrix}wx\\
+wy\\
+w
+\end{matrix}\right)$
+\end_inset
+
+.
+ ברירת המחדל היא 
+\begin_inset Formula $w=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+במילים אחרות, קואורדינטה הומוגנית 
+\begin_inset Formula $\left(\begin{matrix}x\\
+y\\
+w
+\end{matrix}\right)$
+\end_inset
+
+ מייצגת נקודה דו-מימדית 
+\begin_inset Formula $\left(\begin{matrix}\nicefrac{x}{w}\\
+\nicefrac{y}{w}
+\end{matrix}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+קל לראות שקואורדינטות הומוגניות הן אינווריאנטיות לכפל בסקלר: 
+\begin_inset Formula $\left(\begin{matrix}x\\
+y\\
+1
+\end{matrix}\right)\cong\left(\begin{matrix}\lambda x\\
+\lambda y\\
+\lambda
+\end{matrix}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+הקואורדינטה 
+\begin_inset Formula $\left(\begin{matrix}x\\
+y\\
+0
+\end{matrix}\right)$
+\end_inset
+
+ מייצגת נקודה באינסוף.
+ הקואורדינטה 
+\begin_inset Formula $\left(\begin{matrix}0\\
+0\\
+0
+\end{matrix}\right)$
+\end_inset
+
+ לא קיימת.
+\end_layout
+
+\begin_layout Subsubsection
+טרנספורמציות בקואורדינטות הומוגניות
+\end_layout
+
+\begin_layout Itemize
+הזזה )
+\lang english
+Translation
+\lang hebrew
+(: 
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'\\
+1
+\end{matrix}\right)=\left(\begin{matrix}1 & 0 & t_{x}\\
+0 & 1 & t_{y}\\
+0 & 0 & 1
+\end{matrix}\right)\left(\begin{matrix}x\\
+y\\
+1
+\end{matrix}\right)=\left(\begin{matrix}x+t_{x}\\
+y+t_{y}\\
+1
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+שינוי גודל )
+\lang english
+Scaling
+\lang hebrew
+(: 
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'\\
+1
+\end{matrix}\right)=\left(\begin{matrix}s_{x} & 0 & 0\\
+0 & s_{y} & 0\\
+0 & 0 & 1
+\end{matrix}\right)\left(\begin{matrix}x\\
+y\\
+1
+\end{matrix}\right)=\left(\begin{matrix}s_{x}x\\
+s_{y}y\\
+1
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+סיבוב )
+\lang english
+Rotation
+\lang hebrew
+(: 
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'\\
+1
+\end{matrix}\right)=\left(\begin{matrix}\cos\theta & -\sin\theta & 0\\
+\sin\theta & \cos\theta & 0\\
+0 & 0 & 1
+\end{matrix}\right)\left(\begin{matrix}x\\
+y\\
+1
+\end{matrix}\right)=\left(\begin{matrix}x\cdot\cos\theta-y\cdot\sin\theta\\
+x\cdot\sin\theta+y\cdot\cos\theta\\
+1
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+גזירה )
+\lang english
+Shearing
+\lang hebrew
+(: 
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'\\
+1
+\end{matrix}\right)=\left(\begin{matrix}1 & sh_{x} & 0\\
+sh_{y} & 1 & 0\\
+0 & 0 & 1
+\end{matrix}\right)\left(\begin{matrix}x\\
+y\\
+1
+\end{matrix}\right)=\left(\begin{matrix}x+sh_{x}y\\
+sh_{y}x+y\\
+1
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+הרכבת טרנספורמציות
+\end_layout
+
+\begin_layout Standard
+כפל של מספר מטריצות המייצגות טרנספורמציות מאפשר ייצוג של טרנספורמציה מורכבת
+ במטריצה יחידה.
+\end_layout
+
+\begin_layout Standard
+מאפשר מימוש יעיל בחומרה.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+חשוב - 
+\series default
+מכיוון שכפל מטריצות הוא לא קומוטטיבי, סדר הכפלת המטריצות חשוב - לדוגמה,
+ הזזה וסיבוב סביב 
+\begin_inset Formula $\left(0,0\right)$
+\end_inset
+
+ אינו שקול לסיבוב ואחריו הזזה.
+\end_layout
+
+\begin_layout Subsubsection
+משפחות של טרנספורמציות
+\end_layout
+
+\begin_layout Itemize
+טרנספורמציות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Rigid
+\lang hebrew
+:
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שילוב
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Translation, Rotation
+\lang hebrew
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'\\
+1
+\end{matrix}\right)=\left(\begin{matrix}\cos\theta & -\sin\theta & t_{x}\\
+\sin\theta & \cos\theta & t_{y}\\
+0 & 0 & 1
+\end{matrix}\right)\left(\begin{matrix}x\\
+y\\
+1
+\end{matrix}\right)=\left(\begin{matrix}x\cdot\cos\theta-y\cdot\sin\theta+t_{x}\\
+x\cdot\sin\theta+y\cdot\cos\theta+t_{y}\\
+1
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\numeric on
+3
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+פרמטרים: 
+\begin_inset Formula $t_{x},t_{y},\theta$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+משמר את כל הפרמטרים מלבד
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+orientation
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+טרנספורמציות
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Similarity
+\lang hebrew
+: שילוב 
+\series default
+\lang english
+Translation, Rotation, Uniform scaling
+\lang hebrew
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'\\
+1
+\end{matrix}\right)=\left(\begin{matrix}s\cdot\cos\theta & -s\cdot\sin\theta & t_{x}\\
+s\cdot\sin\theta & s\cdot\cos\theta & t_{y}\\
+0 & 0 & 1
+\end{matrix}\right)\left(\begin{matrix}x\\
+y\\
+1
+\end{matrix}\right)=\left(\begin{matrix}s\cdot x\cdot\cos\theta-s\cdot y\cdot\sin\theta+t_{x}\\
+s\cdot x\cdot\sin\theta+s\cdot y\cdot\cos\theta+t_{y}\\
+1
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\numeric on
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+פרמטרים: 
+\begin_inset Formula $s,t_{x},t_{y},\theta$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+משמר פרופורציה וזוויות.
+ לא משמר אורכים ו-
+\lang english
+orientation
+\end_layout
+
+\begin_layout Itemize
+רלוונטי עבור תמונות שצולמו במקביל למישור.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+טרנספורמציות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Affine
+\lang hebrew
+: שילוב 
+\lang english
+Translation, Rotation, Scaling, Shearing
+\lang hebrew
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'\\
+1
+\end{matrix}\right)=\left(\begin{matrix}a & b & c\\
+d & e & f\\
+0 & 0 & 1
+\end{matrix}\right)\left(\begin{matrix}x\\
+y\\
+1
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\numeric on
+6
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ פרמטרים
+\end_layout
+
+\begin_layout Itemize
+משמר קווים מקבילים
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+טרנספורמציות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Projective
+\lang hebrew
+: שילוב
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Affine
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+עם
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Projective warps
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'\\
+1
+\end{matrix}\right)=\left(\begin{matrix}a & b & c\\
+d & e & f\\
+g & h & 1
+\end{matrix}\right)\left(\begin{matrix}x\\
+y\\
+1
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\numeric on
+8
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+פרמטרים
+\end_layout
+
+\begin_layout Itemize
+משמר רק קווים ישרים
+\end_layout
+
+\begin_layout Itemize
+מקרה פרטי:
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Perspective projection
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- משמר את מרכז התמונה.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+סיכום בשרטוט:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename transforms.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+חישוב טרנספורמציה על תמונה
+\end_layout
+
+\begin_layout Subsubsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+בהינתן תמונה וטרנספורמציה שאנו רוצים להפעיל עליה, מה הדרך הנכונה לבצע זאת?
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset Formula $\text{Forward Warping}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+מתרגמים כל קואורדינטה 
+\begin_inset Formula $\left(x,y\right)$
+\end_inset
+
+ בתמונה המקורית לקואורדינטה חדשה 
+\begin_inset Formula $\left(x',y'\right)=T\left(x,y\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+אם 
+\begin_inset Formula $\left(x',y'\right)$
+\end_inset
+
+ נופל "בין שני פיקסלים": 
+\end_layout
+
+\begin_layout Standard
+מבצעים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Splatting
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- מפזרים את הצבע של הפיקסל הבעייתי בין הפיקסלים השכנים.
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset Formula $\text{Backward (Inverse) Warping}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+לכל קואורדינטה 
+\begin_inset Formula $\left(x',y'\right)$
+\end_inset
+
+ בתמונה החדשה, מוצאים את פיקסל המקור שלו בתמונה המקורית - 
+\begin_inset Formula $\left(x,y\right)=T^{-1}\left(x',y'\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+אם 
+\begin_inset Formula $\left(x,y\right)$
+\end_inset
+
+ נופל "בין שני פיקסלים":
+\end_layout
+
+\begin_layout Standard
+מבצעים 
+\series bold
+אינטרפולציה 
+\series default
+של ערכי הפיקסלים השכנים:
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Nearest Neighbor
+\lang hebrew
+, אינטרפולציה גאוסיאנית, אינטרפולציה בי-קובית.
+\end_layout
+
+\begin_layout Standard
+אינטרפולציה בילינארית - סכימה ממושקלת של ערכי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+הפיקסלים הסמוכים.
+ בהינתן 
+\begin_inset Formula $x,y$
+\end_inset
+
+ כנ"ל ותמונה 
+\begin_inset Formula $f$
+\end_inset
+
+, נשערך את ערך התמונה בנקודה 
+\begin_inset Formula $x,y$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f\left(x,y\right)=\sum_{adjacent\ pixels}\left(1-d\left(x,i\right)\right)\cdot\left(1-d\left(y,j\right)\right)\cdot f\left(i,j\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+מי יותר טוב?
+\end_layout
+
+\begin_layout Standard
+בד"כ
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Inverse Warping
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- כי אין היווצרות של חורים כמו ב-
+\lang english
+Forward Warping
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+אפשרי רק אם הטרנספורמציה הפיכה.
 \end_layout
 
 \begin_layout Section
@@ -3681,6 +4912,352 @@ lossy
 Image Alignment
 \end_layout
 
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+בהינתן שתי תמונות שאנו יודעים שנבדלות זו מזו בפרמטרים מסויימים )הזזה, רוטציה
+ וכו'(, נרצה לחשב את הפרמטרים האלה.
+\end_layout
+
+\begin_layout Subsection
+חישוב באמצעות קרוס-קורלציה
+\end_layout
+
+\begin_layout Standard
+לשם הפשטות, נניח שאנו רוצים לחשב רק את ההזזה )בשני הצירים( בין שתי תמונות.
+\end_layout
+
+\begin_layout Standard
+בהינתן שתי תמונות 
+\begin_inset Formula $I_{1},I_{2}$
+\end_inset
+
+ ווקטור הזה 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+, ניתן לחשב את גודל הטעות שבהזזת התמונה 
+\begin_inset Formula $I_{2}$
+\end_inset
+
+ לפי הוקטור 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+, לעומת התמונה 
+\begin_inset Formula $I_{1}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E\left(u,v\right)=\sum_{x}\sum_{y}\left(I_{1}\left(x,y\right)-I_{2}\left(x+u,y+v\right)\right)^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+אם נפתח, נקבל:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E\left(u,v\right)=\sum_{x}\sum_{y}I_{1}^{2}-2\sum_{x}\sum_{y}I_{1}\left(x,y\right)I_{2}\left(x+u,y+v\right)+\sum_{x}\sum_{y}I_{2}^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ומכיוון ש 
+\begin_inset Formula $\sum_{x}\sum_{y}I_{1}^{2}$
+\end_inset
+
+ ו- 
+\begin_inset Formula $\sum_{x}\sum_{y}I_{2}^{2}$
+\end_inset
+
+ )כמעט?( קבועים,מינימיזציה של הטעות שקולה למקסימיזציה של הקרוס-קורלציה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+C\left(u,v\right)=\sum_{x}\sum_{y}I_{1}\left(x,y\right)I_{2}\left(x+u,y+v\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לבטל השפעה של אפקטי חיבור וכפל באמצעות קרוס-קורלציה מנורמלת:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+NC\left(u,v\right)=\frac{\sum\left(I_{1}\left(x,y\right)-\hat{I}_{1}\right)\cdot\left(I_{2}\left(x+u,y+v\right)-\hat{I}_{2}\right)}{\sqrt{\sum\left(I_{1}\left(x,y\right)-\hat{I}_{1}\right)^{2}}\cdot\sqrt{\sum\left(I_{2}\left(x,y\right)-\hat{I}_{2}\right)^{2}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+חישוב באמצעות פירמידות
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+(Multiresolution Search)
+\end_layout
+
+\begin_layout Standard
+השיטה מכונה גם
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Coarse-to-fine alignment
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+בהינתן זוג תמונות שאנו רוצים לחשב את הטרנספורמציה שהתרחשה בינהן, או תמונה
+ שאנו רוצים לחפש בתוכה אובייקט, אפשר להשתמש בפירמידת הגאוסיאן - 
+\end_layout
+
+\begin_layout Standard
+תחילה, נבנה את הפירמידות עבור שתי התמונות.
+\end_layout
+
+\begin_layout Standard
+כעת, נבדוק קורלציה ברזולוציה הנמוכה ביותר, ונקבל טווח פרמטרים גס עבור הטרנספורמצ
+יה.
+\end_layout
+
+\begin_layout Standard
+נתקדם לרמה הבאה, שבה נצטרך לחפש רק בטווח ערכים קטן יחסית.
+\end_layout
+
+\begin_layout Standard
+נמשיך כך עד הרזולוציה הגבוהה ביותר, שבה נצטרך לחפש בטווח ערכים קטן משמעותית
+ לעומת חיפוש על התמונה כולה.
+\end_layout
+
+\begin_layout Subsection
+יתרונות וחסרונות
+\end_layout
+
+\begin_layout Itemize
+קרוס קורלציה מנורמלת:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+טובה במיוחד לזיהוי אובייקטים ול-
+\lang english
+tracking
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בוידאו.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+חישוב באמצעות פירמידות:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+מתאים לזיהוי אובייקטים, אבל פחות מתאים ל-
+\lang english
+tracking
+\lang hebrew
+, שכן ב-
+\lang english
+tracking
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בכל מקרה אנו מבצעים כל חיפוש באזור קטן יחסית.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+בעיית יעילות:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+יעילות החיפוש פוחתת ככל שהטרנספורמציה מסובכת יותר - חישוב הזזה )
+\numeric on
+2
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+פרמטרים( לוקח 
+\begin_inset Formula $O\left(n^{2}\right)$
+\end_inset
+
+, אבל חישוב טרנספורמציה אפינית )
+\numeric on
+6
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+פרמטרים( לוקח 
+\begin_inset Formula $O\left(n^{6}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+דיוק דיסקרטי )?(
+\end_layout
+
 \begin_layout Section
 זיהוי נקודות עניין -
 \family roman
@@ -3814,7 +5391,7 @@ h
 \begin_layout Standard
 
 \lang english
-h
+h 
 \end_layout
 
 \end_body
