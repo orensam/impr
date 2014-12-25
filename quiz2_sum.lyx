@@ -1242,6 +1242,234 @@ L_{C}\left[k\right]=G_{M}\left[k\right]\cdot L_{A}\left[k\right]+\left(1-G_{M}\l
 Warping
 \end_layout
 
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+הרעיון הבסיסי - ביצוע טרנספורמציה על הקואורדינטות של תמונה נתונה.
+\end_layout
+
+\begin_layout Standard
+טרנספורמציות כאלו מאפשרות לנו, בין השאר, להזיז, למתוח, ולסובב תמונה נתונה.
+\end_layout
+
+\begin_layout Standard
+פעולות כאלה מאפשרות לנו לאחר מכאן לבצע פעולות מתקדמות )לדג' תפירה של תמונות
+ שצולמו מזויות שונות(
+\end_layout
+
+\begin_layout Subsection
+הגדרה
+\end_layout
+
+\begin_layout Standard
+הטרנספורמציות בהן נעסוק הן
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Global Parametric Warping
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+טרנספורמציה 
+\begin_inset Formula $T$
+\end_inset
+
+ שכזו היא מהצורה 
+\begin_inset Formula $p'=Tp$
+\end_inset
+
+, כאשר 
+\begin_inset Formula $p$
+\end_inset
+
+ קואורדינטה בתמונה.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $T$
+\end_inset
+
+ היא 
+\series bold
+גלובלית
+\series default
+ )כלומר, עובדת באותה צורה על כל קואורדינטה( ו
+\series bold
+פרמטרית 
+\series default
+)כלומר, נקבעת ע"י מספר מצומצם של פרמטרים(.
+\end_layout
+
+\begin_layout Subsection
+סוגי טרנספורמציות
+\end_layout
+
+\begin_layout Itemize
+הזזה )
+\lang english
+Translation
+\lang hebrew
+( - הוספת סקלר לכל קואורדינטה.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+לא ניתנת לייצוג ע"י מטריצה 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ - כי זו אינה טרנספורמציה לינארית.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+שינוי גודל )
+\lang english
+Scaling
+\lang hebrew
+( - הכפלת כל קואורדינטה בסקלר.
+ אם הסקלרים זהים לכל המימדים, מדובר ב-
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Uniform Scaling
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+ניתנת לייצוג ע"י מטריצה 
+\begin_inset Formula $2\times2$
+\end_inset
+
+: 
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'
+\end{matrix}\right)=\left(\begin{matrix}a & 0\\
+0 & b
+\end{matrix}\right)\left(\begin{matrix}x\\
+y
+\end{matrix}\right)=\left(\begin{matrix}ax\\
+by
+\end{matrix}\right)$
+\end_inset
+
+.
+ המטריצה ההופכית תהיה 
+\begin_inset Formula $\left(\begin{matrix}\frac{1}{a} & 0\\
+0 & \frac{1}{b}
+\end{matrix}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+סיבוב )
+\lang english
+Rotation
+\lang hebrew
+( - סיבוב התמונה בזוית 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+ניתנת לייצוג ע"י מטריצה 
+\begin_inset Formula $2\times2$
+\end_inset
+
+.
+ בהינתן זוית 
+\begin_inset Formula $\theta$
+\end_inset
+
+: 
+\begin_inset Formula $\left(\begin{matrix}x'\\
+y'
+\end{matrix}\right)=\left(\begin{matrix}\cos\theta & -\sin\theta\\
+\sin\theta & \cos\theta
+\end{matrix}\right)\left(\begin{matrix}x\\
+y
+\end{matrix}\right)=\left(\begin{matrix}x\cdot\cos\theta-y\cdot\sin\theta\\
+x\cdot\sin\theta+y\cdot\cos\theta
+\end{matrix}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+המטריצה ההופכית למטריצת סיבוב 
+\begin_inset Formula $R$
+\end_inset
+
+ תהיה 
+\begin_inset Formula $R^{T}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+גזירה )
+\lang english
+Shearing
+\lang hebrew
+( - 
+\end_layout
+
 \begin_layout Section
 דחיסה -
 \family roman
@@ -2607,6 +2835,844 @@ DPCM
 \noun off
 \color none
 , אם הדגימה הנוכחית נמוכה יותר או גבוהה יותר )בהתאמה( מממוצע הדגימות הקודמות.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+דחיסת פירמידה 
+\series default
+גם היא סוג של קידוד פרדירטיבי - פירמידת הלפלסיאן שומרת את ההפרשים בין הפלט
+ החזוי )
+\begin_inset Formula $Expand$
+\end_inset
+
+ של הרמה שמתחת( לבין הפלט האמיתי.
+ פירמידת הלפלסיאן היא במנעד צבעים קטן, ולכן בעלת אנטרופיה נמוכה )ביחס לפירמידת
+ הגאוסיאן, שבה מנעד הצבעים הוא כמו בתמונה המקורית(.
+ האנטרופיה הנמוכה הזו היא מה שמאפשר דחיסה יעילה של פירמידת הלפלסיאן.
+\end_layout
+
+\begin_layout Subsection
+קידוד
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size normal
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DCT
+\end_layout
+
+\begin_layout Standard
+פעולת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DCT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בדומה ל-
+\lang english
+DFT
+\lang hebrew
+, מבצעת טרנספורמציה ממרחב התמונה למרחב התדר.
+\end_layout
+
+\begin_layout Standard
+הן נבדלות זו מזו במספר פרמטרים:
+\end_layout
+
+\begin_layout Itemize
+בעוד
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DFT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+משתמשת בסינוסים וקוסינוסים,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DCT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+משתמשת בקוסינוסים בלבד.
+\end_layout
+
+\begin_layout Itemize
+ב-
+\lang english
+DCT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+יש שימוש במספרים ממשיים בלבד )ולא במספרים מרוכבים(.
+\end_layout
+
+\begin_layout Itemize
+ה-
+\lang english
+DCT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מאפשר קירוב טוב יותר תוך שימוש בפחות מקדמים.
+\end_layout
+
+\begin_layout Itemize
+כאשר הפעולה ציקלית,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DCT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מבצע שיקוף, בניגוד ל-
+\lang english
+DFT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שמבצע חזרה.
+\end_layout
+
+\begin_layout Standard
+הנוסחה למעבר הבסיסים מבסיס מרחב התמונה 
+\begin_inset Formula $f$
+\end_inset
+
+ לבסיס מרחב התדר )במקרה החד מימדי( היא:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+C_{n} & = & DCT\left\{ f_{J}\right\} =\alpha_{n}\sum_{j=0}^{N-1}f_{j}cos\left[\frac{\left(2j+1\right)\cdot n\pi}{2N}\right]\\
+f_{j} & = & DICT\left\{ C_{n}\right\} =\sum_{j=0}^{N-1}\alpha_{n}\cdot C_{n}cos\left[\frac{\left(2j+1\right)\cdot n\pi}{2N}\right]
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כאשר 
+\begin_inset Formula $\alpha_{n}=\sqrt{\frac{1}{N}}$
+\end_inset
+
+ עבור 
+\begin_inset Formula $n=0$
+\end_inset
+
+, ו- 
+\begin_inset Formula $\alpha_{n}=\sqrt{\frac{2}{N}}$
+\end_inset
+
+ לכל 
+\begin_inset Formula $n>0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+את איברי הבסיס עבור
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DCT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+
+\begin_inset Formula $8\times8$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ניתן לתאר גרפית באופן הבא:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename dct.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כלומר, אם ניקח תמונה בגודל 
+\begin_inset Formula $8\times8$
+\end_inset
+
+, ונפעיל עליה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DCT
+\lang hebrew
+, נקבל מטריצה חדשה בגודל 
+\begin_inset Formula $8\times8$
+\end_inset
+
+ שבה כל איבר הוא מקדם של הערך במיקום המקביל במטריצת ה-
+\lang english
+DCT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+לעיל.
+\end_layout
+
+\begin_layout Subsubsection
+דחיסת
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+JPEG
+\end_layout
+
+\begin_layout Standard
+דחיסת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+JPEG
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+משתמשת ב-
+\lang english
+DCT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ובתכונות שלו כדי לדחוס תמונות היטב )הקטנה משמעותית במשקל הקובץ תוך שמירה
+ על האיכות הויזואלית(.
+\end_layout
+
+\begin_layout Standard
+הדחיסה עובדת באופן הבא:
+\end_layout
+
+\begin_layout Enumerate
+מעבירים את התמונה למרחב צבע 
+\begin_inset Formula $YCbCr$
+\end_inset
+
+ )שבו הרכיב הראשון, 
+\begin_inset Formula $Y$
+\end_inset
+
+, קובע את הבהירות(
+\end_layout
+
+\begin_layout Enumerate
+מחלקים את התמונה לבלוקים של 
+\begin_inset Formula $8\times8$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+מבצעים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DCT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+על כל בלוק.
+\end_layout
+
+\begin_layout Enumerate
+מבצעים קוונטיזציה - מחלקים כל ערך בערך המתאים לו במטריצת הקוונטיזציה 
+\begin_inset Formula $Q$
+\end_inset
+
+ )מטריצה קבועה(.
+\end_layout
+
+\begin_layout Enumerate
+מקודדים את התוצאה בקידוד האפמן.
+\end_layout
+
+\begin_layout Standard
+במטריצה 
+\begin_inset Formula $Q$
+\end_inset
+
+, ערכי החלוקה עבור התדרים הגבוהים הם גבוהים משמעותית מערכי החלוקה עבור התדרים
+ הנמוכים.
+\end_layout
+
+\begin_layout Standard
+הדחיסה כאן מתבססת על העובדה שהעין האנושית מתקשה לשים לב לשינויים קטנים בבהירויות
+ גבוהות.
+\end_layout
+
+\begin_layout Standard
+פעולת הקוונטיזציה היא האלמנט ה-
+\lang english
+lossy
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+היחיד בתהליך כולו.
+\end_layout
+
+\begin_layout Standard
+בגלל החלוקה בערכים גבוהים, התדרים הגבוהים בכל בלוק )כלומר, הערכים שבחלק
+ הימני-תחתון( נעים בטווח ערכים קטן, ולעיתים קרובות מתאפסים.
+\end_layout
+
+\begin_layout Standard
+בערוצי הצבע )
+\begin_inset Formula $Cb,Cr$
+\end_inset
+
+( מבצעים קוונטיזציה משמעותית אפילו יותר )עם מטריצת קוונטיזציה אחרת(.
 \end_layout
 
 \begin_layout Section
