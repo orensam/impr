@@ -2403,7 +2403,146 @@ Perspective projection
 \end_layout
 
 \begin_layout Subsection
-חישוב טרנספורמציה על תמונה
+תנאי סף לחישוב טרנספורמציה
+\end_layout
+
+\begin_layout Standard
+בהינתן שתי תמונות, שאחת מהן היא טרנספורמציה של השניה, נרצה לחשב את הטרנספורמציה
+ הזו.
+\end_layout
+
+\begin_layout Standard
+אם נמצא אוסף נקודות בתמונה אחת, שלכל אחת מהן אנו יודעים מה הנקודה המתאימה
+ לה בתמונה השניה, נוכל לחשב את הטרנספורמציה הנ"ל.
+\end_layout
+
+\begin_layout Standard
+מכיוון שכל נקודה מכילה זוג קואורדינטות, כל נקודה שאנו יודעים מה הנקודה המתאימה
+ לה בתמונה השניה מספקת לנו שתי משוואות.
+\end_layout
+
+\begin_layout Standard
+אם כן, לחישוב טרנספורמציה עם דרגת חופש )כלומר, מספר פרמטרים( 
+\begin_inset Formula $d$
+\end_inset
+
+, דרושות לנו לפחות 
+\begin_inset Formula $d$
+\end_inset
+
+ משוואות, כלומר לפחות 
+\begin_inset Formula $\left\lceil \frac{d}{2}\right\rceil $
+\end_inset
+
+ נקודות.
+\end_layout
+
+\begin_layout Standard
+לדוגמה, לטרנספורמציה רגידית יש
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+3
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+דרגות חופש, ולכן דרושות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+נקודות כדי למצוא את הפרמטרים שלה.
+\end_layout
+
+\begin_layout Subsection
+הםעלת טרנספורמציה על תמונה
 \end_layout
 
 \begin_layout Subsubsection
@@ -4907,9 +5046,32 @@ lossy
 \end_layout
 
 \begin_layout Section
-יישור - 
+יישור מבוסס פיקסלים -
+\family roman
+\series bold
+\shape up
+\size larger
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 \lang english
-Image Alignment
+Direct Alignment
 \end_layout
 
 \begin_layout Subsection
@@ -6779,7 +6941,7 @@ LK
 
 \end_deeper
 \begin_layout Section
-זיהוי נקודות עניין -
+יישור מבוסס מאפיינים -
 \family roman
 \series bold
 \shape up
@@ -6804,15 +6966,19 @@ LK
 \noun default
 \color inherit
 \lang english
-Feature Point Detection
+Feature Based Alignment
 \end_layout
 
-\begin_layout Section
-תפירת תמונות -
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+שיטות יישור מבוססות פיקסלים )קרןס קןרלציה,
 \family roman
-\series bold
+\series medium
 \shape up
-\size larger
+\size normal
 \emph off
 \bar no
 \strikeout off
@@ -6833,85 +6999,1526 @@ Feature Point Detection
 \noun default
 \color inherit
 \lang english
-Image Stitching
+LK
+\lang hebrew
+( פחות מתאימים לתמונות שיש בינהן חפיפה.
 \end_layout
 
 \begin_layout Standard
-
+לדוגמה, ייצור פנורמה יהיה קשה מאד אם ננסה להשתמש ב-
 \lang english
-h
+LK
+\end_layout
+
+\begin_layout Subsection
+הרעיון הכללי
 \end_layout
 
 \begin_layout Standard
+יישור מבוסס מאפיינים מורכב מארבעה שלבים:
+\end_layout
 
+\begin_layout Enumerate
+מציאת נקודות עניין בשתי התמונות
+\end_layout
+
+\begin_layout Enumerate
+הגדרת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 \lang english
-h
+descriptor
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+לכל נקודת עניין
+\end_layout
+
+\begin_layout Enumerate
+מציאת זוגות של נקודות מתאימות
+\end_layout
+
+\begin_layout Enumerate
+התאמת התמונות באמצעות הזוגות הנ"ל.
 \end_layout
 
 \begin_layout Standard
+נשים לב שאת שלב
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+אנו כבר יודעים איך לעשות - בהינתן מספיק זוגות של נקודות, אנו יודעים לחשב
+ את הטרנספורמציה שהתבצעה.
+\end_layout
 
+\begin_layout Paragraph
+בעיות שעלינו לפתור
+\end_layout
+
+\begin_layout Enumerate
+עלינו למצוא את אותן הנקודות בשתי התמונות, באופן בלתי תלוי.
+\end_layout
+
+\begin_layout Enumerate
+לאחר שמצאנו אוספי נקודות בכל תמונה, עלינו להתאים כל נקודה לנקודה שבאמת מתאימה
+ לה.
+\end_layout
+
+\begin_layout Paragraph
+דרישות מאלכוריתמי ההתאמה
+\end_layout
+
+\begin_layout Enumerate
+קלים לביצוע
+\end_layout
+
+\begin_layout Enumerate
+לא פגיעים לרעש, תאורה, שינוי גודל, הזזה, סיבוב, זוית צפיה
+\end_layout
+
+\begin_layout Enumerate
+יכולים לבצע התאמה מול מאגרים של אובייקטים
+\end_layout
+
+\begin_layout Subsection
+אלגוריתם
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 \lang english
-h
+Harris Corner Detector
+\end_layout
+
+\begin_layout Subsubsection
+הרעיון הכללי
 \end_layout
 
 \begin_layout Standard
-
-\lang english
-h
+אנו מבקשים לזהות נקודות בתמונה שניתן להגדיר בפינות.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
-h
+האבחנה המרכזית היא שבהינתן חלון כלשהו והזזה קטנה של החלון הזה, אם החלון
+ מכיל פינה, נראה )לאחר ההזזה( שינוי בשני הצירים.
 \end_layout
 
 \begin_layout Standard
-
+אם החלון מכיל
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 \lang english
-h
+edge
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+נראה הזזה בכיוון אחד בלבד, ואם החלון מכיל אזור אחיד לא נראה שינוי באף כיוון.
+\end_layout
+
+\begin_layout Subsubsection
+איך זה עובד
 \end_layout
 
 \begin_layout Standard
+נתונה תמונה 
+\begin_inset Formula $I$
+\end_inset
 
-\lang english
-h
+.
 \end_layout
 
 \begin_layout Standard
+נגדיר חלון באופן הבא - לכל נקודה 
+\begin_inset Formula $x,y$
+\end_inset
 
-\lang english
-h
+, החלון עבורה יהיה הפונקציה 
+\begin_inset Formula $w\left(x,y\right)$
+\end_inset
+
+, שמקבלת את הערך 
+\begin_inset Formula $1$
+\end_inset
+
+ אם נקודה כלשהי נמצאת בתוך החלון, ו-
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $0$
+\end_inset
+
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+אחרת.
+ ניתן להגדיר גם ש-
+\begin_inset Formula $w$
+\end_inset
+
+ מקבלת ערכים בין 
+\begin_inset Formula $0$
+\end_inset
+
+ ל-
+\begin_inset Formula $1$
+\end_inset
+
+ לפי התפלגות גאוסיאנית, כך שניתן משקל גדול יותר לפיקסלים במרכז החלון.
 \end_layout
 
 \begin_layout Standard
+כעת נגדיר את ערך השינוי בעוצמה עבור הזזה לפי הוקטור 
+\begin_inset Formula $u,v$
+\end_inset
 
+ ע"י פונקציית
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 \lang english
-h
+SSD
+\lang hebrew
+:
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\[
+S\left(u,v\right)=\sum_{x,y}w\left(x,y\right)\cdot\left[I\left(x+u,y+v\right)-I\left(x,y\right)\right]^{2}
+\]
 
-\lang english
-h
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-
-\lang english
-h
+כעת נשתמש בקירוב טיילור מסדר ראשון, כלומר:
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\[
+I\left(x+u,y+v\right)\thickapprox I\left(x,y\right)+I_{x}\cdot u+I_{y}\cdot v
+\]
 
-\lang english
-h
+\end_inset
+
+ונקבל:
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+S\left(u,v\right) & \thickapprox & \sum_{x,y}w\left(x,y\right)\left[I_{x}\cdot u+I_{y}\cdot v\right]^{2}\\
+ & = & \sum_{x,y}w\left(x,y\right)\left[\left(u,v\right)\left(\begin{matrix}I_{x}\\
+I_{y}
+\end{matrix}\right)\right]^{2}
+\end{eqnarray*}
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ובכתיב מטריציוני:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+S\left(u,v\right)\thickapprox\left(u,v\right)M\left(\begin{matrix}u\\
+v
+\end{matrix}\right)
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+כאשר:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+M=\sum_{x,y}w\left(x,y\right)\left(\begin{matrix}I_{x}^{2} & I_{x}I_{y}\\
+I_{x}I_{y} & I_{y}^{2}
+\end{matrix}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כעת, ל-
+\begin_inset Formula $M$
+\end_inset
+
+ יהיו שני ע"ע, 
+\begin_inset Formula $\lambda_{1},\lambda_{2}$
+\end_inset
+
+, עם ו"ע מתאימים 
+\begin_inset Formula $\left(u1,v1\right),\ \left(u_{2},v_{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נשים לב שהו"ע ניצבים זה לזה, כי 
+\begin_inset Formula $M$
+\end_inset
+
+ סימטרית וממשית.
+\end_layout
+
+\begin_layout Standard
+ככל שהע"ע גדולים יותר, כך השינוי בכיון הו"ע המתאים להם גדול יותר.
+\end_layout
+
+\begin_layout Standard
+נבחין בין שלושה מצבים:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\lambda_{1},\lambda_{2}\thickapprox0$
+\end_inset
+
+: השינוי בשני הכיוונים קטן.
+ כלומר, מדובר באזור אחיד.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\lambda_{1}\ll\lambda_{2}$
+\end_inset
+
+ או 
+\begin_inset Formula $\lambda_{2}\ll\lambda_{1}$
+\end_inset
+
+: השינוי בכיוון אחד גדול בהרבה מהשינוי בכיוון השני.
+ כלומר, מדובר ב-
 \lang english
-h 
+edge
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\lambda_{1},\lambda_{2}\gg0$
+\end_inset
+
+: השינוי גדול בשני הכיוונים.
+ כלומר, מדובר בפינה.
+\end_layout
+
+\begin_layout Standard
+כעת נגדיר לכל פיקסל את ערך ה-
+\lang english
+Corner Response
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שלו )לפי האריס( - ערך שגדל ככל שהפיקסל יותר מתאים להגדרה של 'פינה':
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{H}=Det\left(M\right)-k\cdot Trace\left(M\right)^{2}=\lambda_{1}\lambda_{2}-k\cdot\left(\lambda_{1}+\lambda_{2}\right)^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+הערה: קיימת הגדרה נוספת ל-
+\lang english
+Corner Response
+\lang hebrew
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{N}=\frac{Det\left(M\right)}{Trace\left(M\right)}=\frac{\lambda_{1}\lambda_{2}}{\lambda_{1}+\lambda_{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+האלגוריתם
+\end_layout
+
+\begin_layout Enumerate
+חשב את 
+\begin_inset Formula $R_{H}$
+\end_inset
+
+ לכל פיקסל בתמונה.
+\end_layout
+
+\begin_layout Enumerate
+הגדר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+סף 
+\begin_inset Formula $t$
+\end_inset
+
+ ומצא את כל הנקודות שמקיימות 
+\begin_inset Formula $R_{N}>t$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+אוסף נקודות העניין הוא נקודות המקסימום הלוקאלי של 
+\begin_inset Formula $R_{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+תכונות
+\end_layout
+
+\begin_layout Enumerate
+ערך ה-
+\lang english
+Corner Response
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+הוא אינווריאנטי לסיבוב - כי הסיבוב לא ישפיע על הע"ע של 
+\begin_inset Formula $M$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+אינוויראנטיות לשינוי בהירות:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+אם מוסיפים לתמונה ערך קבוע, האלגוריתם אינווריאנטי
+\end_layout
+
+\begin_layout Enumerate
+אם כופלים את התמונה בערך קבוע, ייתכן שהצלחת האלגוריתם תיפגע.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+לא אינווריאנטי לשינוי גודל:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+אם מגדילים את התמונה ומשאירים את החלון באותו גודל, ייתכן שפינה תהפוך לסדרת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+edges
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Enumerate
+כדי לפתור את הבעיה, ניתן לחפש פינות ע"י שימוש בחלונות בכמה גדלים שונים.
+\end_layout
+
+\begin_layout Enumerate
+אם נרצה להשתמש בטכניקה הזו כדי להשוות בין שתי תמונות, ניתן להשתמש בעובדה
+ שפינות מתאימות בשתי התמונות יתנהגו באופן דומה זו לזו בכל גדלי החלונות.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+דסקריפטורים
+\end_layout
+
+\begin_layout Subsubsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+בהינתן נקודות עניין, היינו רוצים לתת לכל אחת ערך )או וקטור( שמתאר אותה )דסקריפטו
+ר(, כדי שנוכל להתאים לה נקודת עניין בעלת דסקריפטור דומה בתמונה השניה.
+\end_layout
+
+\begin_layout Standard
+נדרוש שדסקריפטורים כאלה יהיו א.
+ אינווריאנטיים לטרנספורמציות ורעש, ב.
+ דיסטינקטיביים.
+\end_layout
+
+\begin_layout Subsubsection
+אלגוריתם
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+MOPS - Multi-Scale Oriented Patches
+\end_layout
+
+\begin_layout Standard
+האלגוריתם יוצר דסקריפטורים באופן הבא:
+\end_layout
+
+\begin_layout Enumerate
+מבצעים 
+\lang english
+multi-scale harris
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+על התמונה, ושומרים את נקודות העניין בכל רמה בפירמידה.
+\end_layout
+
+\begin_layout Enumerate
+לכל נקודות עניין, בכל רמה בפירמידה, לוקחים סביבה בגודל 
+\begin_inset Formula $40\times40$
+\end_inset
+
+ מהתמונה לאחר טשטוש.
+ לסביבה זו מבצעים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+sub-sampling
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+עם פקטור
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+5
+\numeric off
+, ונותרים עם חלון בגודל 
+\begin_inset Formula $8\times8$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+מחשבים את כיוון הגרדיינט בחלון, ומסובבים אותו בכיוון הזה.
+ 
+\end_layout
+
+\begin_layout Enumerate
+מבצעים נורמליזציה לתוחלת 
+\begin_inset Formula $\mu$
+\end_inset
+
+ ושונות 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ )בד"כ
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $0$
+\end_inset
+
+ ו-
+\begin_inset Formula $1$
+\end_inset
+
+(.
+\end_layout
+
+\begin_layout Enumerate
+הדקסריפטור עבור הנקודה הוא החלון של 
+\begin_inset Formula $64$
+\end_inset
+
+ הפיקסלים שקיבלנו לאחר התהליך.
+\end_layout
+
+\begin_layout Subsubsection
+אלגוריתם
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+SIFT - Scale-Invariant Feature Transform
+\end_layout
+
+\begin_layout Standard
+תחילה האלגוריתם מוצא נקודות עניין:
+\end_layout
+
+\begin_layout Enumerate
+בונים פירמידת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DoG - Difference of Gaussian
+\lang hebrew
+.
+ זוהי פירמידה שבה מספר "אוקטבות" - כל אוקטבה מכילה תמונות מאותו גודל, ואוקטבות
+ נבדלות זו מזו
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ב-
+\lang english
+scaling
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בכל כיוון.
+ כל אוקטבה היא סדרת הפרשים של שתי רמות טשטוש עוקבות של התמונה המקורית.
+\end_layout
+
+\begin_layout Enumerate
+נקודות העניין הן נקודות מינימום ומקסימום לוקאליות, כאשר כל פיקסל מושווה
+ גם לשכנים המידיים שלו )בתוך התמונה שבה הוא נמצא(, וגם ל-
+\numeric on
+9
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+הפיקסלים המקבילים אליו ולסביבתו ברמה שמעליו ומתחתיו )בתוך האוקטבה הרלוונטית(.
+\end_layout
+
+\begin_layout Standard
+לאחר שמצאנו נקודות עניין, אנו נגדיר את הדסקריפטורים שלהם באופן הבא:
+\end_layout
+
+\begin_layout Enumerate
+מציאת אוקיינטציה קנונית - בונים היסטוגרמה עם
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+36
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+דליים עבור כיווני הגרדיינט בסביבה של הנקודה )כל דלי מייצג טווח של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+10
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מעלות(.
+ הערכים שמוכנסים להיסטוגרמה ממושקלים גאוסיאנית.
+\end_layout
+
+\begin_layout Enumerate
+האוריינטציה הקנונית של הנקודה היא הדלי המלא ביותר.
+ במצבים שבהם יש שני ערכים גדולים, ייתכן שנשתמש בשניהם.
+ האוריינטציה הקנונית הזו משמשת למימוש
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+rotation invariance
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- זויות שיחושבו בהמשך מנורמלות לפיה.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+בונים את הדסקריפטור - לוקחים סביבה בגודל 
+\begin_inset Formula $16\times16$
+\end_inset
+
+ של נקודת העניין, ומחשבים את הגרדיינט בכל נקודה בסביבה.
+ את גדלי הגרדיינט ממשקלים גאוסיאנית.
+ את הסביבה מחלקים ל-
+\begin_inset Formula $16$
+\end_inset
+
+ חלונות של 
+\begin_inset Formula $4\times4$
+\end_inset
+
+.
+ בכל חלון יוצרים היסטוגרמה עם 
+\begin_inset Formula $8$
+\end_inset
+
+ דליים של כיווני הגרדיינט.
+ הדסקריפטור הוא וקטור באורך
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+128
+\numeric off
+, שבו
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $16$
+\end_inset
+
+ היסטוגרמות בגודל 
+\begin_inset Formula $8$
+\end_inset
+
+.
+ את הוקטור מנרמלים, לוקחים סף ב-
+\begin_inset Formula $0.2$
+\end_inset
+
+ ומנרמלים שוב.
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+תכונות
+\end_layout
+
+\begin_layout Enumerate
+לוקאליות - הדסקריפטורים שמצאנו הם תכונות מקומיות, ולכן ניתן להתאים אובייקטים
+ גם תחת הפרעות סביבתיות
+\end_layout
+
+\begin_layout Enumerate
+ייחודיות - הדסקריפטורים מייצגים תכונות ייחודיות, שמאפשרות זיהוי עצמים מצוין.
+\end_layout
+
+\begin_layout Enumerate
+יעילות גבוהה.
+\end_layout
+
+\begin_layout Enumerate
+ניתן להתאמה למגוון רחב של סוגי נקודות עניין.
+\end_layout
+
+\begin_layout Subsection
+התאמת נקודות עניין
+\end_layout
+
+\begin_layout Subsubsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+בהינתן נקודות עניין עם דסקריפטורים בשתי תמונות, נרצה למצוא זוגות מתאימים.
+ 
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
+\end_layout
+
+\begin_layout Standard
+י
 \end_layout
 
 \end_body
