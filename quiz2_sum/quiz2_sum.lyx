@@ -5293,7 +5293,15 @@ Lucas-Kanade
 \end_layout
 
 \begin_layout Standard
-תחילה, מזעור השגיאה:
+מכיוון שאנו משתמשים בקירוב לינארי, הפעולה הבסיסית של מזעור השגיאה מתאימה
+ רק לזיהוי תנועה קטן מאד )פיקסל אחד, בערך(.
+ תחילה נציג את הבסיס המתמטי של מזעור שגיאה יחיד, ולאחר מכן נציג שתי שיטות
+ המשתמשות במזעור שגיאה מספר פעמים כדי להשיג תוצאות טובות - השיטה האיטרטיבית,
+ ושיטת הפירמידות.
+\end_layout
+
+\begin_layout Subsubsection
+מזעור השגיאה
 \end_layout
 
 \begin_layout Standard
@@ -5400,7 +5408,7 @@ E\left(u,v\right) & \thickapprox & \left[J\left(x,y\right)+\frac{\partial J}{\pa
 \begin_layout Standard
 \begin_inset Formula 
 \[
-E\left(u,v\right)=\sum_{x,y}\left[J_{x}\left(x,y\right)\cdot u+J_{y}\left(x,y\right)\cdot v+D\left(x,y\right)\right]^{2}
+E\left(u,v\right)=\sum_{x,y}\left[J_{x}\cdot u+J_{y}\cdot v+D\right]^{2}
 \]
 
 \end_inset
@@ -5408,6 +5416,1368 @@ E\left(u,v\right)=\sum_{x,y}\left[J_{x}\left(x,y\right)\cdot u+J_{y}\left(x,y\ri
 
 \end_layout
 
+\begin_layout Standard
+נחשב את הנגזרות החלקיות ונשווה לאפס:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial u} & = & \sum_{x,y}J_{x}\cdot\left(J_{x}\cdot u+J_{y}\cdot v+D\right)=0\\
+\frac{\partial E}{\partial v} & = & \sum_{x,y}J_{y}\cdot\left(J_{x}\cdot u+J_{y}\cdot v+D\right)=0
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ובכתיב מטריציוני - אנו מחפשים 
+\begin_inset Formula $u,v$
+\end_inset
+
+ המקיימים:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(\begin{matrix}\underset{x,y}{\sum}J_{x}^{2} & \underset{x,y}{\sum}J_{x}J_{y}\\
+\underset{x,y}{\sum}J_{y}J_{x} & \underset{x,y}{\sum}J_{y}^{2}
+\end{matrix}\right)\left(\begin{matrix}u\\
+v
+\end{matrix}\right)=-\left(\begin{matrix}\underset{x,y}{\sum}J_{x}D\\
+\underset{x,y}{\sum}J_{y}D
+\end{matrix}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כעת נסמן: 
+\begin_inset Formula 
+\[
+A=\left(\begin{matrix}\underset{x,y}{\sum}J_{x}^{2} & \underset{x,y}{\sum}J_{x}J_{y}\\
+\underset{x,y}{\sum}J_{y}J_{x} & \underset{x,y}{\sum}J_{y}^{2}
+\end{matrix}\right),\ b=\left(\begin{matrix}\underset{x,y}{\sum}J_{x}D\\
+\underset{x,y}{\sum}J_{y}D
+\end{matrix}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ונראה שאנו מקבלים שעלינו לפתור את מערכת המשוואות הבאה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(\begin{matrix}u\\
+v
+\end{matrix}\right)=A^{-1}\cdot\left(-b\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+השיטה האיטרטיבית
+\end_layout
+
+\begin_layout Standard
+כאמור, מזעור השגיאה הבסיסי מאפשר לחשב הזה קטנה מאד.
+ כדי להתגבר על הבעיה, מבצעים איטרציות עד להתכנסות:
+\end_layout
+
+\begin_layout Itemize
+אתחול: 
+\begin_inset Formula $u=v=0$
+\end_inset
+
+, חישוב )חד פעמי( של 
+\begin_inset Formula $J_{x},J_{y},A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+חשב את 
+\begin_inset Formula $D=J-I$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+בצע איטרציות עד התכנסות, כלומר עד ש-
+\begin_inset Formula $D$
+\end_inset
+
+ קרוב לאפס כרצוננו:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+חשב את 
+\begin_inset Formula $b=\left(\begin{matrix}\underset{x,y}{\sum}J_{x}D\\
+\underset{x,y}{\sum}J_{y}D
+\end{matrix}\right)$
+\end_inset
+
+ )כאשר 
+\begin_inset Formula $J_{x},J_{y}$
+\end_inset
+
+ הן הנגזרות של התמונה 
+\begin_inset Formula $J$
+\end_inset
+
+ המקורית(
+\end_layout
+
+\begin_layout Itemize
+פתור את מערכת המשוואות 
+\begin_inset Formula $\left(\begin{matrix}du\\
+dv
+\end{matrix}\right)=A^{-1}\cdot\left(-b\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+עדכן: 
+\begin_inset Formula $u=u+du,\ v=v+dv$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+עדכן: 
+\begin_inset Formula $D=J_{warped}-I$
+\end_inset
+
+, כאשר 
+\begin_inset Formula $J_{warped}$
+\end_inset
+
+ הוא התמונה המקורית 
+\begin_inset Formula $J$
+\end_inset
+
+ לאחר הזזה לפי הוקטור 
+\begin_inset Formula $u,v$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+נקודות חשובות:
+\end_layout
+
+\begin_layout Itemize
+חישוב הנגזרות )ובעקבותיהן, המטריצה 
+\begin_inset Formula $A$
+\end_inset
+
+( מתבצע פעם אחת בלבד.
+\end_layout
+
+\begin_layout Itemize
+יצירת 
+\begin_inset Formula $J_{warped}$
+\end_inset
+
+ מבוסס על התמונה 
+\begin_inset Formula $J$
+\end_inset
+
+ המקורית ולא מתבצע באופן איטרטיבי - מפני שעיוות איטרטיבי יוצר טשטוש.
+\end_layout
+
+\begin_layout Subsubsection
+שיטת הפירמידות )
+\lang english
+Multiresolution
+\lang hebrew
+(
+\end_layout
+
+\begin_layout Standard
+אלגוריתם
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+LK
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ האיטרטיבי יוצא מנקודות הנחה שלפיקסלים מתאימים בשתי התמונות יש נגזרת זהה
+ או דומה, ועובד מצוין במקרים כאלה.
+ אבל במקרים של תנועה גדולה מאד, ייתכן מצב של נגזרות עם קורלציה נמוכה, או
+ אפילו הפוכה:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename lk_dervs.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+שיטת הפירמידות מתגברת על הבעיה הזו - נבנה פירמידה לכל תמונה, ונחפש החל מהרזולוצי
+ה הנמוכה ביותר כלפי מעלה.
+ כך נבצע למעשה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+coarse-to-fine estimation
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ - כל רמה בפירמידה נותנת הערכה גסה יותר, וקלה יותר לזיהוי, של התנועה שהתרחשה
+ בין שתי התמונות.
+ כך מתאפשר לנו לבצע הערכה גסה של 
+\begin_inset Formula $u,v$
+\end_inset
+
+ ברזולוציה נמוכה, ואז לעדן את ההערכה שלנו ככל שעולים ברזולוציה.
+\end_layout
+
+\begin_layout Paragraph
+האלגוריתם:
+\end_layout
+
+\begin_layout Itemize
+בנה את פירמידות הגאוסיאן 
+\begin_inset Formula $G_{I},G_{J}$
+\end_inset
+
+ )עם 
+\begin_inset Formula $n$
+\end_inset
+
+ רמות( עבור התמונות 
+\begin_inset Formula $I,J$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+חשב באמצעות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+LK
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+איטרטיבי את 
+\begin_inset Formula $u,v$
+\end_inset
+
+ עבור רמה 
+\begin_inset Formula $n$
+\end_inset
+
+ בפירמידה )הרזולוציה הנמוכה ביותר(.
+\end_layout
+
+\begin_layout Itemize
+לכל רמה 
+\begin_inset Formula $i$
+\end_inset
+
+ החל מ-
+\begin_inset Formula $n-1$
+\end_inset
+
+ ועד 
+\begin_inset Formula $1$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+בצע
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+warp
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+של רמה 
+\begin_inset Formula $i$
+\end_inset
+
+ של 
+\begin_inset Formula $G_{J}$
+\end_inset
+
+ לפי הוקטור 
+\begin_inset Formula $2\left(u,v\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+בצע
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+LK
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ברמה 
+\begin_inset Formula $i$
+\end_inset
+
+ כדי חשב את 
+\begin_inset Formula $du,dv$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+עדכן: 
+\begin_inset Formula $u=u+du,\ v=v+dv$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+התאמות עבור סוגי טרנספורמציות נוספים
+\end_layout
+
+\begin_layout Paragraph
+הזזה + שינוי גודל
+\end_layout
+
+\begin_layout Standard
+להוסיף
+\end_layout
+
+\begin_layout Paragraph
+הזזה + סיבוב
+\end_layout
+
+\begin_layout Standard
+להוסיף
+\end_layout
+
+\begin_layout Paragraph
+פרספקטיבה
+\end_layout
+
+\begin_layout Standard
+להוסיף
+\end_layout
+
+\begin_layout Subsubsection
+חישוב
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Optical Flow
+\end_layout
+
+\begin_layout Standard
+בניגוד לחישוב טרנספורמציה מוגדרת שהתבצעה על תמונה, לעיתים נרצה לחשב
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Optical Flow
+\lang hebrew
+, כלומר - התזוזה שהתבצעה 
+\series bold
+בכל פיקסל 
+\series default
+בתמונה, בנפרד משאר הפיקסלים.
+\end_layout
+
+\begin_layout Standard
+לדוגמה - אם מצלמה נעה ומולה אובייקט אחד קרוב ואחד רחוק, התזוזה באובייקט
+ הקרוב תהיה גדולה יותר.
+\end_layout
+
+\begin_layout Paragraph
+הנחות בסיס
+\end_layout
+
+\begin_layout Itemize
+מתקיים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+color constancy
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- הצבע לא משתנה בין פיקסלים מתאימים.
+ במקרה של תמונות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+grascale
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- העוצמה לא משתנה.
+\end_layout
+
+\begin_layout Itemize
+התנועה שאנו מחפשים היא קטנה.
+\end_layout
+
+\begin_layout Paragraph
+בעיית ה-
+\series medium
+\lang english
+Aperture
+\end_layout
+
+\begin_layout Standard
+זו בעיה מרכזית בחישוב
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Optical flow
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+באופן כללי - כאשר מסכלים על התזוזה שהתרחשה באזור קטן בתמונה, התנועה שנזהה
+ יכולה להיות שונה מאד מהתנועה בפועל.
+\end_layout
+
+\begin_layout Standard
+בתמונה לדוגמה, ייתכן שבחלון שנסתכל בו נזהה תנוכה של הפס הכחול שמאלה, כאשר
+ למעשה הוא חלק מקו ארוך יותר, שזז שמאלה ולמעלה, שהיינו מזהים את התנועה הנכונה
+ שלו לו היינו משתמשים בחלון גדול יותר.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename aperture.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+מכאן נובעים כללי האצבע הבאים:
+\end_layout
+
+\begin_layout Itemize
+כאשר מחשבים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+optical flow
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+על אזור גדול, נקבל חישוב מדויק של התנועה, אבל לוקליזציה גרועה.
+\end_layout
+
+\begin_layout Itemize
+כאשר מחשבים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+optical flow
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+על אזור קטן, נקבל חישוב גס של התנועה, אבל לוקליזציה טובה.
+\end_layout
+
+\begin_layout Paragraph
+ה-
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Smoothness Constraint
+\end_layout
+
+\begin_layout Standard
+כאשר אנו נדרשים לחשב טרנספורמציה לכל פיקסל, אנו למעשה מנסים לפתור את ה-
+\lang english
+Optical Flow Constraint Equation
+\lang hebrew
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+J_{x}\cdot u+J_{y}\cdot v=-D
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+מדובר במשוואה אחת עם שני נעלמים, כלומר, לא ניתן לפתור אותה.
+\end_layout
+
+\begin_layout Standard
+לשם כך, הגדירו
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+constraint
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+נוסף, שמכונה ה-
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Smoothness Constraint
+\family roman
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- נדרוש ש-
+\begin_inset Formula $u,v$
+\end_inset
+
+ ימזערו את הערך הבא:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E^{2}=\int\int\left(J_{x}u+J_{y}v\right)+\alpha^{2}\left[\left(\frac{\partial u}{\partial x}\right)^{2}+\left(\frac{\partial u}{\partial y}\right)^{2}+\left(\frac{\partial v}{\partial x}\right)^{2}+\left(\frac{\partial v}{\partial y}\right)^{2}\right]dxdy
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כעת, ניתן לחשב את 
+\begin_inset Formula $u,v$
+\end_inset
+
+ ע"י מציאת פתרון שמקיים את שני האילוצים )ה-
+\lang english
+optical flow
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+וה-
+\lang english
+smoothness
+\lang hebrew
+(.
+\end_layout
+
+\begin_layout Paragraph
+חישוב
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Optical Flow
+\end_layout
+
+\begin_layout Itemize
+באמצעות קרוס-קורלציה - נחלק את התמונה לחלונות קטנים, ונחשב את התנועה לפי
+ קרוס-קורלציה בכל חלון.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+ניתן להשתמש בפירמידות כדי לקבל הערכת תנועה מדוייקת יותר.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+באמצעות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+LK
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- נחלק את התמונה לחלונות קטנים, ונחשב את התנועה לפי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+LK
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בכל חלון.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+לרוב מסתכלים על חלונות בגודל 
+\begin_inset Formula $5\times5$
+\end_inset
+
+, ומקבלים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+25
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+משוואות )אחת לכל פיקסל(.
+ הנחת הבסיס היא שלכל הפיקסלים בחלון אותה תנועה.
+\end_layout
+
+\begin_layout Itemize
+ניתן להשתמש בפירמידות כדי לקבל הערכת תנועה מדוייקת יותר.
+\end_layout
+
+\end_deeper
 \begin_layout Section
 זיהוי נקודות עניין -
 \family roman
