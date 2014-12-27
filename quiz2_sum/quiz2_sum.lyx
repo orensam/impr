@@ -103,6 +103,103 @@ Radon
 \end_layout
 
 \begin_layout Section
+דגימה
+\end_layout
+
+\begin_layout Standard
+דגימת סיגנל אנלוגי לדיגיטלי היא למעשה הכפלת הסיגנל בפונקציית דלתא:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+s\left(a\right)=\int_{-\epsilon}^{\epsilon}f\left(x\right)\delta\left(x-a\right)dx=f\left(a\right)
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+קצב הדגימה - משפט
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Nyquist
+\end_layout
+
+\begin_layout Standard
+אם התדר המקסימלי של 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ הוא 
+\begin_inset Formula $\omega_{max}$
+\end_inset
+
+, עלינו לדגום את 
+\begin_inset Formula $f$
+\end_inset
+
+ בתדר של לפחות 
+\begin_inset Formula $2\omega_{max}$
+\end_inset
+
+ כדי לאפשר שחזור נכון.
+\end_layout
+
+\begin_layout Standard
+דגימה בתדר נמוך יותר תיצור
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+aliasing
+\end_layout
+
+\begin_layout Section
 פירמידות
 \end_layout
 
