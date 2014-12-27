@@ -106,8 +106,20 @@ Radon
 דגימה
 \end_layout
 
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
 \begin_layout Standard
-דגימת סיגנל אנלוגי לדיגיטלי היא למעשה הכפלת הסיגנל בפונקציית דלתא:
+הפיכת סיגנל אנלוגי לדיגיטלי.
+\end_layout
+
+\begin_layout Subsection
+איך עושים את זה
+\end_layout
+
+\begin_layout Standard
+דגימת נקודה אחת בסיגנל אנלוגי היא למעשה הכפלת הסיגנל בפונקציית דלתא:
 \end_layout
 
 \begin_layout Standard
@@ -118,7 +130,15 @@ s\left(a\right)=\int_{-\epsilon}^{\epsilon}f\left(x\right)\delta\left(x-a\right)
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
+כלומר, דגימה של סיגנל שלם משמעה כפל של הסיגנל בפונקציית מסרק בתדר 
+\begin_inset Formula $T$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -151,27 +171,7 @@ Nyquist
 \end_layout
 
 \begin_layout Standard
-אם התדר המקסימלי של 
-\begin_inset Formula $f\left(x\right)$
-\end_inset
-
- הוא 
-\begin_inset Formula $\omega_{max}$
-\end_inset
-
-, עלינו לדגום את 
-\begin_inset Formula $f$
-\end_inset
-
- בתדר של לפחות 
-\begin_inset Formula $2\omega_{max}$
-\end_inset
-
- כדי לאפשר שחזור נכון.
-\end_layout
-
-\begin_layout Standard
-דגימה בתדר נמוך יותר תיצור
+משפט
 \family roman
 \series medium
 \shape up
@@ -196,7 +196,449 @@ Nyquist
 \noun default
 \color inherit
 \lang english
+Nyquist
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+קובע כי אם התדר המקסימלי של 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ הוא 
+\begin_inset Formula $\omega_{max}$
+\end_inset
+
+, עלינו לדגום את 
+\begin_inset Formula $f$
+\end_inset
+
+ בתדר 
+\begin_inset Formula $T\geq2\omega_{max}$
+\end_inset
+
+ כדי לאפשר שחזור נכון.
+\end_layout
+
+\begin_layout Standard
+במילים אחרות, אם נרצה לראות בתמונה אובייקטים בגודל 
+\begin_inset Formula $d$
+\end_inset
+
+, המרחק בין כל שתי נקודות דגימה להיות לכל היותר 
+\begin_inset Formula $\frac{d}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נשים לב, שככל ש-
+\begin_inset Formula $T$
+\end_inset
+
+ גדל, פונקציית המסרק ש-
+\begin_inset Formula $T$
+\end_inset
+
+ מייצג במרחב התמונה הולכת ונהיית צפופה יותר, ובמרחב התדר - צפופה פחות:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename sampling.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+תופעת
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ה-
+\series medium
+\lang english
+Aliasing
+\end_layout
+
+\begin_layout Standard
+אם נדגום בתדר נמוך יותר מהתדר שהמשפט מגדיר, נקבל תופעה של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Aliasing
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- בשחזור התמונה מהדגימה, חלק מהתדרים הגבוהים יהפכו לתדרים נמוכים.
+\end_layout
+
+\begin_layout Standard
+דגימה בתדר שמעל הסף תאפשר פונקציית המסרק במרחב התדר להיות מספיק "פרוסה"
+ על פני הספקטרום כדי שלא יווצר מצב של חפיפית תדרים.
+\end_layout
+
+\begin_layout Standard
+דוגמה ל-
+\lang english
 aliasing
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ניתן לראות בתמונה הבאה.
+ אם דוגמים את הסיגנל בתדר הגבוה )בכחול( בקצב איטי מדי, כשננסה לשחזר את הסיגנל
+ נקבל את הסיגנל בעל התדר הנמוך )באדום.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename aliasing.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+רעשים במרחב התדר
+\end_layout
+
+\begin_layout Standard
+לעיתים יש בתמונות רעש שהוא תדר ספציפי, או אוסף תדרים, שיוצר "כיסוי" של התמונה
+ באפקט מחזורי.
+\end_layout
+
+\begin_layout Standard
+ניתן להסיר את הרעש ע"י מעבר למרחב פוריה, ומחיקה של התדרים הרלוונטיים.
+\end_layout
+
+\begin_layout Subsubsection
+פילטר הומומורפי
+\end_layout
+
+\begin_layout Standard
+המטרה בפילטר הומומורפי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+(Homomorphic Filtering)
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ היא לתקן רעש כפלי.
+ יותר במדויק, אנו רוצים לטפל בחוסר האחידות שנפוץ ברכיב ה-
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+illumination
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+נתונה לנו תמונה 
+\begin_inset Formula $g\left(x,y\right)=i\left(x,y\right)\cdot n\left(x,y\right)$
+\end_inset
+
+, כאשר 
+\begin_inset Formula $i$
+\end_inset
+
+ הוא רכיב ה-
+\lang english
+reflectance
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+)שמכיל תדרים גבוהים, לרוב(, ו-
+\begin_inset Formula $n$
+\end_inset
+
+ הוא רכיב ה-
+\lang english
+illumination
+\lang hebrew
+, כלומר הרעש שאנו רוצים לתקן.
+\end_layout
+
+\begin_layout Standard
+הפעלת 
+\begin_inset Formula $\log$
+\end_inset
+
+ על התמונה יאפשר לנו לנקות את הרעש.
+ נגדיר:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+z\left(x,y\right) & = & \log\left(g\left(x,y\right)\right)=\log\left(i\left(x,y\right)\cdot n\left(x,y\right)\right)\\
+ & = & \log\left(i\left(x,y\right)\right)+\log\left(n\left(x,y\right)\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+נעשה פורייה ונקבל:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Z\left(u,v\right)=\Phi\left(\log\left(i\left(x,y\right)\right)\right)+\Phi\left(\log\left(n\left(x,y\right)\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+נפעיל פילטר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+high-pass
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+על 
+\begin_inset Formula $Z$
+\end_inset
+
+ )תוך שמירה על 
+\begin_inset Formula $Z\left(0,0\right)$
+\end_inset
+
+(.
+ כלומר, ניפטר מתדרים נמוכים.
+\end_layout
+
+\begin_layout Standard
+כעת נפעיל פורייה הפוך, נבצע 
+\begin_inset Formula $\exp$
+\end_inset
+
+, ונקבל את התמונה לאחר טיפול בבעיות ה-
+\lang english
+illumination
+\lang hebrew
+.
 \end_layout
 
 \begin_layout Section
@@ -4810,7 +5252,7 @@ DCT
 \align center
 \begin_inset Graphics
 	filename dct.png
-	scale 35
+	scale 30
 
 \end_inset
 
@@ -5925,7 +6367,7 @@ LK
 \align center
 \begin_inset Graphics
 	filename lk_dervs.png
-	scale 35
+	scale 30
 
 \end_inset
 
@@ -6500,7 +6942,7 @@ Optical flow
 \align center
 \begin_inset Graphics
 	filename aperture.png
-	scale 35
+	scale 25
 
 \end_inset
 
@@ -9936,7 +10378,7 @@ Efros & Freeman, 2001
 \align center
 \begin_inset Graphics
 	filename textures.png
-	scale 35
+	scale 30
 
 \end_inset
 
