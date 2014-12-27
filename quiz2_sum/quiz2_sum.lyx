@@ -8425,8 +8425,1513 @@ rotation invariance
 \end_layout
 
 \begin_layout Standard
-בהינתן נקודות עניין עם דסקריפטורים בשתי תמונות, נרצה למצוא זוגות מתאימים.
+בהינתן נקודות עניין עם דסקריפטורים בשתי תמונות, נרצה למצוא זוגות מתאימים,
+ ומהם לבנות את הטרנספורמציה שהתרחשה בין שתי התמונות.
+\end_layout
+
+\begin_layout Subsubsection
+מציאת זוגות עם דסקריפטורים תואמים
+\end_layout
+
+\begin_layout Standard
+בשלב הראשון נרצה תמיד להתאים נקודות לפי התאמה בין דסקריפטורים.
+ ניתן לבצע זאת באמצעות חיפוש מלא )מעבר על כל הזוגות האפשריים( או בשיטות
+ אחרות.
+\end_layout
+
+\begin_layout Subsubsection
+מציאת מודל עבור אוסף נקודות
+\end_layout
+
+\begin_layout Standard
+בהינתן אוסף נקודות, אנו רוצים למצוא את הפונקציה שמתארת את האוסף הזה באופן
+ הטוב ביותר.
+\end_layout
+
+\begin_layout Paragraph
+השיטה הנאיבית
+\end_layout
+
+\begin_layout Standard
+מזעור השגיאה הריבועית בין פונקציה לבין אוסף הנקודות.
+ הבעיה - מספר קטן של נקודות לא-מתאימות )
+\lang english
+outliers
+\lang hebrew
+( יכול להסיט המודל לחלוטין.
+\end_layout
+
+\begin_layout Paragraph
+שיטת
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
  
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Robust Norm
+\end_layout
+
+\begin_layout Standard
+נדרוש למזער את סכום הטעויות 
+\begin_inset Formula $\rho\left(r,\sigma\right)=\frac{r^{2}}{\sigma^{2}+r^{2}}$
+\end_inset
+
+, כאשר 
+\begin_inset Formula $r$
+\end_inset
+
+ הוא המרחק בין המודל לבין הערך בנקודה, ו-
+\begin_inset Formula $\sigma$
+\end_inset
+
+ הוא פרמטר ששולט במשקל אני נותנים לכל
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+outlier
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Paragraph
+אלגוריתם
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+RANSAC
+\end_layout
+
+\begin_layout Standard
+הרעיון - לבחור נקודות רנדומליות, לחשב טרנספורמציה מתאימה, ולבצע איטרציות
+ שימזערו את מספר ה-
+\lang english
+outliers
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+האלגוריתם עבור תמונות:
+\end_layout
+
+\begin_layout Enumerate
+בצע 
+\begin_inset Formula $N$
+\end_inset
+
+ פעמים:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+בחר רנדומלית
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+זוגות של נקודות )בעלות דסקריפטורים דומים(
+\end_layout
+
+\begin_layout Enumerate
+חשב את הטרנספורמציה 
+\begin_inset Formula $H$
+\end_inset
+
+ עפ"י הזוגות האלה )
+\numeric on
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+נקודות נותנות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+8
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+משוואות, שמספיקות כדי לחשב כל טרנספורמציה מהסוגים שראינו(
+\end_layout
+
+\begin_layout Enumerate
+חשב את מספר ה-
+\lang english
+inliers
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+)הנקודות שמתאימות לטרנספורמציה 
+\begin_inset Formula $H$
+\end_inset
+
+ עד כדי 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+(
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+החזר את 
+\begin_inset Formula $H$
+\end_inset
+
+ שעבורה היה מספר מקסימלי של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+inliers
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+את 
+\begin_inset Formula $N$
+\end_inset
+
+ ניתן לקבוע באופן הבא.
+\end_layout
+
+\begin_layout Standard
+נסמן את מספר הנקודות שבוחרים בכל דגימה ב-
+\begin_inset Formula $S$
+\end_inset
+
+, ואת יחס ה-
+\lang english
+inliers
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+למספר הנקודות הכללי )בטרנספורמציה האמיתית( ב-
+\begin_inset Formula $w$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+נבקש שבהסתברות 
+\begin_inset Formula $p$
+\end_inset
+
+ תהיה לנו דגימה אחת )לפחות( שבה אין
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+outliers
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+כלל.
+\end_layout
+
+\begin_layout Standard
+אם כן, הסיכוי שקיימת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+outlier
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בין 
+\begin_inset Formula $S$
+\end_inset
+
+ הנקודות בדגימה נתונה הוא 
+\begin_inset Formula $1-w^{s}$
+\end_inset
+
+.
+ מכאן שאנו רוצים 
+\begin_inset Formula $N$
+\end_inset
+
+ שיקיים: 
+\begin_inset Formula $\left(1-w^{s}\right)\leq1-p$
+\end_inset
+
+, כלומר:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+N\geq\frac{\log\left(1-p\right)}{\log\left(1-w^{s}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+לעיתים קרובות קשה להעריך את 
+\begin_inset Formula $w$
+\end_inset
+
+, אז מתחילים מהערכה פסימית )
+\begin_inset Formula $50\%$
+\end_inset
+
+ לדוגמה(, ומקטינים את מספר האיטרציות הצפוי בהתאם ליחס
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+inliers
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+למספר הנקודות הכללי שאנו רואים בכל איטרציה.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+יתרונות: 
+\series default
+שיטה גנרית מאד; קל למימוש; קל לחשב את אחוז הכשלונות.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+חסרונות:
+\series default
+ אם מספר ה-
+\lang english
+outliers
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+גדול מאד, כפי שקורה בבעיות אמיתיות, מצריך מספר איטרציות גדול מאד.
+\end_layout
+
+\begin_layout Section
+תפירת וערבוב תמונות -
+\family roman
+\series bold
+\shape up
+\size larger
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Image Stitching and Blending
+\end_layout
+
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+תפירת תמונות - יצירת פנורמה, זוית צפיה רחבה.
+ יצירת טקסטורות מתמונה קטנה.
+\end_layout
+
+\begin_layout Standard
+ערבוב תמונות - הכנסת אובייקטים מתמונה אחת לאחרת.
+\end_layout
+
+\begin_layout Standard
+בשני המקרים האתגר הוא להסתיר את נקודות המפגש בין התמונות, ולהפוך את המפגש
+ בינהן ל-
+\lang english
+seamless
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ככל האפשר.
+\end_layout
+
+\begin_layout Standard
+הבעיות צצות כאשר החשיפה והתאורה שונות בין התמונות, או שיש טשטוש או תנועה
+ באחת מהן.
+\end_layout
+
+\begin_layout Subsection
+גישות נאיביות
+\end_layout
+
+\begin_layout Subsubsection
+תפירת פנורמה עם
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+simple seam location
+\end_layout
+
+\begin_layout Standard
+בהינתן אזורים חופפים במספר תמונות, ניתן להדביק את התמונות זו על זו באמצעות
+ יישר האזורים החופפים זה לצד זה.
+\end_layout
+
+\begin_layout Subsubsection
+שיטת
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Feathering
+\end_layout
+
+\begin_layout Standard
+הגדרת 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ - פונקציה שנותנת ערך 
+\begin_inset Formula $1$
+\end_inset
+
+ לאזורים מסויימים בתמונה, יורדת מ-
+\numeric on
+1
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ל-
+\numeric on
+0
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+לאורך החתך הרצוי, ונותנת ערך
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+לשאר האזורים.
+\end_layout
+
+\begin_layout Standard
+בהינתן תמונות 
+\begin_inset Formula $I,J$
+\end_inset
+
+, נבצע תפירה שלהן ע"י חישוב 
+\begin_inset Formula $\alpha I+\left(1-\alpha\right)J$
+\end_inset
+
+.
+ התוצאה היא החלקה של המעבר ב"חלון" שנוצר באזור שבו 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ נעה בין
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ל-
+\numeric on
+1
+\numeric off
+.
+\end_layout
+
+\begin_layout Standard
+גודל החלון קריטי - חלון קטן מדי ייתן אפקט של חיתוך, חלון גדול מדי ייצור
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+ghosting
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Subsubsection
+שיטת הפירמידות
+\end_layout
+
+\begin_layout Standard
+ערבוב תמונות באמצעות פירמידת לפלסיאן, כפי שכבר הוצג.
+\end_layout
+
+\begin_layout Subsection
+שיטת
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Gradient-domain Image Stitching
+\end_layout
+
+\begin_layout Standard
+שיטה ל-
+\lang english
+blending
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+של תמונות באופן
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+seamless
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Subsubsection
+האלגוריתם
+\end_layout
+
+\begin_layout Standard
+בהינתן שתי תמונות 
+\begin_inset Formula $A,B$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+חשב את הגרדיינטים: 
+\begin_inset Formula $A_{x},A_{y}$
+\end_inset
+
+ ו-
+\begin_inset Formula $B_{x},B_{y}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+בצע תפירה )בשיטה כלשהי( של 
+\begin_inset Formula $A_{x}$
+\end_inset
+
+ עם 
+\begin_inset Formula $B_{x}$
+\end_inset
+
+ ושל 
+\begin_inset Formula $A_{y}$
+\end_inset
+
+ עם 
+\begin_inset Formula $B_{y}$
+\end_inset
+
+ לקבל גרדיינט חדש 
+\begin_inset Formula $G=\left(G_{x},G_{y}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+מצא את התמונה 
+\begin_inset Formula $I$
+\end_inset
+
+ שהגרדיינטים שלה הם הקרובים ביותר ל-
+\begin_inset Formula $G$
+\end_inset
+
+ - כלומר, התמונה הממזערת את הערך 
+\begin_inset Formula $\int\int\left\Vert \nabla I-G\right\Vert ^{2}dxdy$
+\end_inset
+
+, ע"י שימוש במשוואת פואסון: 
+\begin_inset Formula $\nabla^{2}I=divG$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+מתמטית - אם נסמן 
+\begin_inset Formula $F\left(\nabla I,G\right)=\left\Vert \nabla I-G\right\Vert ^{2}=\left(\frac{\partial I}{\partial x}-G_{x}\right)^{2}+\left(\frac{\partial I}{\partial y}-G_{y}\right)^{2}$
+\end_inset
+
+, אנו למעשה מבקשים לפתור את משוואת אוילר-לגרנז': 
+\begin_inset Formula $\frac{\partial F}{\partial I}-\frac{d}{dx}\frac{\partial F}{\partial I_{x}}-\frac{d}{dy}\frac{\partial F}{\partial I_{y}}=0$
+\end_inset
+
+, וניתן לבצע זאת ע"י פתרון משוואת פואסון.
+\end_layout
+
+\begin_layout Subsection
+שיטת
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size normal
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Poisson Image Editing
+\end_layout
+
+\begin_layout Standard
+עוד שיטה לבצע
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+seamless blending
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Subsection
+שיטות מבוססות
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Optimal Seam
+\end_layout
+
+\begin_layout Subsubsection
+שיטה להתמודדות עם תמונות שיש בינהן תנועה -
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Davis 1998
+\end_layout
+
+\begin_layout Standard
+כאשר מנסים לערבב תמונות שיש בינהן תמונה, ייווצר אפקט
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+ghosting
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+הפתרון - לחתוך סגמנטים מכל תמונה, כך שלא תהיה חפיפה בין אובייקטים שנעו בין
+ שני הצילומים.
+\end_layout
+
+\begin_layout Standard
+לאחר מכן, לחבר את הסגמנטים תוך הימנעות מארטיפקטים.
+\end_layout
+
+\begin_layout Subsubsection
+יצירת טקסטורות -
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Efros & Freeman, 2001
+\end_layout
+
+\begin_layout Standard
+בהינתן בלוק )או בלוקים( של טקסטורה, רוצים לחבר אותם לכדי טקסטורה גדולה יותר
+ באופן אופטימלי ויזואלית.
+\end_layout
+
+\begin_layout Standard
+הצבה שלהם זה לצד זה יוצרת חיתוכים נראים לעין.
+\end_layout
+
+\begin_layout Standard
+יצירת אזור חפיפה שבו יש מקסימום התאמה משפרת את החיתוכים, אך לא באופן מושלם.
+\end_layout
+
+\begin_layout Standard
+אם משתמשים באלגוריתם דינמי, או דייקסטרה, ניתן ליצור חתך מעוקל שממזער את
+ הטעות ויוצר חיתוך שאינו נראה לעין.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename textures.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+פתרון באמצעות רשתות זרימה
+\end_layout
+
+\begin_layout Standard
+ניתן לבטא בעיית
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+stitching
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+במושגים של רשת זרימה, כך שמציאת זרימה אופטימלית ברשת תתן לנו תפירה אופטימילת
+ של התמונות.
+\end_layout
+
+\begin_layout Standard
+כל פיקסל יהיה קודקוד ברשת הזרימה.
+ הצלעות ברשת יהיו ארבעת הכיוונים לפיקסלים הסמוכים.
+\end_layout
+
+\begin_layout Standard
+המשקל של כל צלע נתון ע"י:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+w\left(p_{1},p_{2}\right)=\left\Vert A\left(p_{1}\right)-B\left(p_{1}\right)\right\Vert +\left\Vert A\left(p_{2}\right)-B\left(p_{2}\right)\right\Vert 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כלומר, האלגוריתם יעדיף לבצע את החתך בין פיקסלים שההבדל בצבעים שלהם הוא מינימלי.
+\end_layout
+
+\begin_layout Standard
+פחות מתאים לתרחישים בהם אזור החפיפה קטנים מאד, או כאשר יש הבדלי עוצמה גלובליים
+ בין התמונות.
 \end_layout
 
 \begin_layout Standard
