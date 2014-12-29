@@ -102,6 +102,277 @@
 Radon
 \end_layout
 
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+חישוב פונקציה דו-מימדית ע"י הטלות שלה על אוסף מישורים.
+ נחוץ לשימושים רפואיים -
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+CT
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+משתמש בטכניקה הזו כדי לבנות תמונה מלאה של חתך מתוך אוסף הטלות.
+\end_layout
+
+\begin_layout Subsection
+איך זה עובד
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename radon2.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename radon1.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+נתונות לנו הטלות של פונקציה דו-מימדית 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ כלומר, סכימה של 
+\begin_inset Formula $f$
+\end_inset
+
+ לאורך הקו שעובר דרך 
+\begin_inset Formula $f$
+\end_inset
+
+ במרחק 
+\begin_inset Formula $r$
+\end_inset
+
+ מהציר 
+\begin_inset Formula $s$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+כל הטלה בזוית 
+\begin_inset Formula $\theta$
+\end_inset
+
+ ניתנת ע"י:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p_{\theta}\left(r\right)=\int f\left(r,s\right)ds
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כאשר 
+\begin_inset Formula $r,s$
+\end_inset
+
+ הם הצירים הנקבעים ע"י 
+\begin_inset Formula $\theta$
+\end_inset
+
+, כמו בשרטוט.
+\end_layout
+
+\begin_layout Standard
+אם נעבור לקואורדינטות סטנדרטיות, ניתן לכתוב את הנוסחה באופן הבא:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\iint f\left(x,y\right)\delta\left(x\cos x\theta+y\sin\theta-r\right)dxdy
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כאשר 
+\begin_inset Formula $\delta\left(z\right)=1$
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+אם 
+\begin_inset Formula $z=0$
+\end_inset
+
+, ו-
+\begin_inset Formula $\delta\left(z\right)=0$
+\end_inset
+
+ אחרת.
+ כלומר, הפונקציה מקבלת ערכים שונים מאפס רק כאשר 
+\begin_inset Formula $x\cos x\theta+y\sin\theta=r$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+מבצע פורייה חד-מימדי על 
+\begin_inset Formula $p$
+\end_inset
+
+ ונקבל:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+P\left(\theta,\omega\right) & = & \iiint f\left(x,y\right)\delta\left(x\cos x\theta+y\sin\theta-r\right)\cdot e^{-2\pi i\omega r}dxdydr\\
+ & = & \iint f\left(x,y\right)\cdot e^{-2\pi i\omega\left(x\cos\theta+y\sin\theta\right)}dxdy
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כעת נגדיר 
+\begin_inset Formula $u=\omega\cos\theta,\ v=\omega\sin\theta$
+\end_inset
+
+ ונקבל:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P\left(\omega,\theta\right)=\iint f\left(x,y\right)\cdot e^{-2\pi i\left(ux+vy\right)}dxdy
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+וזהו בדיוק הפורייה הדו-מימדי של ההטלה בכיוון 
+\begin_inset Formula $\theta$
+\end_inset
+
+, כלומר 
+\begin_inset Formula $P\left(\omega,\theta\right)=F\left(u,v\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+כעת, אם נסכום את ה-
+\begin_inset Formula $P$
+\end_inset
+
+ של אוסף גדול של זויות 
+\begin_inset Formula $\theta$
+\end_inset
+
+, נקבל סכימה של פורייה דו-מימדית בכל זוית של הפונקציה 
+\begin_inset Formula $f$
+\end_inset
+
+, כפי שמתואר בשרטוט:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename radon3.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+לבסוף, נבצע פורייה הפוך, ונקבל את 
+\begin_inset Formula $f$
+\end_inset
+
+ עצמה.
+\end_layout
+
 \begin_layout Section
 דגימה
 \end_layout
@@ -399,6 +670,7 @@ aliasing
 \end_layout
 
 \begin_layout Standard
+\align center
 \begin_inset Graphics
 	filename aliasing.png
 	scale 30
@@ -1644,9 +1916,9 @@ LZ
 \color none
  
 \family default
-\series medium
+\series default
 \shape default
-\size normal
+\size default
 \emph default
 \bar default
 \strikeout default
@@ -3081,7 +3353,7 @@ Perspective projection
 \end_layout
 
 \begin_layout Subsection
-הםעלת טרנספורמציה על תמונה
+הפעלת טרנספורמציה על תמונה
 \end_layout
 
 \begin_layout Subsubsection
@@ -3093,10 +3365,32 @@ Perspective projection
 \end_layout
 
 \begin_layout Subsubsection
-\begin_inset Formula $\text{Forward Warping}$
-\end_inset
-
-
+שיטת
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Forward Warping
 \end_layout
 
 \begin_layout Standard
@@ -3174,10 +3468,32 @@ Splatting
 \end_layout
 
 \begin_layout Subsubsection
-\begin_inset Formula $\text{Backward (Inverse) Warping}$
-\end_inset
-
-
+שיטת
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Backward (Inverse) Warping
 \end_layout
 
 \begin_layout Standard
@@ -4777,9 +5093,9 @@ DPCM
 \color none
  
 \family default
-\series medium
+\series default
 \shape default
-\size normal
+\size default
 \emph default
 \bar default
 \strikeout default
@@ -5340,7 +5656,7 @@ DCT
 \color none
  
 \family default
-\series medium
+\series default
 \shape default
 \size default
 \emph default
@@ -5689,7 +6005,7 @@ E\left(u,v\right)=\sum_{x}\sum_{y}I_{1}^{2}-2\sum_{x}\sum_{y}I_{1}\left(x,y\righ
 \begin_inset Formula $\sum_{x}\sum_{y}I_{2}^{2}$
 \end_inset
 
- )כמעט?( קבועים,מינימיזציה של הטעות שקולה למקסימיזציה של הקרוס-קורלציה:
+ )כמעט?( קבועים, מינימיזציה של הטעות שקולה למקסימיזציה של הקרוס-קורלציה:
 \end_layout
 
 \begin_layout Standard
@@ -6703,7 +7019,7 @@ LK
 \color none
  
 \family default
-\series medium
+\series default
 \shape default
 \size default
 \emph default
@@ -6872,7 +7188,6 @@ grascale
 
 \begin_layout Paragraph
 בעיית ה-
-\series medium
 \lang english
 Aperture
 \end_layout
@@ -7076,7 +7391,7 @@ optical flow
 \color none
  
 \family default
-\series medium
+\series default
 \shape default
 \size default
 \emph default
@@ -7513,7 +7828,7 @@ Feature Based Alignment
 \end_layout
 
 \begin_layout Standard
-שיטות יישור מבוססות פיקסלים )קרןס קןרלציה,
+שיטות יישור מבוססות פיקסלים )קרוס קןרלציה,
 \family roman
 \series medium
 \shape up
@@ -7547,6 +7862,8 @@ LK
 לדוגמה, ייצור פנורמה יהיה קשה מאד אם ננסה להשתמש ב-
 \lang english
 LK
+\lang hebrew
+.
 \end_layout
 
 \begin_layout Subsection
@@ -7558,7 +7875,7 @@ LK
 \end_layout
 
 \begin_layout Enumerate
-מציאת נקודות עניין בשתי התמונות
+מציאת נקודות עניין בשתי התמונות.
 \end_layout
 
 \begin_layout Enumerate
@@ -7612,11 +7929,11 @@ descriptor
 \uwave default
 \noun default
 \color inherit
-לכל נקודת עניין
+לכל נקודת עניין.
 \end_layout
 
 \begin_layout Enumerate
-מציאת זוגות של נקודות מתאימות
+מציאת זוגות של נקודות מתאימות.
 \end_layout
 
 \begin_layout Enumerate
@@ -7692,19 +8009,19 @@ descriptor
 \end_layout
 
 \begin_layout Paragraph
-דרישות מאלכוריתמי ההתאמה
+דרישות מאלגוריתמי ההתאמה
 \end_layout
 
 \begin_layout Enumerate
-קלים לביצוע
+קלים לביצוע.
 \end_layout
 
 \begin_layout Enumerate
-לא פגיעים לרעש, תאורה, שינוי גודל, הזזה, סיבוב, זוית צפיה
+לא פגיעים לרעש, תאורה, שינוי גודל, הזזה, סיבוב, זוית צפיה.
 \end_layout
 
 \begin_layout Enumerate
-יכולים לבצע התאמה מול מאגרים של אובייקטים
+יכולים לבצע התאמה מול מאגרים של אובייקטים.
 \end_layout
 
 \begin_layout Subsection
@@ -8207,7 +8524,7 @@ Corner Response
 
 \begin_deeper
 \begin_layout Enumerate
-אם מוסיפים לתמונה ערך קבוע, האלגוריתם אינווריאנטי
+אם מוסיפים לתמונה ערך קבוע, האלגוריתם אינווריאנטי.
 \end_layout
 
 \begin_layout Enumerate
@@ -8295,7 +8612,7 @@ edges
 \color none
  
 \family default
-\series medium
+\series default
 \shape default
 \size default
 \emph default
@@ -8444,7 +8761,7 @@ sub-sampling
 \begin_inset Formula $\mu$
 \end_inset
 
- ושונות 
+ וסטיית תקן 
 \begin_inset Formula $\sigma$
 \end_inset
 
@@ -8494,7 +8811,7 @@ sub-sampling
 \color none
  
 \family default
-\series medium
+\series default
 \shape default
 \size default
 \emph default
@@ -8940,7 +9257,7 @@ rotation invariance
 
 \begin_layout Enumerate
 לוקאליות - הדסקריפטורים שמצאנו הם תכונות מקומיות, ולכן ניתן להתאים אובייקטים
- גם תחת הפרעות סביבתיות
+ גם תחת הפרעות סביבתיות.
 \end_layout
 
 \begin_layout Enumerate
@@ -9042,7 +9359,7 @@ Robust Norm
 \begin_inset Formula $\sigma$
 \end_inset
 
- הוא פרמטר ששולט במשקל אני נותנים לכל
+ הוא פרמטר ששולט במשקל שאנו נותנים לכל
 \family roman
 \series medium
 \shape up
@@ -9087,7 +9404,7 @@ outlier
 \color none
  
 \family default
-\series medium
+\series default
 \shape default
 \size default
 \emph default
@@ -9174,7 +9491,7 @@ outliers
 \uwave default
 \noun default
 \color inherit
-זוגות של נקודות )בעלות דסקריפטורים דומים(
+זוגות של נקודות )בעלות דסקריפטורים דומים(.
 \end_layout
 
 \begin_layout Enumerate
@@ -9259,7 +9576,7 @@ outliers
 \uwave default
 \noun default
 \color inherit
-משוואות, שמספיקות כדי לחשב כל טרנספורמציה מהסוגים שראינו(
+משוואות, שמספיקות כדי לחשב כל טרנספורמציה מהסוגים שראינו(.
 \end_layout
 
 \begin_layout Enumerate
@@ -9298,7 +9615,7 @@ inliers
 \begin_inset Formula $\epsilon$
 \end_inset
 
-(
+(.
 \end_layout
 
 \end_deeper
@@ -9762,7 +10079,7 @@ simple seam location
 \color none
  
 \family default
-\series medium
+\series default
 \shape default
 \size default
 \emph default
@@ -10387,6 +10704,8 @@ Efros & Freeman, 2001
 
 \begin_layout Subsubsection
 פתרון באמצעות רשתות זרימה
+\numeric on
+7
 \end_layout
 
 \begin_layout Standard
@@ -10473,96 +10792,531 @@ w\left(p_{1},p_{2}\right)=\left\Vert A\left(p_{1}\right)-B\left(p_{1}\right)\rig
  בין התמונות.
 \end_layout
 
-\begin_layout Standard
-י
+\begin_layout Section
+זיהוי צורות -
+\family roman
+\series bold
+\shape up
+\size larger
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Hough Transform
+\end_layout
+
+\begin_layout Subsection
+מוטיבציה
 \end_layout
 
 \begin_layout Standard
-י
+זיהוי צורות בסיסיות - קווים ישרים, מרובעים, מעגלים וכד'.
+\end_layout
+
+\begin_layout Subsection
+האלגוריתם
 \end_layout
 
 \begin_layout Standard
-י
+הרעיון הכללי - לחפש את הקווים שמתאימים ביותר לקווים שיש בתמונה.
 \end_layout
 
 \begin_layout Standard
-י
+אבחנה - כל צורה שאנו מחפשים ניתן להגדרה ע"י אוסף מצומצם של פרמטרים.
+ לדוגמה, כל ישר ניתן לייצג ע"י משווה מהצורה 
+\begin_inset Formula $y=ax+b$
+\end_inset
+
+, כלומר ע"י זוג פרמטרים 
+\begin_inset Formula $\left\langle a,b\right\rangle $
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-י
+נציג גרסה פשוטה של האלגוריתם שמחפשת קווים, ע"י הפרמטרים 
+\begin_inset Formula $\left\langle a,b\right\rangle $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+מוצאים את הקווים בתמונה - ניתן לעשות זאת בעזרת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Canny Edge Detector
+\lang hebrew
+, או ע"י חישוב גרדיינט ולקיחת סף.
+\end_layout
+
+\begin_layout Enumerate
+מאתחלים טבלה 
+\begin_inset Formula $h\left(a,b\right)$
+\end_inset
+
+ עם טווח ערכים מוגדר מראש בכל ציר, ומאתחלים את כל התאים ל-
+\numeric on
+0
+\numeric off
+.
+\end_layout
+
+\begin_layout Enumerate
+לכל פיקסל 
+\begin_inset Formula $\left(x,y\right)$
+\end_inset
+
+ בתמונה, בצע
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+'vote'
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+לפרמטרים 
+\begin_inset Formula $a,b$
+\end_inset
+
+ המתאימים לו - כלומר, בצע 
+\begin_inset Formula $h\left(a,b\right)++$
+\end_inset
+
+ לכל 
+\begin_inset Formula $a,b$
+\end_inset
+
+ המקיימים 
+\begin_inset Formula $y=ax+b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+החזר את התא )או התאים( שמייצגים קו:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+התאים בטבלה שערכם מקסימלי, או
+\end_layout
+
+\begin_layout Enumerate
+שעוברים סף מסוים, או
+\end_layout
+
+\begin_layout Enumerate
+שהם מקסימום לוקאלי בטבלה.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+שיקולים באלגוריתם
+\end_layout
+
+\begin_layout Itemize
+בחירת הייצוג )לדג' 
+\begin_inset Formula $a,b$
+\end_inset
+
+ לא יודעים לייצג קו אנכי(.
+\end_layout
+
+\begin_layout Itemize
+בחירת טווח )לדג' 
+\begin_inset Formula $a\in\left[-\infty,\infty\right]$
+\end_inset
+
+ וצריך לבחור לו טוחח מצומצם משיקולי יעילות(.
+\end_layout
+
+\begin_layout Itemize
+קוונטיזציה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ - לאיזה טווח ערכים משייכים ערך נתון.
+\end_layout
+
+\begin_layout Itemize
+בחירת סף עבור חילוץ מהטבלה.
+\end_layout
+
+\begin_layout Subsection
+מציאת קווים ע"י ייצוג פולארי
 \end_layout
 
 \begin_layout Standard
-י
+שיטה טובה מיותר משימוש בפרמטרים 
+\begin_inset Formula $a,b$
+\end_inset
+
+ היא שימוש בקואורדינטות פולאריות.
 \end_layout
 
 \begin_layout Standard
-י
+ניתן לתאר קו באמצעות קואורדינטות פולאריות באופן הבא:
 \end_layout
 
 \begin_layout Standard
-י
+הקואורדינטה 
+\begin_inset Formula $\left(r,\theta\right)$
+\end_inset
+
+ מייצגת את הישר שניצב לנקודה שנמצאת במרחק 
+\begin_inset Formula $r$
+\end_inset
+
+ ובזוית 
+\begin_inset Formula $\theta$
+\end_inset
+
+ מהראשית.
 \end_layout
 
 \begin_layout Standard
-י
+כעת, לכל נקודה 
+\begin_inset Formula $x,y$
+\end_inset
+
+, ניתן להגדיר את אוסף הישרים שעובר דרכה - זהו אוסף הפרמטרים 
+\begin_inset Formula $r,\theta$
+\end_inset
+
+ המקיימים:
 \end_layout
 
 \begin_layout Standard
-י
+\begin_inset Formula 
+\[
+r\left(\theta\right)=x\cos\theta+y\sin\theta
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-י
+כעת, אם נמצא אוסף נקודות שעבורן קיים זוג 
+\begin_inset Formula $r,\theta$
+\end_inset
+
+ שמתאים לכולן, נדע שהן שייכות לאותו קו.
+\end_layout
+
+\begin_layout Subsubsection
+יתרונות על פני ייצוג סטנדרטי
+\end_layout
+
+\begin_layout Itemize
+הערכים של 
+\begin_inset Formula $r,\theta$
+\end_inset
+
+ תמיד חסומים - 
+\begin_inset Formula $0\leq\theta\leq2\pi$
+\end_inset
+
+, 
+\begin_inset Formula $0\leq r\leq\frac{N}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+ניתן לכייל את הרזולוציה של הקפיצות בפרמטרים יותר בקלות.
+\end_layout
+
+\begin_layout Itemize
+יחידות השינוי הן 'טבעיות' - מעלות ל-
+\begin_inset Formula $\theta$
+\end_inset
+
+, פיקסלים ל-
+\begin_inset Formula $r$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+קוונטיזציה
+\end_layout
+
+\begin_layout Itemize
+ע"י הצבעה לתא הקרוב ביותר.
+\end_layout
+
+\begin_layout Itemize
+ע"י הצבעה ממושקלת - נקודות שמתאימים בדיוק לישר יוסיפו
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בטבלה, תאים אחרים יוסיפו ערכים קטנים יותר לפי המרחק שלהם.
+\end_layout
+
+\begin_layout Subsection
+תיקון שגיאות
 \end_layout
 
 \begin_layout Standard
-י
+לעיתים נרצה טווח טעות גדול יותר - כלומר, לאפשר לכל נקודה לייצג אוסף רחב
+ יותר של ישרים, שעוברים בסביבה הקרובה שלה.
 \end_layout
 
 \begin_layout Standard
-י
+לשם כך מבצעים
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+smoothing
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- נותנים לכל נקודה "להתפרס" על פני סביבה שלה.
+\end_layout
+
+\begin_layout Subsection
+שימוש בגרדיינט
 \end_layout
 
 \begin_layout Standard
-י
+אם נשתמש לא רק במיקום של נקודה נתונה, אלא גם בכיוון הגרדיינט שלה, נוכל לצמצם
+ משמעותית את אוסף הישרים שייתכן שעוברים דרכה, ובכך לצמצם טעויות בתהליך ה-
+\lang english
+vote
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Subsection
+זיהוי מעגלים
 \end_layout
 
 \begin_layout Standard
-י
+פתרון נאיבי - לבנות טבלה 
+\begin_inset Formula $h\left(a,b,r\right)$
+\end_inset
+
+, וכל פיקסל יצביע עבור 
+\begin_inset Formula $\left\langle a,b,r\right\rangle $
+\end_inset
+
+ שמספקים את משוואת המעגל: 
 \end_layout
 
 \begin_layout Standard
-י
+\begin_inset Formula $\left(x-a\right)^{2}+\left(y-b\right)^{2}=r^{2}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-י
+הבעיה בפתרון הזה היא הסיבוכיות - טבלה בגודל 
+\begin_inset Formula $O\left(N^{3}\right)$
+\end_inset
+
+, כל הצבעה לוקחת 
+\begin_inset Formula $O\left(N^{2}\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-י
+ניתן, אם כן, להשתמש בכיוון הגרדיינט בכל נקודת עניין -
 \end_layout
 
 \begin_layout Standard
-י
+בהינתן רדיוס, כל נקודת עניין )הכוללת כיוון גרדיינט( תצביע לנו על מספר מעגלים
+ קטן )אידיאלית - שניים(.
 \end_layout
 
 \begin_layout Standard
-י
-\end_layout
-
-\begin_layout Standard
-י
-\end_layout
-
-\begin_layout Standard
-י
-\end_layout
-
-\begin_layout Standard
-י
+כך נוכל לייעל את החיפוש ולמצוא בקלות את כל המעגלים ברדיוס נתון שמופיעים
+ בתמונה.
 \end_layout
 
 \end_body
