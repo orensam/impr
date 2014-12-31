@@ -23,7 +23,7 @@ function desc = sampleDescriptor(im, pos, descRad)
     repPos = (repPos + [dxRow; dyRow])';
     
     % Sample with interpolation
-    desc = interp2(im, repPos(:,1), repPos(:,2));
+    desc = interp2(im, repPos(:,1), repPos(:,2), 'linear');
     
     % Normalize
     avg = mean(desc);
