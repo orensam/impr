@@ -7,16 +7,20 @@ function [pos, desc] = findFeatures(pyr, maxNum)
 % pos − An nx2 matrix of [x,y] feature positions per row found in pyr. These
 % coordinates are provided at the pyramid level pyr{1}.
 % desc − A kxkxn feature descriptor matrix.
+
     N = 8;
     M = 8;
-    DESC_RAD = 3;
+    DESC_RAD = 1;
+        
     
     % Get corners in pyramid level 1
-    level1Pos = spreadOutCorners(pyr{1}, N, M, maxNum);    
-    % Convert to level 3 positions
-    level3Pos = 0.25 * (level1Pos - 1) + 1; % 2^(l_1 - l_2) = 2^(1 - 3) = 1/4
+    pos = spreadOutCorners(pyr{1}, N, M, maxNum);    
     
-    sampleDescriptor(pyr{3}, level3Pos, DESC_RAD)
+    % Convert to level 3 positions
+    level3Pos = 0.25 * (pos - 1) + 1; % 2^(l_1 - l_2) = 2^(1 - 3) = 1/4
+    
+    % Get the descriptors for the feature points we found
+    desc = sampleDescriptor(pyr{3}, level3Pos, DESC_RAD);
     
 
 end

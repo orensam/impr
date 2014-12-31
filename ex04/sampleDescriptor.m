@@ -10,6 +10,7 @@ function desc = sampleDescriptor(im, pos, descRad)
 % at desc(:,:,i). The per−descriptor dimensions kxk are related to the
 % descRad argument as follows k = 1+2∗descRad.
     
+    % Parameters
     k = 1 + 2 * descRad;
     ksq = k^2;
     n = size(pos, 1);
@@ -21,8 +22,14 @@ function desc = sampleDescriptor(im, pos, descRad)
     dyRow = repmat(reshape(dy, 1, ksq), 1, n);    
     repPos = (repPos + [dxRow; dyRow])';
     
+    % Sample with interpolation
+    desc = interp2(im, repPos(:,1), repPos(:,2));
     
+    % Normalize
+    avg = mean(desc);
+    desc = (desc - avg) / norm(desc - avg);
     
-    
+    % Reshape to N kxk matrices
+    desc = reshape(desc, k, k, n);    
     
 end
