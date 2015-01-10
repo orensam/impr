@@ -8,8 +8,8 @@ function [pos, desc] = findFeatures(pyr, maxNum)
 % coordinates are provided at the pyramid level pyr{1}.
 % desc - A kxkxn feature descriptor matrix.
 
-    N = 8;
-    M = 8;
+    N = 2;
+    M = 2;
     DESC_RAD = 3;
             
     % Get corners in pyramid level 1

@@ -32,11 +32,13 @@ function [T, inliers] = ransacTransform(pos1, pos2, numIters, inlierTol)
         p = randi(n);
         p1 = pos1(p,:);
         p2 = pos2(p,:);
-        tmpT = buildT(p2(1)-p1(1), p2(2)-p1(2));
+        tmpT = buildT(p1(1)-p2(1), p1(2)-p2(2));
         
-        % Transform pos1, using homogenous coordinates
-        pos1T = [pos1, ones(n, 1)] * tmpT; 
-        pos1T = pos1T(:,1:2)
+        % Transform pos1, using homogenous coordinates.
+        % Then renormalize to regular coordinates.
+        pos1T = (tmpT * [pos1'; ones(1, n)]);
+        pos1T = pos1T(1:2,:)';
+        %pos1T = (pos1T(1:2,:) ./ [pos1T(3,:); pos1T(3,:)])';        
         
         % Calculate squared equclidean distance and update inliers if
         % needed
@@ -49,10 +51,11 @@ function [T, inliers] = ransacTransform(pos1, pos2, numIters, inlierTol)
     end
     
     % Re-evaluate T
-    pos1new = pos1(inliers);
-    pos2new = pos2(inliers);    
-    posdiffs = pos2new - pos1new;    
-    [avgdx, avgdy] = mean(posdiffs);
+    pos1new = pos1(inliers,:);
+    pos2new = pos2(inliers,:);    
+    posdiffs = pos1new - pos2new;    
+    avgdx = mean(posdiffs(:,1));
+    avgdy = mean(posdiffs(:,2));    
     T = buildT(avgdx, avgdy);
     
 end

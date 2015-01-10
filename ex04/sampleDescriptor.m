@@ -1,5 +1,5 @@
 function desc = sampleDescriptor(im, pos, descRad)
-% SAMPLEDESCRIPTOR Sample a MOPS−like descriptor at given position in image.
+% SAMPLEDESCRIPTOR Sample a MOPS-like descriptor at given position in image.
 % Arguments:
 % im - nxm grayscale image to sample within.
 % pos - A nx2 matrix of [x,y] descriptor positions in im.
@@ -25,9 +25,15 @@ function desc = sampleDescriptor(im, pos, descRad)
     % Sample with interpolation
     desc = interp2(im, repPos(:,1), repPos(:,2), 'linear');
     
+    
+    
+          
     % Normalize
-    avg = mean(desc);
-    desc = (desc - avg) / norm(desc - avg);
+    desc = reshape(desc, ksq, n);
+    desc = desc - repmat(mean(desc), ksq, 1); % subtract mean
+    desc = desc ./ repmat(sqrt(sum(desc.^2, 1)), ksq, 1); % divide by norm
+    
+    %desc = (desc - avg) / norm(desc - avg);
     
     % Reshape to N kxk matrices
     desc = reshape(desc, k, k, n);    
