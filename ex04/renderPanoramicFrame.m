@@ -18,7 +18,9 @@ function [panoramaFrame, frameNotOK] = ...
 % Returns:
 % panoramaFrame - the rendered frame
 % frameNotOK - in case of errors in rednering the frame, it is true.
-
+    
+    frameNotOK = 0;
+    
     n = numel(T);
     panoramaFrame = zeros(panoSize(1), panoSize(2), 3);
     centerY = ones(1, numel(imgSliceCenterX)) * size(imgs,1)/2;
@@ -52,7 +54,7 @@ function [panoramaFrame, frameNotOK] = ...
         stripWidth = stripRight - stripLeft + 1;
         stripHeight = stripBottom - stripTop + 1;        
         
-        [stripX, stripY] = meshgrid( stripLeft:stripRight, stripTop:stripBottom);
+        [stripX, stripY] = meshgrid(stripLeft:stripRight, stripTop:stripBottom);
          
         % Switch to M*N x 2 so we can use T
         stripCoords = [reshape(stripX, 1, stripWidth * stripHeight); ...
@@ -72,11 +74,11 @@ function [panoramaFrame, frameNotOK] = ...
         
         stripData = zeros(size(imCoordsX));
         % Interpolate from original image and add to the panorama
-        stripData(:,:,1) = interp2(imgs(:,:,1,i), imCoordsX, imCoordsY, 'linear');
-        stripData(:,:,2) = interp2(imgs(:,:,2,i), imCoordsX, imCoordsY, 'linear');
-        stripData(:,:,3) = interp2(imgs(:,:,3,i), imCoordsX, imCoordsY, 'linear');
+        stripData(:,:,1) = interp2(imgs(:,:,1,i), imCoordsX, imCoordsY, 'linear', 0);
+        stripData(:,:,2) = interp2(imgs(:,:,2,i), imCoordsX, imCoordsY, 'linear', 0);
+        stripData(:,:,3) = interp2(imgs(:,:,3,i), imCoordsX, imCoordsY, 'linear', 0);
         panoramaFrame(stripTop:stripBottom, stripLeft:stripRight, :) = stripData;
-
+2
     end
-    
+
 end

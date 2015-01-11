@@ -15,8 +15,8 @@ function imgs = loadImages(directoryPath)
     imSize = size(imread(getPath(directoryPath, filenames(1).name)));
     imgs = zeros(imSize(1), imSize(2), imSize(3), numel(filenames));
     
-    for i = 1:numel(filenames)
-        imgs(:,:,:,i) = double(imread(getPath(directoryPath, filenames(i).name))) / 255;
+    for i = 1:numel(filenames)        
+        imgs(:,:,:,i) = imReadAndConvert(getPath(directoryPath, filenames(i).name), 2);
     end
     
 end

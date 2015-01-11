@@ -17,12 +17,12 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
 % stereoVid - a movie which includes all the panoramic views
 %
     
-    minMatchScore = 0.5;
-    ransacIters = 1000;
-    ransacInlierTol = 500;
+    minMatchScore = 0.8;
+    ransacIters = 10000;
+    ransacInlierTol = 50;
     
     imgs = loadImages(imgDirectory);
-    n = size(imgs, 3);
+    n = size(imgs, 4);
     transforms = cell(1, n-1);
         
     for i = 1:(n-1)
@@ -35,7 +35,7 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
         [ind1, ind2] = myMatchFeatures(desc1, desc2, minMatchScore);
         newPos1 = pos1(ind1,:);
         newPos2 = pos2(ind2,:);
-        [T, ~] = ransacTransform(newPos1, newPos2, ransacIters, ransacInlierTol);
+        [T, ~] = ransacTransform(newPos2, newPos1, ransacIters, ransacInlierTol)
         transforms{i} = T;        
     end
     
@@ -44,18 +44,21 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     dxs = cellfun(@(T) T(1,3), panoTransforms);
     dys = cellfun(@(T) T(2,3), panoTransforms);
     
-    panoSizeX = round(size(imgs, 2) + abs(min(dxs)) + abs(max(dxs)));
+    panoSizeX = round(size(imgs, 2) + abs(max(dxs)));
     panoSizeY = round(size(imgs, 1) + abs(min(dys)) + abs(max(dys)));
     panoSize = [panoSizeX, panoSizeY];
     
     imgWidth = size(imgs, 2);
     stripWidth = round(imgWidth / nViews);
-    centersX = round(stripWidth / 2) : nViews : imgWidth;
+    centersX = round(stripWidth / 2) : stripWidth : imgWidth;
     
-    stereoVid = struct;
+    stereoVid = struct('cdata', 1, 'colormap', cell([1 nViews]));
+    
     for i = 1:nViews
-        frame = renderPanoramicFrame(panoSize, imgs, panoTransforms, centersX, stripWidth / 2);
-        stereoVid(i) = im2frame(frame);
+        imgSliceCenterX = ones(1, n) * centersX(i);
+        [panoFrame, frameNotOK] = renderPanoramicFrame(panoSize, imgs, panoTransforms, ...
+                                                       imgSliceCenterX, stripWidth / 2);        
+        stereoVid(i) = im2frame(panoFrame);
     end
     
 
