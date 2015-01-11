@@ -23,7 +23,7 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     
     imgs = loadImages(imgDirectory);
     n = size(imgs, 3);
-    transforms = cell(n-1);
+    transforms = cell(1, n-1);
         
     for i = 1:(n-1)
         im1 = rgb2gray(imgs(:,:,:,i));
@@ -41,12 +41,21 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     
     panoTransforms = imgToPanoramaCoordinates(transforms);
     
+    dxs = cellfun(@(T) T(1,3), panoTransforms);
+    dys = cellfun(@(T) T(2,3), panoTransforms);
+    
+    panoSizeX = round(size(imgs, 2) + abs(min(dxs)) + abs(max(dxs)));
+    panoSizeY = round(size(imgs, 1) + abs(min(dys)) + abs(max(dys)));
+    panoSize = [panoSizeX, panoSizeY];
+    
     imgWidth = size(imgs, 2);
     stripWidth = round(imgWidth / nViews);
     centersX = round(stripWidth / 2) : nViews : imgWidth;
     
+    stereoVid = struct;
     for i = 1:nViews
-        
+        frame = renderPanoramicFrame(panoSize, imgs, panoTransforms, centersX, stripWidth / 2);
+        stereoVid(i) = im2frame(frame);
     end
     
 

@@ -11,7 +11,7 @@ function Tout = imgToPanoramaCoordinates(Tin)
 % system of the first image
     
     n = numel(Tin);
-    Tout = cell(n+1);
+    Tout = cell(1, n+1);
     Tout{1} = eye(3);
     
     for i = 1:n
