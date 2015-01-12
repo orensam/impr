@@ -22,18 +22,14 @@ function desc = sampleDescriptor(im, pos, descRad)
     dyRow = repmat(reshape(dy, 1, ksq), 1, n);    
     repPos = (repPos + [dxRow; dyRow])';
     
-    % Sample with interpolation
-    desc = interp2(im, repPos(:,1), repPos(:,2), 'linear');
-    
-    
-    
-          
-    % Normalize
+    % Sample with interpolation. After reshape, every column is one
+    % descriptor.
+    desc = interp2(im, repPos(:,1), repPos(:,2), 'linear', 0);            
     desc = reshape(desc, ksq, n);
-    desc = desc - repmat(mean(desc), ksq, 1); % subtract mean
-    desc = desc ./ repmat(sqrt(sum(desc.^2, 1)), ksq, 1); % divide by norm
     
-    %desc = (desc - avg) / norm(desc - avg);
+    % Normalize    
+    desc = desc - repmat(mean(desc), ksq, 1); % subtract mean
+    desc = desc ./ repmat(sqrt(sum(desc.^2, 1)), ksq, 1); % divide by norm        
     
     % Reshape to N kxk matrices
     desc = reshape(desc, k, k, n);    

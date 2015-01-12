@@ -21,11 +21,12 @@ function [panoramaFrame, frameNotOK] = ...
     
     frameNotOK = 0;
     
-    n = numel(T);
-    panoramaFrame = zeros(panoSize(1), panoSize(2), 3);
-    centerY = ones(1, numel(imgSliceCenterX)) * size(imgs,1)/2;
-    centers = [imgSliceCenterX; centerY; ones(1, numel(centerY))];
+    [imHeight, imWidth, ~, n] = size(imgs);
+    nViews = numel(imgSliceCenterX);
     
+    panoramaFrame = zeros(panoSize(1), panoSize(2), 3);
+    centersY = ones(1, nViews) * imHeight/2;
+    centers = [imgSliceCenterX; centersY; ones(1, nViews)];
     
     centersT = zeros(size(centers));
     
@@ -34,6 +35,8 @@ function [panoramaFrame, frameNotOK] = ...
     end
     
     centersX = centersT(1,:);
+    centersY = centersT(2,:);
+    
     % Calculate bounds by averaging every pair of consecutive x's.
     % Special treatment for first and last.
     bounds = (centersX + [centersX(2:end), 0]) / 2;
@@ -42,19 +45,30 @@ function [panoramaFrame, frameNotOK] = ...
                     bounds, ...
                     centersX(n) + halfSliceWidthX]);
     
+    dxs = cellfun(@(trans) trans(1,3), T);
+    dys = cellfun(@(trans) trans(2,3), T);
+    
     for i = 1:n
         
         % Get panorama strip coordinates
         
-        stripTop = 1;
-        stripBottom = panoSize(1);
-        stripLeft = bounds(i) + 1;
-        stripRight = bounds(i+1)-1;
+        stripTop = 1; %round(abs(min(dys)) + centersY(i) - imHeight / 2) + 1;
+        stripBottom = imHeight; % round(abs(max(dys)) + centersY(i) + imHeight / 2) + 1;
+        stripBounds =  [max([1, bounds(i)]), bounds(i+1)-1];
+        stripLeft = min(stripBounds);
+        stripRight = max(stripBounds);
         
         stripWidth = stripRight - stripLeft + 1;
         stripHeight = stripBottom - stripTop + 1;        
         
         [stripX, stripY] = meshgrid(stripLeft:stripRight, stripTop:stripBottom);
+        
+%         stripLeft
+%         stripRight
+%         stripWidth
+%         stripHeight
+%         size(stripX)
+%         size(stripY)
          
         % Switch to M*N x 2 so we can use T
         stripCoords = [reshape(stripX, 1, stripWidth * stripHeight); ...
@@ -77,8 +91,12 @@ function [panoramaFrame, frameNotOK] = ...
         stripData(:,:,1) = interp2(imgs(:,:,1,i), imCoordsX, imCoordsY, 'linear', 0);
         stripData(:,:,2) = interp2(imgs(:,:,2,i), imCoordsX, imCoordsY, 'linear', 0);
         stripData(:,:,3) = interp2(imgs(:,:,3,i), imCoordsX, imCoordsY, 'linear', 0);
+        
+        if stripTop <= 0 || stripBottom <= 0 || stripLeft <= 0 || stripRight <= 0
+            x=3;
+        end
         panoramaFrame(stripTop:stripBottom, stripLeft:stripRight, :) = stripData;
-2
+
     end
 
 end

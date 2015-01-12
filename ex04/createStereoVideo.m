@@ -17,12 +17,14 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
 % stereoVid - a movie which includes all the panoramic views
 %
     
-    minMatchScore = 0.8;
-    ransacIters = 10000;
-    ransacInlierTol = 50;
+    %% Calculate transformations between given images
+    minMatchScore = 0.5;
+    ransacIters = 1000;
+    ransacInlierTol = 10;
+    maxPoints = 800;
     
     imgs = loadImages(imgDirectory);
-    n = size(imgs, 4);
+    [imHeight, imWidth, ~, n] = size(imgs);
     transforms = cell(1, n-1);
         
     for i = 1:(n-1)
@@ -30,36 +32,46 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
         im2 = rgb2gray(imgs(:,:,:,i+1));
         pyr1 = GaussianPyramid(im1, 3, 3);
         pyr2 = GaussianPyramid(im2, 3, 3);
-        [pos1, desc1] = findFeatures(pyr1, 100);
-        [pos2, desc2] = findFeatures(pyr2, 100);        
+        [pos1, desc1] = findFeatures(pyr1, maxPoints);
+        [pos2, desc2] = findFeatures(pyr2, maxPoints);        
         [ind1, ind2] = myMatchFeatures(desc1, desc2, minMatchScore);
         newPos1 = pos1(ind1,:);
         newPos2 = pos2(ind2,:);
-        [T, ~] = ransacTransform(newPos2, newPos1, ransacIters, ransacInlierTol)
-        transforms{i} = T;        
+        [T, ~] = ransacTransform(newPos2, newPos1, ransacIters, ransacInlierTol);        
+        transforms{i} = T.T;
     end
     
+    % Get the comulative transformations
     panoTransforms = imgToPanoramaCoordinates(transforms);
     
-    dxs = cellfun(@(T) T(1,3), panoTransforms);
-    dys = cellfun(@(T) T(2,3), panoTransforms);
+    %% Calculate panorama size
+    dxs = cellfun(@(T) T(1,3), panoTransforms)
+    dys = cellfun(@(T) T(2,3), panoTransforms)    
     
-    panoSizeX = round(size(imgs, 2) + abs(max(dxs)));
-    panoSizeY = round(size(imgs, 1) + abs(min(dys)) + abs(max(dys)));
+    topPixels = abs(min(dys(find(dys<0))));
+    bottomPixels = max(dys(find(dys>0)));
+    leftPixels = abs(min(dys(find(dxs<0))));
+    rightPixels = max(dys(find(dxs>0)));
+    
+    panoSizeX = round(imWidth + abs(max(dxs)));
+    panoSizeY = round(imHeight + topPixels + bottomPixels);
     panoSize = [panoSizeX, panoSizeY];
     
-    imgWidth = size(imgs, 2);
-    stripWidth = round(imgWidth / nViews);
-    centersX = round(stripWidth / 2) : stripWidth : imgWidth;
+    %% Calculate strip center for each frame
+    stripWidth = round(imWidth / nViews);
+    centersX = round(stripWidth / 2) : stripWidth : imWidth;        
     
+    %% Iterate views and create panorama frame for each one
     stereoVid = struct('cdata', 1, 'colormap', cell([1 nViews]));
-    
     for i = 1:nViews
         imgSliceCenterX = ones(1, n) * centersX(i);
         [panoFrame, frameNotOK] = renderPanoramicFrame(panoSize, imgs, panoTransforms, ...
-                                                       imgSliceCenterX, stripWidth / 2);        
-        stereoVid(i) = im2frame(panoFrame);
+                                                       imgSliceCenterX, stripWidth / 2);
+        if frameNotOK
+            fprintf('Problem in frame %d\n', i);
+        else
+            stereoVid(i) = im2frame(panoFrame);
+        end        
     end
     
-
 end
