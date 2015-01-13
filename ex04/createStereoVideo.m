@@ -20,8 +20,8 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     %% Calculate transformations between given images
     minMatchScore = 0.5;
     ransacIters = 1000;
-    ransacInlierTol = 10;
-    maxPoints = 800;
+    ransacInlierTol = 20;
+    maxPoints = 400;
     
     imgs = loadImages(imgDirectory);
     [imHeight, imWidth, ~, n] = size(imgs);
@@ -38,7 +38,7 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
         newPos1 = pos1(ind1,:);
         newPos2 = pos2(ind2,:);
         [T, ~] = ransacTransform(newPos2, newPos1, ransacIters, ransacInlierTol);        
-        transforms{i} = T.T;
+        transforms{i} = T;
     end
     
     % Get the comulative transformations
@@ -53,9 +53,27 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     leftPixels = abs(min(dys(find(dxs<0))));
     rightPixels = max(dys(find(dxs>0)));
     
-    panoSizeX = round(imWidth + abs(max(dxs)));
-    panoSizeY = round(imHeight + topPixels + bottomPixels);
-    panoSize = [panoSizeX, panoSizeY];
+    panoHeight = imHeight;
+    panoWidth = imWidth;    
+    
+    if ~isempty(topPixels)
+        panoHeight = panoHeight + topPixels;
+    end
+    if ~isempty(bottomPixels)
+        panoHeight = panoHeight + bottomPixels;
+    end
+    
+    if ~isempty(leftPixels)
+        panoWidth = panoWidth + leftPixels;
+    end
+    if ~isempty(rightPixels)
+        panoWidth = panoWidth + rightPixels;
+    end
+    
+    panoHeight = round(panoHeight);
+    panoWidth = round(panoWidth);
+    
+    panoSize = [panoHeight, panoWidth];
     
     %% Calculate strip center for each frame
     stripWidth = round(imWidth / nViews);

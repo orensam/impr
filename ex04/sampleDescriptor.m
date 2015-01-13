@@ -17,10 +17,10 @@ function desc = sampleDescriptor(im, pos, descRad)
     
     % Get the positions around pos, i.e a (N*k^2)x2 matrix
     repPos = reshape(repmat(pos, 1, ksq)', 2, ksq * n);
-    [dx, dy] = meshgrid(-descRad:descRad);   
-    dxRow = repmat(reshape(dx, 1, ksq), 1, n);
-    dyRow = repmat(reshape(dy, 1, ksq), 1, n);    
-    repPos = (repPos + [dxRow; dyRow])';
+    [dCol, dRow] = meshgrid(-descRad:descRad);   
+    repdCol = repmat(reshape(dCol, 1, ksq), 1, n);
+    repdRow = repmat(reshape(dRow, 1, ksq), 1, n);    
+    repPos = (repPos + [repdCol; repdRow])';
     
     % Sample with interpolation. After reshape, every column is one
     % descriptor.

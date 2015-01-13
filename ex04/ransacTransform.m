@@ -32,7 +32,12 @@ function [T, inliers] = ransacTransform(pos1, pos2, numIters, inlierTol)
         p = randi(n);
         p1 = pos1(p,:);
         p2 = pos2(p,:);
-        tmpT = buildT(p2(1)-p1(1), p2(2)-p1(2));
+        col1 = p1(1);
+        col2 = p2(1);
+        row1 = p1(2);
+        row2 = p2(2);
+        
+        tmpT = buildT(col2-col1, row2-row1);
         
         % Transform pos1, using homogenous coordinates.
         % Then renormalize to regular coordinates.
@@ -54,14 +59,14 @@ function [T, inliers] = ransacTransform(pos1, pos2, numIters, inlierTol)
     pos1new = pos1(inliers,:);
     pos2new = pos2(inliers,:);    
     posdiffs = pos2new - pos1new;    
-    avgdx = mean(posdiffs(:,1));
-    avgdy = mean(posdiffs(:,2));    
-    T = buildT(avgdx, avgdy);
+    avgdCol = mean(posdiffs(:,1));
+    avgdRow = mean(posdiffs(:,2));    
+    T = buildT(avgdCol, avgdRow);
     
 end
 
-function T = buildT(dx, dy)
+function T = buildT(dCols, dRows)
     T = eye(3);
-    T(1, 3) = dx;
-    T(2, 3) = dy;
+    T(1, 3) = dCols;
+    T(2, 3) = dRows;
 end

@@ -8,8 +8,8 @@ function [pos, desc] = findFeatures(pyr, maxNum)
 % coordinates are provided at the pyramid level pyr{1}.
 % desc - A kxkxn feature descriptor matrix.
 
-    N = 8;
-    M = 8;
+    N = 2;
+    M = 2;
     DESC_RAD = 3;
             
     % Get corners in pyramid level 1
@@ -19,13 +19,13 @@ function [pos, desc] = findFeatures(pyr, maxNum)
     level3Pos = 0.25 * (pos - 1) + 1; % 2^(l_1 - l_2) = 2^(1 - 3) = 1/4
     
     % Fix coordinates - so that all positions can be interpolated.
-    [height, width] = size(pyr{3});    
-    posX = level3Pos(:,1);
-    posY = level3Pos(:,2);
-    xMask = (posX > (DESC_RAD + 1)) & (posX < (width - DESC_RAD));
-    yMask = (posY > (DESC_RAD + 1)) & (posY < (height - DESC_RAD));
-    mask = xMask & yMask;
-    level3Pos = [posX(mask), posY(mask)];
+    [level3Height, level3Width] = size(pyr{3});
+    cols = level3Pos(:,1);
+    rows = level3Pos(:,2);
+    colMask = (cols > (DESC_RAD + 1)) & (cols < (level3Width - DESC_RAD));
+    rowMask = (rows > (DESC_RAD + 1)) & (rows < (level3Height - DESC_RAD));
+    mask = colMask & rowMask;
+    level3Pos = [cols(mask), rows(mask)];    
     
     % Get the descriptors for the feature points we found
     desc = sampleDescriptor(pyr{3}, level3Pos, DESC_RAD);

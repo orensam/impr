@@ -22,9 +22,11 @@ function [panoramaFrame, frameNotOK] = ...
     frameNotOK = 0;
     
     [imHeight, imWidth, ~, n] = size(imgs);
+    panoHeight = panoSize(1);
+    panoWidth = panoSize(2);
     nViews = numel(imgSliceCenterX);
     
-    panoramaFrame = zeros(panoSize(1), panoSize(2), 3);
+    panoramaFrame = zeros(panoHeight, panoWidth, 3);
     centersY = ones(1, nViews) * imHeight/2;
     centers = [imgSliceCenterX; centersY; ones(1, nViews)];
     
