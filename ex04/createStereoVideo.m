@@ -50,8 +50,8 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     
     topPixels = abs(min(dys(find(dys<0))));
     bottomPixels = max(dys(find(dys>0)));
-    leftPixels = abs(min(dys(find(dxs<0))));
-    rightPixels = max(dys(find(dxs>0)));
+    leftPixels = abs(min(dxs(find(dxs<0))));
+    rightPixels = max(dxs(find(dxs>0)));
     
     panoHeight = imHeight;
     panoWidth = imWidth;    
@@ -70,8 +70,8 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
         panoWidth = panoWidth + rightPixels;
     end
     
-    panoHeight = round(panoHeight);
-    panoWidth = round(panoWidth);
+    panoHeight = ceil(panoHeight);
+    panoWidth = ceil(panoWidth);
     
     panoSize = [panoHeight, panoWidth];
     
