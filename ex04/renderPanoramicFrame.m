@@ -50,12 +50,14 @@ function [panoramaFrame, frameNotOK] = ...
     dxs = cellfun(@(trans) trans(1,3), T);
     dys = cellfun(@(trans) trans(2,3), T);
     
+    [topPad, bottomPad, leftPad, rightPad, dxs, dys] = calcPad(T);
+    
     for i = 1:n
         
         % Get panorama strip coordinates
-        
-        stripTop = 1; %round(abs(min(dys)) + centersY(i) - imHeight / 2) + 1;
-        stripBottom = imHeight; % round(abs(max(dys)) + centersY(i) + imHeight / 2) + 1;
+        verticalShift = ceil(-1 * dys(i));                
+        stripTop = topPad + verticalShift + 1; %round(abs(min(dys)) + centersY(i) - imHeight / 2) + 1;
+        stripBottom = imHeight - verticalShift + 1; % round(abs(max(dys)) + centersY(i) + imHeight / 2) + 1;
         stripBounds =  [max([1, bounds(i)]), bounds(i+1)-1];
         stripLeft = min(stripBounds);
         stripRight = max(stripBounds);
@@ -94,9 +96,6 @@ function [panoramaFrame, frameNotOK] = ...
         stripData(:,:,2) = interp2(imgs(:,:,2,i), imCoordsX, imCoordsY, 'linear', 0);
         stripData(:,:,3) = interp2(imgs(:,:,3,i), imCoordsX, imCoordsY, 'linear', 0);
         
-        if stripTop <= 0 || stripBottom <= 0 || stripLeft <= 0 || stripRight <= 0
-            x=3;
-        end
         panoramaFrame(stripTop:stripBottom, stripLeft:stripRight, :) = stripData;
 
     end

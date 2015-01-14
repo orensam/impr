@@ -45,33 +45,11 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     panoTransforms = imgToPanoramaCoordinates(transforms);
     
     %% Calculate panorama size
-    dxs = cellfun(@(T) T(1,3), panoTransforms)
-    dys = cellfun(@(T) T(2,3), panoTransforms)    
     
-    topPixels = abs(min(dys(find(dys<0))));
-    bottomPixels = max(dys(find(dys>0)));
-    leftPixels = abs(min(dxs(find(dxs<0))));
-    rightPixels = max(dxs(find(dxs>0)));
+    [topPad, bottomPad, leftPad, rightPad, ~, ~] = calcPad(panoTransforms);        
     
-    panoHeight = imHeight;
-    panoWidth = imWidth;    
-    
-    if ~isempty(topPixels)
-        panoHeight = panoHeight + topPixels;
-    end
-    if ~isempty(bottomPixels)
-        panoHeight = panoHeight + bottomPixels;
-    end
-    
-    if ~isempty(leftPixels)
-        panoWidth = panoWidth + leftPixels;
-    end
-    if ~isempty(rightPixels)
-        panoWidth = panoWidth + rightPixels;
-    end
-    
-    panoHeight = ceil(panoHeight);
-    panoWidth = ceil(panoWidth);
+    panoHeight = ceil(imHeight + topPad + bottomPad);
+    panoWidth = ceil(imWidth + leftPad + rightPad);
     
     panoSize = [panoHeight, panoWidth];
     
