@@ -1,5 +1,4 @@
 function [stereoVid] = createStereoVideo(imgDirectory, nViews)
-%
 % This function gets an image directory and create a stereo movie with
 % nViews. It does the following:
 %
@@ -15,14 +14,8 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
 %
 % Returns:
 % stereoVid - a movie which includes all the panoramic views
-%
     
-    %% Calculate transformations between given images
-    minMatchScore = 0.5;
-    ransacIters = 1000;
-    ransacInlierTol = 20;
-    maxPoints = 400;
-    
+    %% Calculate transformations between given images    
     imgs = loadImages(imgDirectory);
     [imHeight, imWidth, ~, n] = size(imgs);
     transforms = cell(1, n-1);
@@ -30,23 +23,16 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     for i = 1:(n-1)
         im1 = rgb2gray(imgs(:,:,:,i));
         im2 = rgb2gray(imgs(:,:,:,i+1));
-        pyr1 = GaussianPyramid(im1, 3, 3);
-        pyr2 = GaussianPyramid(im2, 3, 3);
-        [pos1, desc1] = findFeatures(pyr1, maxPoints);
-        [pos2, desc2] = findFeatures(pyr2, maxPoints);        
-        [ind1, ind2] = myMatchFeatures(desc1, desc2, minMatchScore);
-        newPos1 = pos1(ind1,:);
-        newPos2 = pos2(ind2,:);
-        [T, ~] = ransacTransform(newPos2, newPos1, ransacIters, ransacInlierTol);        
-        transforms{i} = T;
+        transforms{i} = findTransform(im2, im1);
     end
     
     % Get the comulative transformations
     panoTransforms = imgToPanoramaCoordinates(transforms);
     
-    %% Calculate panorama size
-    
-    [topPad, bottomPad, leftPad, rightPad, ~, ~] = calcPad(panoTransforms);        
+    %% Calculate panorama size    
+    [topPad, bottomPad, leftPad, rightPad, dxs, dys] = calcPad(panoTransforms);        
+    dxs
+    dys
     
     panoHeight = ceil(imHeight + topPad + bottomPad);
     panoWidth = ceil(imWidth + leftPad + rightPad);
