@@ -41,19 +41,25 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     
     %% Calculate strip center for each frame
     stripWidth = round(imWidth / nViews);
-    centersX = round(stripWidth / 2) : stripWidth : imWidth;        
+    halfSliceWidthX = round(stripWidth / 2);
+    centersX = halfSliceWidthX : stripWidth : imWidth
     
     %% Iterate views and create panorama frame for each one
+    nOKFrames = 0;
     stereoVid = struct('cdata', 1, 'colormap', cell([1 nViews]));
     for i = 1:nViews
+        %imgSliceCenterX = ones(1, n) .* (2 * i * stripWidth);
         imgSliceCenterX = ones(1, n) * centersX(i);
         [panoFrame, frameNotOK] = renderPanoramicFrame(panoSize, imgs, panoTransforms, ...
-                                                       imgSliceCenterX, stripWidth / 2);
+                                                       imgSliceCenterX, halfSliceWidthX);
         if frameNotOK
-            fprintf('Problem in frame %d\n', i);
+            fprintf('Problem in frame %d\n', i);            
         else
             stereoVid(i) = im2frame(panoFrame);
+            nOKFrames = nOKFrames + 1;
         end        
     end
+    
+    stereoVid(nOKFrames+1:end) = [];
     
 end

@@ -19,16 +19,19 @@ function [panoramaFrame, frameNotOK] = ...
 % panoramaFrame - the rendered frame
 % frameNotOK - in case of errors in rednering the frame, it is true.
     
-    frameNotOK = 0;
+    frameNotOK = false;
     
+    % Sizes
     [imHeight, imWidth, ~, n] = size(imgs);
     panoHeight = panoSize(1);
-    panoWidth = panoSize(2);
-    nViews = numel(imgSliceCenterX);
+    panoWidth = panoSize(2);    
     
+    % Init pano frame
     panoramaFrame = zeros(panoHeight, panoWidth, 3);
-    centersY = ones(1, nViews) * imHeight/2;
-    centers = [imgSliceCenterX; centersY; ones(1, nViews)];
+    
+    % Handle centers
+    centersY = ones(1, n) * imHeight/2;
+    centers = [imgSliceCenterX; centersY; ones(1, n)];
     
     centersT = zeros(size(centers));
     
@@ -41,11 +44,11 @@ function [panoramaFrame, frameNotOK] = ...
     
     % Calculate bounds by averaging every pair of consecutive x's.
     % Special treatment for first and last.
-    bounds = (centersX + [centersX(2:end), 0]) / 2;
-    bounds = bounds(1:end-1);    
-    bounds = round([centersX(1) - halfSliceWidthX, ...
-                    bounds, ...
-                    centersX(n) + halfSliceWidthX]);
+    bounds = (centersX(1:end-1) + centersX(2:end)) / 2;
+    %bounds = bounds(1:end-1);    
+    bounds = ceil([centersX(1) - halfSliceWidthX, ...
+                   bounds, ...
+                   centersX(n) + halfSliceWidthX])
     
     dxs = cellfun(@(trans) trans(1,3), T);
     dys = cellfun(@(trans) trans(2,3), T);
@@ -57,7 +60,7 @@ function [panoramaFrame, frameNotOK] = ...
         % Get panorama strip coordinates
         verticalShift = ceil(-1 * dys(i));                
         stripTop = topPad + verticalShift + 1; %round(abs(min(dys)) + centersY(i) - imHeight / 2) + 1;
-        stripBottom = imHeight - verticalShift + 1; % round(abs(max(dys)) + centersY(i) + imHeight / 2) + 1;
+        stripBottom = imHeight + verticalShift + 1; % round(abs(max(dys)) + centersY(i) + imHeight / 2) + 1;
         stripBounds =  [max([1, bounds(i)]), bounds(i+1)-1];
         stripLeft = min(stripBounds);
         stripRight = max(stripBounds);
@@ -90,7 +93,7 @@ function [panoramaFrame, frameNotOK] = ...
         imCoordsX = reshape(imCoords(1,:), stripHeight, stripWidth); 
         imCoordsY = reshape(imCoords(2,:), stripHeight, stripWidth);
         
-        stripData = zeros(size(imCoordsX));
+        stripData = zeros(stripHeight, stripWidth, 3);
         % Interpolate from original image and add to the panorama
         stripData(:,:,1) = interp2(imgs(:,:,1,i), imCoordsX, imCoordsY, 'linear', 0);
         stripData(:,:,2) = interp2(imgs(:,:,2,i), imCoordsX, imCoordsY, 'linear', 0);
