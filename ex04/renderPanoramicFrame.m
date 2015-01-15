@@ -22,7 +22,7 @@ function [panoramaFrame, frameNotOK] = ...
     frameNotOK = false;
     
     % Sizes
-    [imHeight, imWidth, ~, n] = size(imgs);
+    [imHeight, ~, ~, n] = size(imgs);
     panoHeight = panoSize(1);
     panoWidth = panoSize(2);    
     
@@ -40,7 +40,6 @@ function [panoramaFrame, frameNotOK] = ...
     end
     
     centersX = centersT(1,:);
-    centersY = centersT(2,:);
     
     % Calculate bounds by averaging every pair of consecutive x's.
     % Special treatment for first and last.
@@ -48,50 +47,36 @@ function [panoramaFrame, frameNotOK] = ...
     %bounds = bounds(1:end-1);    
     bounds = ceil([centersX(1) - halfSliceWidthX, ...
                    bounds, ...
-                   centersX(n) + halfSliceWidthX])
+                   centersX(n) + halfSliceWidthX]);    
     
-    dxs = cellfun(@(trans) trans(1,3), T);
-    dys = cellfun(@(trans) trans(2,3), T);
-    
-    [topPad, bottomPad, leftPad, rightPad, dxs, dys] = calcPad(T);
+    [topPad, ~, ~, ~, ~, dys] = calcPad(T);
     
     for i = 1:n
         
         % Get panorama strip coordinates
-        verticalShift = ceil(-1 * dys(i));                
-        stripTop = topPad + verticalShift + 1; %round(abs(min(dys)) + centersY(i) - imHeight / 2) + 1;
-        stripBottom = imHeight + verticalShift + 1; % round(abs(max(dys)) + centersY(i) + imHeight / 2) + 1;
+        %verticalShift = 0;%ceil(-1 * dys(i));                
+        stripTop = max(1, ceil(topPad + dys(i)));
+        stripBottom = stripTop + imHeight;
         stripBounds =  [max([1, bounds(i)]), bounds(i+1)-1];
         stripLeft = min(stripBounds);
         stripRight = max(stripBounds);
-        
+
         stripWidth = stripRight - stripLeft + 1;
         stripHeight = stripBottom - stripTop + 1;        
         
-        [stripX, stripY] = meshgrid(stripLeft:stripRight, stripTop:stripBottom);
-        
-%         stripLeft
-%         stripRight
-%         stripWidth
-%         stripHeight
-%         size(stripX)
-%         size(stripY)
+        [stripX, stripY] = meshgrid(stripLeft:stripRight, stripTop:stripBottom);        
          
         % Switch to M*N x 2 so we can use T
         stripCoords = [reshape(stripX, 1, stripWidth * stripHeight); ...
                        reshape(stripY, 1, stripWidth * stripHeight); ...
-                       ones(1, stripWidth * stripHeight)];        
-        
-         
-%         imgTopLeft = inv(T{i}) * [stripLeft; stripTop; 1];
-%         imgBottomRight = inv(T{i}) * [stripRight; stripBottom; 1];
-%         imCoordsX = imTopLeft(1):imBottomRight(1);
-%         imCoordsY = imTopLeft(2):imBottomRight(2);
+                       ones(1, stripWidth * stripHeight)];                         
                 
         % Apply transformation 
         imCoords = inv(T{i}) * stripCoords;
         imCoordsX = reshape(imCoords(1,:), stripHeight, stripWidth); 
-        imCoordsY = reshape(imCoords(2,:), stripHeight, stripWidth);
+        imCoordsY = reshape(imCoords(2,:), stripHeight, stripWidth) - topPad;
+
+        %imCoordsY = ceil(imCoordsY + topPad);
         
         stripData = zeros(stripHeight, stripWidth, 3);
         % Interpolate from original image and add to the panorama

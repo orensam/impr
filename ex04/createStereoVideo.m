@@ -30,9 +30,7 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     panoTransforms = imgToPanoramaCoordinates(transforms);
     
     %% Calculate panorama size    
-    [topPad, bottomPad, leftPad, rightPad, dxs, dys] = calcPad(panoTransforms);        
-    dxs
-    dys
+    [topPad, bottomPad, leftPad, rightPad, ~, ~] = calcPad(panoTransforms);        
     
     panoHeight = ceil(imHeight + topPad + bottomPad);
     panoWidth = ceil(imWidth + leftPad + rightPad);
@@ -40,15 +38,14 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
     panoSize = [panoHeight, panoWidth];
     
     %% Calculate strip center for each frame
-    stripWidth = round(imWidth / nViews);
-    halfSliceWidthX = round(stripWidth / 2);
-    centersX = halfSliceWidthX : stripWidth : imWidth
+    stripWidth = imWidth / nViews;
+    halfSliceWidthX = stripWidth / 2;
+    centersX = halfSliceWidthX : stripWidth : imWidth;
     
     %% Iterate views and create panorama frame for each one
     nOKFrames = 0;
     stereoVid = struct('cdata', 1, 'colormap', cell([1 nViews]));
-    for i = 1:nViews
-        %imgSliceCenterX = ones(1, n) .* (2 * i * stripWidth);
+    for i = 1:nViews        
         imgSliceCenterX = ones(1, n) * centersX(i);
         [panoFrame, frameNotOK] = renderPanoramicFrame(panoSize, imgs, panoTransforms, ...
                                                        imgSliceCenterX, halfSliceWidthX);
