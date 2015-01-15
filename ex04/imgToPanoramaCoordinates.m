@@ -10,10 +10,12 @@ function Tout = imgToPanoramaCoordinates(Tin)
 % image i to the panorama corrdinate system which is the the corrdinates
 % system of the first image
     
+    % Initialize
     n = numel(Tin);
     Tout = cell(1, n+1);
-    Tout{1} = eye(3);
     
+    % Create cumulative transforms
+    Tout{1} = eye(3);    
     for i = 1:n
         Tout{i+1} = Tin{i} * Tout{i};
     end

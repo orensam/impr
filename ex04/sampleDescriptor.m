@@ -31,7 +31,7 @@ function desc = sampleDescriptor(im, pos, descRad)
     desc = desc - repmat(mean(desc), ksq, 1); % subtract mean
     desc = desc ./ repmat(sqrt(sum(desc.^2, 1)), ksq, 1); % divide by norm        
     
-    % Reshape to N kxk matrices
+    % Reshape to n kxk matrices
     desc = reshape(desc, k, k, n);    
     
 end

@@ -22,31 +22,29 @@ function [T, inliers] = ransacTransform(pos1, pos2, numIters, inlierTol)
 % inlier match, the squared euclidean distance between the transformed pos1(i,:)
 % and pos2(i,:) is computed and compared to inlierTol. Matches having this squared
 % distance smaller than inlierTol are deemed inliers.
-
+    
+    % Sizes
     n = size(pos1, 1);
-       
+    
+    % Initialize empty inliers list
     inliers = [];
-    for i = 1:numIters
+    
+    % Perform RANSAC iterations
+    for i = 1:numIters        
         
-        % Estimnate transformation using one randon point
+        % 1. Estimnate transformation using one randon point
         p = randi(n);
         p1 = pos1(p,:);
-        p2 = pos2(p,:);
-        col1 = p1(1);
-        col2 = p2(1);
-        row1 = p1(2);
-        row2 = p2(2);
+        p2 = pos2(p,:);        
+        tmpT = buildT(p2(1)-p1(1), p2(2)-p1(2));
         
-        tmpT = buildT(col2-col1, row2-row1);
-        
-        % Transform pos1, using homogenous coordinates.
-        % Then renormalize to regular coordinates.
+        % 2. Transform pos1 using the estimated transformation,
+        %    (using homogenous coordinates).
         pos1T = (tmpT * [pos1'; ones(1, n)]);
-        pos1T = pos1T(1:2,:)';
-        %pos1T = (pos1T(1:2,:) ./ [pos1T(3,:); pos1T(3,:)])';        
+        pos1T = pos1T(1:2,:)';        
         
-        % Calculate squared equclidean distance and update inliers if
-        % needed
+        % 3. Calculate squared equclidean distance and update inliers if
+        %    needed
         E = sum((pos2 - pos1T).^2, 2); 
         tmpInliers = find(E<inlierTol);        
         if numel(tmpInliers) > numel(inliers)
@@ -55,7 +53,8 @@ function [T, inliers] = ransacTransform(pos1, pos2, numIters, inlierTol)
         
     end
     
-    % Re-evaluate T
+    % Re-evaluate the transformation using the
+    % best inliers list
     pos1new = pos1(inliers,:);
     pos2new = pos2(inliers,:);    
     posdiffs = pos2new - pos1new;    

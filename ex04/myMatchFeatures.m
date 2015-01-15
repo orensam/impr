@@ -13,23 +13,27 @@ function [ind1, ind2] = myMatchFeatures(desc1, desc2, minScore)
 % 2. The number of feature descriptors n1 generally differs from n2
 % 3. ind1 and ind2 have the same length.
     
+    % Get sizes
     [k, ~, n1] = size(desc1);
     [~, ~, n2] = size(desc2);    
-    ksq = k^2;    
+    ksq = k^2;
     
-    % Reshape desc1 - every row is a descriptor    
+    % Reshape desc1 - every row is a descriptor
     desc1mat = reshape(desc1, ksq, n1)';
     % Reshape desc2 - every column is a descriptor
     desc2mat = reshape(desc2, ksq, n2);
-    S = desc1mat * desc2mat; % n1 * n2 matrix of descriptor match scores (dot product)
-    S(S < minScore) = 0;    
-
+    % S is an n1xn2 matrix of descriptor match scores (dot product)
+    S = desc1mat * desc2mat;
+    % Leave S only with values higher than the threshold
+    S(S < minScore) = 0;
+    
+    % Initialize matching indices lists
     ind1 = zeros(1, n1);
     ind2 = zeros(1, n1);
-    counter = 0;
     
     % Match descriptors when entry value is both
     % a row and a column maximum
+    counter = 0;
     for i = 1:n1
         [maxVal, maxCol] = max(S(i,:));
         if maxVal > 0 && maxVal == max(S(:,maxCol))
@@ -40,12 +44,5 @@ function [ind1, ind2] = myMatchFeatures(desc1, desc2, minScore)
     end
     ind1 = ind1(1:counter);
     ind2 = ind2(1:counter);
-
-    % Simple matching algorithm - every descriptor in desc1 is matched with
-    % its maximal descriptor in desc2.
-%     
-%      ind1 = 1:n1;
-%      [~, ind2] = max(S, [], 2); % max index in each row
-%      ind2 = ind2';
     
 end
