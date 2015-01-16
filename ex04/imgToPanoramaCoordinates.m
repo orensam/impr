@@ -17,7 +17,7 @@ function Tout = imgToPanoramaCoordinates(Tin)
     % Create cumulative transforms
     Tout{1} = eye(3);    
     for i = 1:n
-        Tout{i+1} = Tin{i} * Tout{i};
+        Tout{i+1} = Tout{i} * Tin{i};
     end
 
 end

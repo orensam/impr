@@ -9,8 +9,8 @@ function [pos, desc] = findFeatures(pyr, maxNum)
 % desc - A kxkxn feature descriptor matrix.
     
     % Config parameters
-    spreadN = 2;
-    spreadM = 2;
+    spreadN = 8;
+    spreadM = 8;
     DESC_RAD = 3;
             
     % Get corners in pyramid level 1

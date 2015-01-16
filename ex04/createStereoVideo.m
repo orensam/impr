@@ -1,4 +1,4 @@
-function [stereoVid] = createStereoVideo(imgDirectory, nViews)
+function [stereoVid] = createStereoVideo(imgDirectory, nViews, rotate)
 % This function gets an image directory and create a stereo movie with
 % nViews. It does the following:
 %
@@ -15,15 +15,22 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews)
 % Returns:
 % stereoVid - a movie which includes all the panoramic views
     
-    %% Calculate transformations between given images    
+    %% Init
+    rot = false;
+    if exist('rotate', 'var')
+        rot = rotate;
+    end
+    
     imgs = loadImages(imgDirectory);
     [imHeight, imWidth, ~, n] = size(imgs);
+    
+    %% Calculate transformations between given images    
     transforms = cell(1, n-1);
         
     for i = 1:(n-1)
         im1 = rgb2gray(imgs(:,:,:,i));
         im2 = rgb2gray(imgs(:,:,:,i+1));
-        transforms{i} = findTransform(im2, im1);
+        transforms{i} = findTransform(im2, im1, rot);
     end
     
     % Get the comulative transformations

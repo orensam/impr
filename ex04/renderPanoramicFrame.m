@@ -52,7 +52,7 @@ function [panoramaFrame, frameNotOK] = ...
     [topPad, ~, ~, ~, ~, dys] = calcPad(T);
     
     for i = 1:n
-        
+
         % Get panorama strip coordinates
         %verticalShift = 0;%ceil(-1 * dys(i));                
         stripTop = max(1, ceil(topPad + dys(i)));
@@ -73,10 +73,9 @@ function [panoramaFrame, frameNotOK] = ...
                 
         % Apply transformation 
         imCoords = inv(T{i}) * stripCoords;
+        imCoords = imCoords(1:2,:) ./ repmat(imCoords(3,:),2,1);
         imCoordsX = reshape(imCoords(1,:), stripHeight, stripWidth); 
-        imCoordsY = reshape(imCoords(2,:), stripHeight, stripWidth) - topPad;
-
-        %imCoordsY = ceil(imCoordsY + topPad);
+        imCoordsY = reshape(imCoords(2,:), stripHeight, stripWidth) - topPad;        
         
         stripData = zeros(stripHeight, stripWidth, 3);
         % Interpolate from original image and add to the panorama
