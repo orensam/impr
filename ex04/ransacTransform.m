@@ -71,8 +71,8 @@ function T = buildT(pos1, pos2, rot)
         % Create the equation system.
         % in case of two source points [x1, y1], [x2, y2]
         % and two destination points [x'1, y'1], [x'2, y'2]
-        % we have:        
-        % M = x1 -y1 1 0     a     x'1
+        % So we have a system of the form M * x = r:
+        %     x1 -y1 1 0     a     x'1
         %     x2 -y2 1 0  *  b  =  x'2
         %     y1  x1 0 1     c     y'1
         %     y2  x2 0 1     d     y'2
@@ -88,18 +88,23 @@ function T = buildT(pos1, pos2, rot)
         numPoints = size(pos1, 1);        
         M = [pos1(:,1), -pos1(:,2), ones(numPoints, 1), zeros(numPoints, 1);
              pos1(:,2),  pos1(:,1), zeros(numPoints, 1), ones(numPoints, 1)];
-        b = [pos2(:,1);
+        r = [pos2(:,1);
              pos2(:,2)];
+                
         if rank(M) < min(size(M))
+            % M is singular (uninvertible) - cannot solve
+            avgDiffs = mean(pos2 - pos1, 1);
             T = eye(3);
+            T(1,3) = avgDiffs(1);
+            T(2,3) = avgDiffs(2);
             return;
         end
         % x = [a,b,c,d] = [cos(w), sin(w), dx, dy], where w is the rotation
         % angle
-        x = M\b; 
-        
+        x = M\r;         
+                
         T = [x(1), x(2), x(3);
-             -x(2),  x(1), x(4);
+             -x(2), x(1), x(4);
              0,     0,    1];
          
     else
