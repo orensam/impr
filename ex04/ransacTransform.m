@@ -60,11 +60,13 @@ function [T, inliers] = ransacTransform(pos1, pos2, numIters, inlierTol, rotate)
             inliers = tmpInliers;
         end
         
-    end    
+    end
+    
     T = buildT(pos1(inliers,:), pos2(inliers,:), rot);
     
 end
 
+%%
 function T = buildT(pos1, pos2, rot)
 % Estimate transformation according to 
     if rot        
@@ -92,11 +94,9 @@ function T = buildT(pos1, pos2, rot)
              pos2(:,2)];
                 
         if rank(M) < min(size(M))
-            % M is singular (uninvertible) - cannot solve
-            avgDiffs = mean(pos2 - pos1, 1);
-            T = eye(3);
-            T(1,3) = avgDiffs(1);
-            T(2,3) = avgDiffs(2);
+            % M is singular (uninvertible) - cannot solve.
+            % Resort to translation.
+            T = buildTranslationT(pos1, pos2);
             return;
         end
         % x = [a,b,c,d] = [cos(w), sin(w), dx, dy], where w is the rotation
@@ -106,14 +106,20 @@ function T = buildT(pos1, pos2, rot)
         w = acos(x(1));
         
         T = [x(1), -x(2), x(3);
-             x(2), x(1), x(4);
+             x(2),  x(1), x(4);
              0,     0,    1];
          
     else
-        avgDiffs = mean(pos2 - pos1, 1);
-        T = eye(3);
-        T(1,3) = avgDiffs(1);
-        T(2,3) = avgDiffs(2);
+        T = buildTranslationT(pos1, pos2);
     end
     
+end
+
+%%
+function [T] = buildTranslationT(pos1, pos2)
+% Calculate the average translation between pos1 and pos2.
+    avgDiffs = mean(pos2 - pos1, 1);
+    T = eye(3);
+    T(1,3) = avgDiffs(1);
+    T(2,3) = avgDiffs(2);
 end

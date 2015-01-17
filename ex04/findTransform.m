@@ -20,4 +20,5 @@ function [T] = findTransform(im1, im2, rotate)
     [pos2, desc2] = findFeatures(pyr2, maxPoints);        
     [ind1, ind2] = myMatchFeatures(desc1, desc2, minMatchScore);
     [T, ~] = ransacTransform(pos1(ind1,:), pos2(ind2,:), ransacIters, ransacInlierTol, rot);
+    
 end

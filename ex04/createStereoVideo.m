@@ -73,7 +73,7 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews, rotate, pyrBlend)
         else
             okFrames = okFrames + 1;
             stereoVid(okFrames) = im2frame(panoFrame);            
-        end        
+        end
     end
     
     stereoVid(okFrames+1:end) = [];
