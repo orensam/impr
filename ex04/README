@@ -17,7 +17,7 @@ loadImages.m                 - Read all images from directoryPath
 myMatchFeatures.m            - Match feature descriptors in desc1 and desc2
 ransacTransform.m            - Fit transform to maximal inliers given point matches
 renderPanoramicFrame.m       - Render a single panoramic frame from the given images
-spreadOutCoreners.m          - The supllied corner detector.
+spreadOutCoreners.m          - The supplied corner detector.
 
 Helper Functions - for RANSAC pyramids:
 reduce.m                     - Reduces the image size by a factor of 2 in each dimension
