@@ -1,0 +1,119 @@
+orensam
+200170694
+
+=== Image Processing - Ex4 ===
+
+--- Submitted Files ---
+
+Main files:
+sampleDescriptor.m           - Sample a MOPS-like descriptor at given position in image
+calcPad.m                    - Calculates the padding required on the 4 sides of a frame
+createStereoVideo.m          - gets an image directory and create a stereo movie with nViews frames
+displayTheMatches.m          - Display matched point pairs overlayed on given image pair
+findFeatures.m               - Detect feature points in pyramid and sample their descriptors
+findTransform.m              - receives two grayscale images and calculates the transformation
+imgToPanoramaCoordinates.m   - Change a transformation list to a cumulative (relative) list
+loadImages.m                 - Read all images from directoryPath
+myMatchFeatures.m            - Match feature descriptors in desc1 and desc2
+ransacTransform.m            - Fit transform to maximal inliers given point matches
+renderPanoramicFrame.m       - Render a single panoramic frame from the given images
+spreadOutCoreners.m          - The supllied corner detector.
+
+Helper Functions - for RANSAC pyramids:
+reduce.m                     - Reduces the image size by a factor of 2 in each dimension
+getFilter.m                  - Returns a Gaussain filter of a given size
+imReadAndConvert.m           - Reads an image to RGB/grayscale (from Ex1)
+GaussianPyramid.m            - Creates the Gaussain pyramid of a given image
+
+Bonus:
+./bonus folder:              - Same files + additions, configured to use rotation and pyramid blending
+expand.m                     - Expands the image by a factor of 2 in each dimension
+LaplacianPyramid.m           - Creates the Laplacian pyramid of a given image
+LaplacianToImage.m           - Reconstructs the image from the given Laplacian pyramid.
+pyramidBlending.m            - Blends the two given images using the pyramid method, with the given mask
+pyramidBlendingRGB.m         - Blends the two given RGB images, using the given mask.
+
+README                       - This file
+
+--- MATLAB Version ---
+
+MATLAB R2012a on MS Windows 7
+
+--- Functionality ---
+
+The files above create a stereo video from a given set of (presumably) contiguous images,
+as specified in the exercise description.
+The basic functionality (in the main folder) assumes only translation, and combined the images
+into frames using naive stitching.
+The bonus folder is configured to handle rotation, and blend the images using pyramid blending.
+
+--- Answers to Questions ---
+ 
+myMatchFeature.m - matching approach:
+
+As documented in the code, two descriptors are considered matching if they are both
+a maximum match of each other.
+I.e if S is an n1*n2 matrix where S[i,j] is the match score between descriptor i in im1
+and descriptor j in im2, then S[i,j] is considered a match iff it is a maximal both
+in row i and in column j.
+This seemed to yield slightly better results than just taking the maximal match in every row.
+Admittedly, this might dramatically decrease the number of matches we provide RANSAC with -
+it is not unlikely that only a small number of match scores will have the property of
+being both a row and a column maximum. However, real-world testing proved that this did not
+have an adverse effect on the results.
+
+--- Bonus ---
+To run the program with both rotation and pyramid blending, simply run createStereoVideo
+as usual, only from the bonus folder.
+
+To control the features individually, the API is:
+
+            createStereoVideo(imgDirectory, nViews, rotate, pyrBlend)
+
+where <rotate> and <pyrBlend> are booleans controlling whether rotation and pyramid blending
+are enabled, respectively. 
+By default, in the bonus folder, both parameters are configured to <true>.
+By default, in the main folder, both parameters are configured to <false>.
+
+1. Rotation
+
+In order to handle rotation, the RANSAC transformation evaluation had to be changed.
+Instead of using a one pair of points for a simple calculation of difference in x's and y's
+for translation, here we use two pairs of points in order to solve a linear system of
+4 equations with 4 unknowns.
+As documented in the code - given two source points [x1, y1], [x2, y2]
+and two destination points [x'1, y'1], [x'2, y'2], we have a system of the form M * x = r:
+        
+             | x1 -y1 1 0 |   |a|   |x'1|
+             | x2 -y2 1 0 | * |b| = |x'2|
+             | y1  x1 0 1 |   |c|   |y'1|
+             | y2  x2 0 1 |   |d|   |y'2|
+
+And we solve for x = [a, b, c, d] = [cos(w), sin(w), dx, dy], where w is the rotation angle.
+Finally, the estimated transformation will be:        
+                | a -b c |
+            T = | b  a d |
+                | 0  0 1 |
+Technically, we are trying to calculate a rigid transformation (translation+rotation),
+so we only have 3 degrees of freedom and only need 3 equations. But here, since we're
+evaluating a & b directly, it was easier (Matlab-wise) to do this with 4 equations.
+Since they are mutually dependant, it is possible we could have found both of them using
+only 3 equations. In any case, Matlab performs an automatic error-minimizing calculation
+in an overdetermined system like we have here. This automatic calculation also helps us
+with the final transformation estimation using the entire inlier set, when we have have
+2*k equations for the k>2 given inlier pairs.
+
+Side note: initially, it seemed that in order to implement rotation, it was also necessary to
+rotate the descriptors (i.e sample around a pixel with rotation towards it gradient direction,
+as in MOPS). However, since we're dealing with small rotations, it seems that we can achieve
+relatively good descriptor matching without adding this functionality.
+
+2. Pyramid blending
+The pyramid blending is implemented as learned in class, using a barcode mask.
+In every frame creation, instead of a simple stitching, we blend two frames -
+one from the even images and one from the odd images, with the mask matching its black
+and white strips accordingly.
+The blending is implemented using my pyramid blending implementation from the
+previous exercise.
+
+
