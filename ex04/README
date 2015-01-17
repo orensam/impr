@@ -47,6 +47,34 @@ The basic functionality (in the main folder) assumes only translation, and combi
 into frames using naive stitching.
 The bonus folder is configured to handle rotation, and blend the images using pyramid blending.
 
+--- Configuration parameters ---
+The different configuration parameters for the RANSAC algorithm are set in findTransform.m
+and findFeatures.m.
+All parameters were calibrated using careful trial and error.
+In many cases, the values suggested in the exercise description seemed to give the best results.
+
+spreadN, spreadM:
+Define the division of the image for corner detection in spreadOutCorners.m.
+They are both set to 8, as suggested in the exercise specification.
+
+DESC_RAD:
+The radius of the descriptor. Set to 3 as in the exercise specs, and results in 7x7 descriptors.
+
+minMatchScore:
+Threshold for the descriptor match matrix S. Set to 0.5.
+
+ransacIters:
+Number of RANSAC iteration to perform on every image pair.
+Set to 1000, which should result in a good calculation of the transformation.
+
+ransacInlierTol:
+Maximum squared error for inlier/outlier decision.
+Set to 2, since this value seemed to produce the best results.
+
+maxPoints:
+Maximum number of interest points to find in spreadOutCorners.m
+Set to 800 as in the exercise specs.
+
 --- Answers to Questions ---
  
 myMatchFeature.m - matching approach:
@@ -115,5 +143,3 @@ one from the even images and one from the odd images, with the mask matching its
 and white strips accordingly.
 The blending is implemented using my pyramid blending implementation from the
 previous exercise.
-
-
