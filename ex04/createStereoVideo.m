@@ -1,4 +1,4 @@
-function [stereoVid] = createStereoVideo(imgDirectory, nViews, rotate)
+function [stereoVid] = createStereoVideo(imgDirectory, nViews, rotate, pyrBlend)
 % This function gets an image directory and create a stereo movie with
 % nViews. It does the following:
 %
@@ -19,6 +19,11 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews, rotate)
     rot = false;
     if exist('rotate', 'var')
         rot = rotate;
+    end
+    
+    blend = false;
+    if exist('pyrBlend', 'var')
+        blend = pyrBlend;
     end
     
     imgs = loadImages(imgDirectory);
@@ -42,6 +47,12 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews, rotate)
     panoHeight = ceil(imHeight + topPad + bottomPad);
     panoWidth = ceil(imWidth + leftPad + rightPad);
     
+    % To use pyramids we need size divisible by 4
+    if blend
+        panoHeight = ceil(panoHeight / 4.0) * 4;
+        panoWidth = ceil(panoWidth / 4.0) * 4;        
+    end
+    
     panoSize = [panoHeight, panoWidth];
     
     %% Calculate strip center for each frame
@@ -55,7 +66,8 @@ function [stereoVid] = createStereoVideo(imgDirectory, nViews, rotate)
     for i = 1:nViews        
         imgSliceCenterX = ones(1, n) * centersX(i);
         [panoFrame, frameNotOK] = renderPanoramicFrame(panoSize, imgs, panoTransforms, ...
-                                                       imgSliceCenterX, halfSliceWidthX);
+                                                       imgSliceCenterX, halfSliceWidthX, ...
+                                                       blend);
         if frameNotOK
             fprintf('Problem in frame %d\n', i);            
         else
