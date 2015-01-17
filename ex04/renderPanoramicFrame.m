@@ -22,7 +22,7 @@ function [panoramaFrame, frameNotOK] = ...
     frameNotOK = false;
     
     % Sizes
-    [imHeight, ~, ~, n] = size(imgs);
+    [imHeight, imWidth, ~, n] = size(imgs);
     panoHeight = panoSize(1);
     panoWidth = panoSize(2);    
     
@@ -76,6 +76,15 @@ function [panoramaFrame, frameNotOK] = ...
         imCoords = imCoords(1:2,:) ./ repmat(imCoords(3,:),2,1);
         imCoordsX = reshape(imCoords(1,:), stripHeight, stripWidth); 
         imCoordsY = reshape(imCoords(2,:), stripHeight, stripWidth) - topPad;        
+        
+        minX = min(imCoordsX(1,:));
+        maxX = max(imCoordsX(1,:));
+        
+        if minX < 1 || maxX > imWidth
+            frameNotOK = true;
+            return;
+        end
+        
         
         stripData = zeros(stripHeight, stripWidth, 3);
         % Interpolate from original image and add to the panorama
