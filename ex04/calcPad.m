@@ -2,7 +2,7 @@ function [topPad, bottomPad, leftPad, rightPad, dxs, dys] = calcPad(transforms)
 % Calculates the padding required on the 4 sides of a frame according to
 % the given transformations.
     
-    moves = cellfun(@(T) T*[1;1;1], transforms, 'UniformOutput', false);
+    moves = cellfun(@(T) T*[0;0;1], transforms, 'UniformOutput', false);
     dxs = cellfun(@(p) p(1)/p(3), moves);
     dys = cellfun(@(p) p(2)/p(3), moves);
 

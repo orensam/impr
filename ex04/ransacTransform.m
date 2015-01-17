@@ -102,9 +102,11 @@ function T = buildT(pos1, pos2, rot)
         % x = [a,b,c,d] = [cos(w), sin(w), dx, dy], where w is the rotation
         % angle
         x = M\r;         
-                
-        T = [x(1), x(2), x(3);
-             -x(2), x(1), x(4);
+        
+        w = acos(x(1));
+        
+        T = [x(1), -x(2), x(3);
+             x(2), x(1), x(4);
              0,     0,    1];
          
     else

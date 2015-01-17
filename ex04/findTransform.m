@@ -8,9 +8,9 @@ function [T] = findTransform(im1, im2, rotate)
         rot = rotate;
     end
     
-    minMatchScore = 0.8;
+    minMatchScore = 0.5;
     ransacIters = 1000;
-    ransacInlierTol = 10;
+    ransacInlierTol = 2;
     maxPoints = 800;
     
     %% Find the transformation
