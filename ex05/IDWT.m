@@ -3,7 +3,6 @@ function [image] = IDWT(waveletDecomp, lowFilt, highFilt, levels)
 % using the given filter and amount of levels.
 % Displays the resulting image.
 
-
     [height, width] = size(waveletDecomp);
     image = waveletDecomp;
     lowFilt = 2 * lowFilt;
@@ -13,6 +12,7 @@ function [image] = IDWT(waveletDecomp, lowFilt, highFilt, levels)
     w = width / (2^levels);
     
     for i = 1:levels
+        
         LL = image(1:h, 1:w);
         LH = image(1:h, (w+1):w*2);
         HL = image((h+1):(h*2), 1:w);
@@ -55,10 +55,3 @@ function [image] = IDWT(waveletDecomp, lowFilt, highFilt, levels)
     imshow(image);
     
 end
-
-
-
-
-
-
-
