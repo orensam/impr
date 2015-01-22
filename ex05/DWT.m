@@ -3,7 +3,7 @@ function [waveletDecomp] = DWT(image, lowFilt, highFilt, levels)
 % using the given filters. <levels> decompositions are performed.
 % Displays the resulting decomposition.
     
-    [height, width] = size(image);    
+    [height, width] = size(image);
     waveletDecomp = zeros(size(image));
     LL = image;
     
