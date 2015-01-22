@@ -1,6 +1,7 @@
 function [waveletDecomp] = DWT(image, lowFilt, highFilt, levels)
 % Decomposes the given image into its wavelet representation,
 % using the given filters. <levels> decompositions are performed.
+% Displays the resulting decomposition.
     
     [height, width] = size(image);    
     waveletDecomp = zeros(size(image));
@@ -39,6 +40,7 @@ function [waveletDecomp] = DWT(image, lowFilt, highFilt, levels)
     
     minVal = min(waveletDecomp(:));
     maxVal = max(waveletDecomp(:));
+    figure;
     imshow((waveletDecomp-minVal) / (maxVal-minVal));
     
 end
