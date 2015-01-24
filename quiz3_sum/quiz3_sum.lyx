@@ -1,0 +1,938 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\date{}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language hebrew
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\topmargin 1.5cm
+\secnumdepth -2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+חיבור תמונות - 
+\lang english
+Mosaicing
+\end_layout
+
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+חיבור אוסף של תמונות חופפות לתמונה אחת גדולה.
+ הבעיה המרכזית - השינויים שנעשו במצלמה בין כל זוג תמונות )הזזה, סיבוב וכו'(.
+\end_layout
+
+\begin_layout Subsection
+הרעיון הכללי
+\end_layout
+
+\begin_layout Enumerate
+חישוב התזוזה בין כל זוג תמונות )עם
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+LK
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+או התאמת נקודות עניין(
+\end_layout
+
+\begin_layout Enumerate
+בוחרים "תמונות בסיס" שביחס אליה נחשב את המיקומים בתמונה כולה
+\end_layout
+
+\begin_layout Enumerate
+מרכיבים את הטרנספורמציות ביחס לתמונת הבסיס, ומעוותים כל תמונה בהתאם
+\end_layout
+
+\begin_layout Enumerate
+מחברים את התמונות
+\end_layout
+
+\begin_layout Subsection
+הומוגרפיה
+\end_layout
+
+\begin_layout Standard
+כאשר רצף התמונות נוצר מסיבוב המצלמה סביב הציר האופטי, מתקבלת הומוגרפיה -טרנספורמ
+ציה פרוייקטיבית.
+ 
+\end_layout
+
+\begin_layout Standard
+ככל שזוית הסיבוב של תמונה נתונה )ביחס לתמונת הבסיס( גדולה יותר, כך גדל גם
+ שטח ההיטל של התמונה הזו בהרכבה הסופית )כאשר הזוית הולכת ל-
+\begin_inset Formula $90^{\circ}$
+\end_inset
+
+, השטח הולך לאינסוף(:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename plane_projection.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+הפתרון הוא הטלה של התמונות על צילינדר:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename cylinder_projection.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+הטלה כזו לא משמרת קווים ישרים - הם הופכים לחתכים קוניים.
+\end_layout
+
+\begin_layout Subsection
+מצלמת
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size normal
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Pushbroom
+\end_layout
+
+\begin_layout Standard
+מצלמה שזזה באופן רציף מעל משטח מסוים, ורוצה לצלם אזור ספציפי.
+ לדוגמה - לווין או מטוס שמוכרח לנוע בכיוון קבוע אבל רוצה לצלם בניין ספציפי.
+\end_layout
+
+\begin_layout Standard
+התוצאה היא אוסף תמונות שיש בינהן הומוגרפיה.
+\end_layout
+
+\begin_layout Subsection
+חיבור התמונות
+\end_layout
+
+\begin_layout Standard
+שיטה ראשונה - לקיחת ממוצע או חציון באזורים החופפים.
+ הבעיה - אם ההתאמה לא מדויקת, נקבל טשטוש.
+\end_layout
+
+\begin_layout Standard
+שיטה שניה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- לקיחת סטריפים.
+ לוקחים סטריפ אמצעי מכל תמונה, ומחברים כל שני סטריפים בנקודת האמצע בינהם
+ )שתחושב לפי ההזזה(.
+\end_layout
+
+\begin_layout Standard
+בשיטה זו, התאמה מדוייקת דרושה רק בנקודות החיבור, וגם אם לא קיימת, ניתן לשפר
+ אותה באמצעות שימוש ב-
+\lang english
+min cut
+\lang hebrew
+.
+ חיבור כזה של תמונות הוא מעין "חתיכה" של זמן-מרחב.
+\end_layout
+
+\begin_layout Standard
+ניתו להשתמש ב-
+\lang english
+pyramid blending
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ כדי לשפר את החיבור - יצירת "ברקוד" - מסכה שבה אזורים של סטריפים זוגיים
+ יקבלו ערך 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ וסטריפים אי-זוגיים 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+, וכך החיבור יהיה נקי יותר.
+\end_layout
+
+\begin_layout Subsection
+אפקט סטריאו
+\end_layout
+
+\begin_layout Standard
+המטרה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ - יצירת תמונה או וידאו שנותנים תחושה של תלת-מימד.
+\end_layout
+
+\begin_layout Subsubsection
+חיבור סטריפים
+\end_layout
+
+\begin_layout Standard
+יצירת רצף פריימים, כך שכל פריים נוצר מחיבור של אוסף סטריפים אחר בתמונות
+ המקור.
+\end_layout
+
+\begin_layout Standard
+כך נוצר אפקט של שינוי זוית ראיה בין פריימים שונים.
+\end_layout
+
+\begin_layout Subsubsection
+הדפסה לנטיקולרית
+\end_layout
+
+\begin_layout Standard
+הדפסה של זוג )או יותר( תמונות, סטריפ מכל תמונה לסירוגין, כשכל תמונה היא
+ זוית צפיה אחרת.
+\end_layout
+
+\begin_layout Standard
+מעל התמונה מודפסות עדשות גליליות, שגורמות לכך שבכל זוית שבה מסתכלים על הדף
+ רואים רק את התמונה המתאימה לזוית הראיה הזו.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename lenticular.gif
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+שיטת
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size normal
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+X-Slits
+\end_layout
+
+\begin_layout Standard
+להוסיף
+\end_layout
+
+\begin_layout Section
+ניקוי רעשים
+\end_layout
+
+\begin_layout Subsection
+פילטר בילטראלי
+\end_layout
+
+\begin_layout Standard
+מוטיבציה: ניקוי רעש באמצעות החלקה עם גאוסיאן יוצר טשטוש בכל התמונה - מנקה
+ רעשים, אבל גם מטשטש
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+edges
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+נבקש ליצור פילטר שיודע "לדלג" מעל הקצוות, ולטשטש רק אזורים חלקים.
+ ניתן לכנות את השיטה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Local adaptive smoothing
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+הרעיון - להתחשב לא רק 
+\series bold
+במרחק 
+\series default
+בין שני פיקסלים, אלא גם 
+\series bold
+בהפרש הצבעים 
+\series default
+בינהם.
+\end_layout
+
+\begin_layout Subsubsection
+הנוסחה
+\end_layout
+
+\begin_layout Standard
+הפילטר יהיה מהצורה הבאה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+BF\left[I\right]_{p}=\frac{1}{W_{p}}\sum_{q\in S}G_{\sigma_{s}}\left(\left\Vert p-q\right\Vert \right)G_{\sigma_{r}}\left(\left|I_{p}-I_{q}\right|\right)\cdot I_{q}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כלומר - הערך החדש של פיקסל 
+\begin_inset Formula $p$
+\end_inset
+
+ הוא ממוצע משוקלל של כל הפיקסלים 
+\begin_inset Formula $q$
+\end_inset
+
+ בסביבה של 
+\begin_inset Formula $p$
+\end_inset
+
+, והמשקל של כל פיקסל 
+\begin_inset Formula $q$
+\end_inset
+
+ נקבע לפי:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $G_{\sigma_{s}}\left(\left\Vert p-q\right\Vert \right)$
+\end_inset
+
+ - פונקציה גאוסיאנית של המרחק בין 
+\begin_inset Formula $p$
+\end_inset
+
+ ו-
+\begin_inset Formula $q$
+\end_inset
+
+, עם פרמטר 
+\begin_inset Formula $\sigma_{s}$
+\end_inset
+
+ הקובע את גודל החלון.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $G_{\sigma_{r}}\left(\left|I_{p}-I_{q}\right|\right)$
+\end_inset
+
+ - פונקציה גאוסיאנית של ההבדל בצבע בין 
+\begin_inset Formula $p$
+\end_inset
+
+ ו-
+\begin_inset Formula $q$
+\end_inset
+
+, עם פרמטר 
+\begin_inset Formula $\sigma_{r}$
+\end_inset
+
+ הקובע את הבדל ההפרש המינימלי שנגדיר בתור
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+edge
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+הרכיב 
+\begin_inset Formula $\frac{1}{W_{p}}$
+\end_inset
+
+ הוא פקטור נרמול.
+\end_layout
+
+\begin_layout Subsubsection
+קביעת הפרמטרים
+\end_layout
+
+\begin_layout Standard
+קביעת הפרמטרים צריכה להיעשות באופן שהוא בלתי-תלוי ברזולוציה ובחשיפה של התמונה:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\sigma_{s}$
+\end_inset
+
+ ייקבע באופן פרופורציונלי לגודל התמונה )לדוגמה,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $2\%$
+\end_inset
+
+ מאורך האלכסון(.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\sigma_{r}$
+\end_inset
+
+ ייקבע באופן פרופורציונלי לעוצמת ה-
+\lang english
+edges
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ בתמונה )לדוגמה, ממוצע של הגרדיינט(.
+\end_layout
+
+\begin_layout Subsubsection
+הפעלה איטרטיבית
+\end_layout
+
+\begin_layout Standard
+ניתן לבצע פילטר בילטראלי איטרטיבי - להפעיל את הפילטר מספר פעמים באופן חוזר.
+ התהליך ישטח את העוצמות )או הצבעים( בכל אזור בתמונה, אבל ישמר את הקצוות.
+\end_layout
+
+\begin_layout Subsubsection
+הפעלה על תמונות צבעוניות
+\end_layout
+
+\begin_layout Standard
+אם עוסקים בתמונות צבעוניות - מבצעים פילטר בילטראלי על כל ערוץ צבע בנפרד.
+ כלומר, בסה"כ מדובר בפילטר על
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+5
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מימדים )
+\numeric on
+3
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מימדי צבע,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מימדי מרחב(.
+\end_layout
+
+\begin_layout Subsubsection
+סיבוכיות
+\end_layout
+
+\begin_layout Standard
+קשה לחישוב, הגרעין משתנה בין פיקסל לפיקסל.
+ לא ניתן לחישוב באמצעות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+FFT
+\lang hebrew
+.
+ לכן - איטי.
+\end_layout
+
+\begin_layout Standard
+אם משתמשים ב-
+\begin_inset Formula $\sigma_{s}$
+\end_inset
+
+ קטן )כלומר, גרעין קטן(, ניתן לחשב במהירות יחסית.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section
+גאומטריה דיסקרטית
+\end_layout
+
+\begin_layout Section
+סופר רזולוציה
+\end_layout
+
+\begin_layout Section
+טרנספורם
+\family roman
+\series bold
+\shape up
+\size larger
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Wavelets
+\end_layout
+
+\begin_layout Section
+תמונות אינטגרל
+\end_layout
+
+\begin_layout Section
+צבע
+\end_layout
+
+\end_body
+\end_document
