@@ -885,8 +885,616 @@ FFT
  קטן )כלומר, גרעין קטן(, ניתן לחשב במהירות יחסית.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
+פילטר
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size normal
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Non-Local Means
+\end_layout
 
+\begin_layout Subsubsection
+מוטיבציה -
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Temporal Denoising
+\end_layout
+
+\begin_layout Standard
+המודל - תמונה קבועה עם רעש גאוסיאני שמשתנה לאורך הזמן.
+\end_layout
+
+\begin_layout Subsubsection
+איך זה עובד
+\end_layout
+
+\begin_layout Standard
+זהו פילטר שמוציא מהמשוואה את הרכיב המרחבי - וממצע על פני כל הפיקסלים שדומים
+ בערכם לפיקסל מסוים:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+NLM\left[I\right]_{p}=\frac{1}{W_{p}}\sum_{j\in I}e^{-\frac{\left|B\left(q\right)-B\left(p\right)\right|^{2}}{2\sigma^{2}}}\cdot I_{q}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כאשר 
+\begin_inset Formula $I$
+\end_inset
+
+ היא התמונה, 
+\begin_inset Formula $p$
+\end_inset
+
+ הוא הפיקסל שאנו מבקשים לבצע עליו את הפילטר, 
+\begin_inset Formula $B\left(p\right),\ B\left(q\right)$
+\end_inset
+
+ הם הערכים הממוצעים בסביבה כלשהי של 
+\begin_inset Formula $p,\ q$
+\end_inset
+
+ בהתאמה, ו-
+\begin_inset Formula $\sigma$
+\end_inset
+
+ הוא הפרמטר לפילטר.
+\end_layout
+
+\begin_layout Standard
+הנוסחה מדגימה את הרעיון של הפילטר - מניחים שיש הרבה אזורים בתמונה ש"מתנהגים
+ דומה", ומשתמשים באזורים שדומים לסביבה של פיקסל נתון כדי לקבל בשבילו ערך
+ חדש.
+\end_layout
+
+\begin_layout Standard
+התוצאות טובות יותר מ-
+\lang english
+BF
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Subsection
+אלגוריתם
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size normal
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+BM3D
+\end_layout
+
+\begin_layout Standard
+השם -
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Block Matching 3D Collaborative filtering
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Standard
+הרעיון המרכזי 
+\numeric on
+-
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+להשתמש בקבוצות של בלוקים מורעשים כדי לנקות את הרעש 
+\series bold
+מכולם ביחד
+\series default
+, תוך שימוש באינפורמציה שקיימת בכולם.
+\end_layout
+
+\begin_layout Subsubsection
+איך זה עובד
+\end_layout
+
+\begin_layout Enumerate
+מוצאים קבוצה של בלוקים סמוכים, מורעשים, שדומים זה לזה.
+\end_layout
+
+\begin_layout Enumerate
+מבצעים טרנספורמציה תלת-מימדים עליהם )כל בלוק הוא דו-מימדי, אוסף של בלוקים
+ הוא אובייקט תלת מימדי(.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+טרנספורמציות אפשריות -
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+DCT
+\lang hebrew
+,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Wavelets
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ וכו'.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+מפעילים פילטר או לוקחים סף.
+\end_layout
+
+\begin_layout Enumerate
+מפעילים את הטרנספורמציה ההפועה ומקבלים ערך חדש לכל פיקסל.
+\end_layout
+
+\begin_layout Subsubsection
+בחירת ערך לפיקסל
+\end_layout
+
+\begin_layout Standard
+כעת, יש לנו מספר הערכות לכל פיקסל - אחת מכל אוסף בלוקים שבו הפיקסל השתתף.
+\end_layout
+
+\begin_layout Standard
+כדי להחליט על הערך הסופי צריך למשקל כל הערכה.
+ הגישה הנאיבית - משקל זהה לכולן )ממוצע(.
+\end_layout
+
+\begin_layout Standard
+גישה טובה יותר - למשקל לפי איכות הניקוי בקבוצה שנתנה את ההערכה.
+\end_layout
+
+\begin_layout Standard
+ניתן לכמת את האיכות לפי כמות הערכים שאינם אפס בהיטוגרמה של קבוצת הבלוקים
+ )פחות ערכים = הערכה טובה יותר(, או לפי הערכה של פילטר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Wiener
+\lang hebrew
+.
+\end_layout
+
+\begin_layout Subsubsection
+שיפורים אפשריים
+\end_layout
+
+\begin_layout Standard
+ביצוע ההתאמה הראשונית בין בלוקים עפ"י גרסה מטושטשת של התמונה )ייתן התאמת
+ בלוקים אמינה יותר(.
+\end_layout
+
+\begin_layout Standard
+ביצוע
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+BM3D
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ראשוני לקבלת תמונה משוערכת,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ואז 
+\lang english
+BM3D
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שני שלוקח את הבלוקים לפי התמונה המשוערכת.
+\end_layout
+
+\begin_layout Subsection
+שימושים של פילטר בילטראלי
+\end_layout
+
+\begin_layout Subsubsection
+חידוד תמונות
+\end_layout
+
+\begin_layout Standard
+כל פילטר שמסיר פרטים מהתמונה יכול לשמש לחידוד - מסירים את הפרטים, מחסרים
+ את התמונה המטושטשת מהמקורית לקבלת הפרטים, ואז מוסיפים את הפרטים לתמונה
+ המקורית.
+\end_layout
+
+\begin_layout Standard
+אם משתמשים בפילטר גאוסיאני, הפרטים הם הלפלסיאן - ויש בו ארטיפקטים של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+halos
+\lang hebrew
+, לכן הוא לא מחדד בצורה טובה.
+\end_layout
+
+\begin_layout Standard
+לעומת זאת, שימוש בפילטר בילטראלי מונע את הבעיה הזו, כי ה-
+\lang english
+edges
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+נשמרים גם בתמונה ה"מטושטשת".
+\end_layout
+
+\begin_layout Subsubsection
+מיפוי ערכים -
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Tone Mapping
+\end_layout
+
+\begin_layout Standard
+מוטיבציה - לקחת תמונות עם טווח דינמי רחב ולהציג אותן בצורה אופטימלית במסך
+ עם טווח דינמי צר.
+\end_layout
+
+\begin_layout Standard
+אפשרויות:
+\end_layout
+
+\begin_layout Enumerate
+חלוקה - 
+\begin_inset Formula $x\mapsto\frac{x}{m}$
+\end_inset
+
+ כאשר 
+\begin_inset Formula $m$
+\end_inset
+
+ הוא היחס בין הערך המקסימלי בתמונה לבין הערך המקסימלי ברכיב התצוגה.
+\end_layout
+
+\begin_layout Enumerate
+תיקון 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ - 
+\begin_inset Formula $x\mapsto x^{\gamma}$
+\end_inset
+
+ כאשר 
+\begin_inset Formula $0<\gamma<1$
+\end_inset
+
+ - מעוות את היחס בין הצבעים השונים.
 \end_layout
 
 \begin_layout Section
