@@ -1482,11 +1482,7 @@ Tone Mapping
 \end_layout
 
 \begin_layout Enumerate
-תיקון 
-\begin_inset Formula $\gamma$
-\end_inset
-
- - 
+תיקון גאמא - 
 \begin_inset Formula $x\mapsto x^{\gamma}$
 \end_inset
 
@@ -1497,8 +1493,313 @@ Tone Mapping
  - מעוות את היחס בין הצבעים השונים.
 \end_layout
 
+\begin_layout Enumerate
+תיקון גאמא לערוץ ה-
+\lang english
+intensity
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- משאיר את הצבעים בסדר, אבל פוגע בקונטרסט של הפרטים.
+\end_layout
+
+\begin_layout Enumerate
+תיקון גאמא לתדרים הנמוכים של ערוץ ה-
+\lang english
+intensity
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- יוצר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+halos
+\lang hebrew
+.
+ )הפרדה לתדרים גבוהים ונמוכים באמצעות פילטר גאוסיאני(.
+\end_layout
+
+\begin_layout Standard
+הפתרון - תיקון גאמא לתדרים הנמוכים של ערוץ ה-
+\lang english
+intensity
+\lang hebrew
+, אחרי הפרדה לתדרים גבוהים ונמוכים באמצעות פילטר בילטראלי.
+\end_layout
+
+\begin_layout Standard
+חשוב - את הפילטר מפעילים על ערוץ ה-
+\lang english
+intensity
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+במרחב
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+log
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- כדי להשפיע באופן משמעותי יותר על רכיב ה-
+\lang english
+illumination
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+)תאורה( מאשר על רכיב ה-
+\lang english
+albedo
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+)השתקפויות(, כמו בפילטר הומומורפי.
+\end_layout
+
+\begin_layout Standard
+דיאגרמה של התהליך:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename tone_mapping.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 גאומטריה דיסקרטית
+\end_layout
+
+\begin_layout Standard
+תמונות בינאריות - מורכבות משני צבעים בלבד - שחור ולבן.
+\end_layout
+
+\begin_layout Standard
+ניתנות לייצוג ע"י שמירת האינדקסים של הפיקסלים השחורים )או הלבנים(.
+\end_layout
+
+\begin_layout Standard
+ניתן להפוך תמונה "רגילה" )בשחור-לבן( לתמונה בינארית ע"י לקיחת סף.
+\end_layout
+
+\begin_layout Subsection
+קשירות
+\end_layout
+
+\begin_layout Standard
+בהינתן תמונה בינארית, ניתן להגדיר קשירות עבור פיקסלים - אם 
+\begin_inset Formula $a,b$
+\end_inset
+
+ פיקסלים באותו צבע, ויש בינהם "מסלול" בתמונה בצבע הזה, ניתן לומר שהם קשורים
+ זה לזה, ולכתוב 
+\begin_inset Formula $a\approx b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+קשירות היא יחס שקילות )רפלקסיביות - 
+\begin_inset Formula $a\approx a$
+\end_inset
+
+, סימטריה - אם 
+\begin_inset Formula $a\approx b$
+\end_inset
+
+ אז 
+\begin_inset Formula $b\approx a$
+\end_inset
+
+, טרנזיטיביות - אם 
+\begin_inset Formula $a\approx b$
+\end_inset
+
+, 
+\begin_inset Formula $b\approx c$
+\end_inset
+
+ אז 
+\begin_inset Formula $a\approx c$
+\end_inset
+
+(
 \end_layout
 
 \begin_layout Section
