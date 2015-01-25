@@ -1581,6 +1581,8 @@ halos
 \lang hebrew
 .
  )הפרדה לתדרים גבוהים ונמוכים באמצעות פילטר גאוסיאני(.
+\numeric on
+7
 \end_layout
 
 \begin_layout Standard
@@ -1800,6 +1802,1146 @@ albedo
 \end_inset
 
 (
+\end_layout
+
+\begin_layout Subsubsection
+הגדרת שכנות
+\end_layout
+
+\begin_layout Standard
+ניתן להגדיר מיהם השכנים של פיקסל בשני אופנים -
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שכנים )מעל, מתחת, ימין, שמאל( או
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+8
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שכנים )גם הפיקסלים שבאלכסון(.
+\end_layout
+
+\begin_layout Subsubsection
+רכיבי קשירות
+\end_layout
+
+\begin_layout Standard
+קבוצת פיקסלים תיקרא 
+\series bold
+רכיב קשירות
+\series default
+ אם לכל שני פיקסלים בה יש מסלול בינהם - רצף פיקסלים באותו צבע שכולם שכנים
+ זה של זה )בהתאם להגדרה -
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+או
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+8
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שכנים( 
+\end_layout
+
+\begin_layout Subsubsection
+מציאת רכיבי הקשירות
+\end_layout
+
+\begin_layout Standard
+מוטיבציה - הפרדת אובייקט מרקע.
+\end_layout
+
+\begin_layout Standard
+שיטת שני המעברים -
+\end_layout
+
+\begin_layout Enumerate
+מעבר ראשון: עוברים על התמונה מלמעלה למטה, משמאל לימין.
+ לכל פיקסל 
+\begin_inset Formula $p$
+\end_inset
+
+ מסתכלים על השכנים השמאלי 
+\begin_inset Formula $q$
+\end_inset
+
+ והעליון 
+\begin_inset Formula $r$
+\end_inset
+
+ שלו:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+אם שניהם
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\numeric off
+, נותנים ל-
+\begin_inset Formula $p$
+\end_inset
+
+ תיוג חדש.
+\end_layout
+
+\begin_layout Enumerate
+אם אחד מהם
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+והשני
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\numeric off
+, נותנים ל-
+\begin_inset Formula $p$
+\end_inset
+
+ את התיוג של השכן שהוא
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+.
+\end_layout
+
+\begin_layout Enumerate
+אם שניהם
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+, נותנים ל-
+\begin_inset Formula $p$
+\end_inset
+
+ את התיוג של 
+\begin_inset Formula $q$
+\end_inset
+
+, וזוכרים ש 
+\begin_inset Formula $q\approx r$
+\end_inset
+
+ )כי עכשיו אנחנו יודעים ש-
+\begin_inset Formula $p$
+\end_inset
+
+ מחבר בינהם(.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+מחשבים את מחלקות השקילות באמצעות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Union-Find
+\end_layout
+
+\begin_layout Enumerate
+מעבר שני - מעדכנים את התיוגים של כל הפיקסלים בהתאם למחלקות השקילות שמצאנו.
+\end_layout
+
+\begin_layout Subsection
+מספר אוילר
+\end_layout
+
+\begin_layout Standard
+מספר אוילר 
+\begin_inset Formula $E$
+\end_inset
+
+ של תמונה בינארית מוגדר בתור מספר רכיבי הקשירות פחות מספר החורים.
+\end_layout
+
+\begin_layout Standard
+"חורים" הם אוספי פיקסלים שאינם שייכים לאובייקט )כלומר, לאחד מרכיבי הקשירות
+ שמצאנו(, ואינם נוגעים בקצוות התמונה.
+\end_layout
+
+\begin_layout Standard
+אם משתמשים ב
+\numeric on
+8
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שכנים עבור אובייקטים ו
+\numeric on
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שכנים עבור רקע, מספר אוילר נתון ע"י 
+\begin_inset Formula $E=v-e+q$
+\end_inset
+
+ כאשר:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $v$
+\end_inset
+
+ הוא מספר המופעים של 
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $e$
+\end_inset
+
+ הוא מספר המופעים של 
+\begin_inset Formula $1\ 1$
+\end_inset
+
+ או 
+\begin_inset Formula $\begin{array}{c}
+1\\
+1
+\end{array}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $q$
+\end_inset
+
+ הוא מספר המופעים של 
+\begin_inset Formula $\begin{array}{cc}
+1 & 1\\
+1 & 1
+\end{array}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+קצוות
+\end_layout
+
+\begin_layout Standard
+אם 
+\begin_inset Formula $C$
+\end_inset
+
+ הוא רכיב קשירות של אובייקט 
+\begin_inset Formula $A$
+\end_inset
+
+ ו-
+\begin_inset Formula $D$
+\end_inset
+
+ הוא רכיב קשירות של 
+\begin_inset Formula $\overline{A}$
+\end_inset
+
+ )כלומר, ברקע( אז ה- 
+\begin_inset Formula $D-Edge$
+\end_inset
+
+ של 
+\begin_inset Formula $C$
+\end_inset
+
+ הוא אוסף הפיקסלים ב-
+\begin_inset Formula $C$
+\end_inset
+
+ שיש להם שכן ב-
+\begin_inset Formula $D$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+אם 
+\begin_inset Formula $C$
+\end_inset
+
+ משתמש בסביבת-
+\numeric on
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+אז נגדיר את הקצה באמצעות סביבת-
+\numeric on
+8
+\numeric off
+, ולהיפך.
+\end_layout
+
+\begin_layout Subsubsection
+גישת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Chain codes
+\end_layout
+
+\begin_layout Standard
+ניתן לתאר קצוות באמצעות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Chain codes
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ - נותנים מספר לכל אחד מהכיוונים )
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+כיוונים אם משתמשים בסביבת-
+\numeric on
+4
+\numeric off
+,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+8
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+כיוונים לסביבת-
+\numeric on
+8
+\numeric off
+(.
+\end_layout
+
+\begin_layout Standard
+כעת, בהינתן פיקסל התחלה בקצה של אובייקט כלשהו, ניתן לתאר את הקצה באמצעות
+ רצף של כיוונים התקדמות:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename chain_code.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+נרצה לבדוק אם שני ּ
+\lang english
+Chain codes
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מייצגים את אותה צורה.
+ 
+\end_layout
+
+\begin_layout Standard
+יש להם אינווריאנטיות טבעית לטרנסלציה.
+\end_layout
+
+\begin_layout Standard
+כדי לטפל ברוטציה, נגדיר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Curvature
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+באופן הבא - בהינתן
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+chain code
+\lang hebrew
+, ה-
+\lang english
+curvature
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שלו הוא רצף ההפרשים של הקוד )מודולו
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+8
+\numeric off
+(, בהזזה הציקלית שמניבה את המספר הנמוך ביותר.
+\end_layout
+
+\begin_layout Standard
+לקיחת הפרשים במקום מספר אבסולוטי מאפשרת להגדיר את ה"זוית" של כל פיקסל בקצה
+ המתואר.
+ ההזזה הציקלית מאפשרת אינווריאנטיות לנקודות התחלה.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename chain_code_curvature.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+מרחקים
+\end_layout
+
+\begin_layout Standard
+שלוש מטריקות אפשריות להגדרה של מרחק בין זוג פיקסלים 
+\begin_inset Formula $p=\left(x_{1},y_{1}\right),\ q=\left(x_{2},y_{2}\right)$
+\end_inset
+
+ :
+\end_layout
+
+\begin_layout Enumerate
+מרחק אוקלידי: 
+\begin_inset Formula $d_{e}\left(p,q\right)=\sqrt{\left(x_{2}-x_{1}\right)^{2}+\left(y_{2}-y_{1}\right)^{2}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+מרחק מנהטן: 
+\begin_inset Formula $d_{4}\left(p,q\right)=\left|x_{2}-x_{1}\right|+\left|y_{2}-y_{1}\right|$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+מרחק שח: 
+\begin_inset Formula $d_{8}\left(p,q\right)=\max\left\{ \left|x_{2}-x_{1}\right|,\left|y_{2}-y_{1}\right|\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+תכונות:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $d_{8}\leq d_{2}\leq d_{4}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\sqrt{2}d_{8}\geq d_{e}\geq\nicefrac{d_{4}}{\sqrt{2}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+בהינתן מטריקה 
+\begin_inset Formula $d$
+\end_inset
+
+ כלשהי ופיקסל 
+\begin_inset Formula $p$
+\end_inset
+
+, 
+\series bold
+מעגל 
+\series default
+מוגדר בתור אוסף הפיקסלים 
+\begin_inset Formula $q$
+\end_inset
+
+ עבורם 
+\begin_inset Formula $d\left(p,q\right)$
+\end_inset
+
+ זהה:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename metrics.png
+	scale 50
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
