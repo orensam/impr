@@ -181,7 +181,7 @@ LK
 \align center
 \begin_inset Graphics
 	filename plane_projection.png
-	scale 50
+	scale 30
 
 \end_inset
 
@@ -196,7 +196,7 @@ LK
 \align center
 \begin_inset Graphics
 	filename cylinder_projection.png
-	scale 50
+	scale 30
 
 \end_inset
 
@@ -443,7 +443,7 @@ X-Slits
 \end_layout
 
 \begin_layout Standard
-להוסיף
+וואט
 \end_layout
 
 \begin_layout Section
@@ -1736,7 +1736,7 @@ albedo
 \align center
 \begin_inset Graphics
 	filename tone_mapping.png
-	scale 50
+	scale 30
 
 \end_inset
 
@@ -2944,8 +2944,1255 @@ curvature
 
 \end_layout
 
+\begin_layout Subsubsection
+טרנספורמציית
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series medium
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+distance
+\end_layout
+
+\begin_layout Standard
+הרעיון - בהינתן קבוצת פיקסלים 
+\begin_inset Formula $S$
+\end_inset
+
+ בתמונה, לסמן בכל הפיקסלים בתמונה את המרחק )המינימלי( שלהם מקבוצת הפיקסלים
+ הזו.
+\end_layout
+
+\begin_layout Standard
+הגישה הנאיבית - לסמן את הפיקסלים של 
+\begin_inset Formula $S$
+\end_inset
+
+ ב-
+\numeric on
+0
+\numeric off
+, את כל שאר התמונה ב-
+\numeric on
+1
+\numeric off
+, ואז לעבור על כל הפיקסלים ולעדכן את המרחק ל))מינימום מבין השכנים( +
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+((.
+ כל ממשיכים עד התכנסות.
+ סיבוכיות 
+\begin_inset Formula $O\left(n^{2}\right)$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+גישת שני המעברים - מפרידים את השכנים של כל פיקסל לשתי קבוצות - 
+\begin_inset Formula $N_{1}$
+\end_inset
+
+ )בירוק( ו-
+\begin_inset Formula $N_{2}$
+\end_inset
+
+ )בכחול(:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename two_pass_distance.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+מעבר ראשון: עוברים על התמונה מלמעלה למטה, משמאל לימין.
+ עבור פיקסל 
+\begin_inset Formula $p$
+\end_inset
+
+ מגדירים:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula 
+\[
+d'\left(p,S\right)=\begin{cases}
+0 & p\in S\\
+\underset{q\in N_{1}}{\min}\left\{ d'\left(q,S\right)\right\} +1 & p\notin S
+\end{cases}
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+מעבר שני: עוברים על התמונה מלמטה למעלה, מימין לשמאל.
+ עבור פיקסל 
+\begin_inset Formula $p$
+\end_inset
+
+ מגדירים:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula 
+\[
+d\left(p,S\right)=\underset{q\in N_{2}}{\min}\left\{ d'\left(p,S\right),\ d\left(q,S\right)+1\right\} 
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+כעת, ניתן להגדיר לכל צורה 
+\series bold
+שלד
+\series default
+ - שלד של צורה הוא אוסף נקודות המקסימום הלוקאלי בטרנספורם
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+distance
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ביחס לקצה של הצורה.
+ 
+\end_layout
+
+\begin_layout Standard
+השלד הוא אוסף המרכזים של מעגלים מקסימליים שיש להם שתי נקודות מגע עם קצה
+ הצורה.
+\end_layout
+
+\begin_layout Standard
+ניתן לחשוב על שלד בתור אוסף נקודות המפגש של שני )או יותר( גלים המתקדמים
+ במהירות קבועה מקצה הצורה למרכזה.
+\end_layout
+
+\begin_layout Standard
+לדוגמה עבור מלבן )בסביבת-
+\numeric on
+4
+\numeric off
+(:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename skeleton.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename skeleton2.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+מומנטים
+\end_layout
+
+\begin_layout Subsubsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+קנוניזציה של צורות.
+ לדוגמה - למצוא מהן האותיות שמפוזרות על דף כלשהו )בגדלים ואוריינטציות שונים(.
+\end_layout
+
+\begin_layout Standard
+מומנט מסדר 
+\begin_inset Formula $\left(n,m\right)$
+\end_inset
+
+ של אובייקט 
+\begin_inset Formula $I$
+\end_inset
+
+ נתון ע"י: 
+\begin_inset Formula 
+\[
+M_{n,m}=\sum_{x}\sum_{y}x^{n}y^{m}I\left(x,y\right)
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+כעת, ניתן להגדיר שטח של אובייקט לפי מומנט מסדר 
+\begin_inset Formula $\left(0,0\right)$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+A\left(I\right)=\sum_{x}\sum_{y}I\left(x,y\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+המרכז הגאומטרי )
+\lang english
+centroid
+\lang hebrew
+( של האובייקט נתון ע"י הממנטים מסדר 
+\begin_inset Formula $\left(1,0\right),\left(0,1\right)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+C=\left(\frac{1}{A\left(I\right)}\sum_{x}\sum_{y}xI\left(x,y\right),\ \frac{1}{A\left(I\right)}\sum_{x}\sum_{y}yI\left(x,y\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+הציר הראשי של אובייקט ניתן לחישוב באמצעות מומנט מסדר שני.
+\end_layout
+
+\begin_layout Standard
+נגדיר:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+a=\sum\sum x^{2}I\left(x,y\right),\ b=2\sum\sum xyI\left(x,y\right),\ c=\sum\sum y^{2}I\left(x,y\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כעת, הציר הראשי של האובייקט הוא הישר שעובר דרך המרכז הגאומטרי, בזוית 
+\begin_inset Formula $\theta$
+\end_inset
+
+ המקיימת: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\tan\left(2\theta\right)=\frac{b}{a-c}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+הרחבה, צמצום, פתיחה וסגירה
+\end_layout
+
+\begin_layout Subsubsection
+הרחבה -
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Dilation
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+מסכה 
+\series default
+
+\begin_inset Formula $B$
+\end_inset
+
+ היא אוסף קואורדינטות יחסיות לפיקסל - לדוגמה, המסכה 
+\begin_inset Formula $B=\left\{ \left(0,0\right),\left(0,2\right)\right\} $
+\end_inset
+
+ משמעה הפיקסל עצמו, והפיקסל שבמרחק
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מעליו.
+\end_layout
+
+\begin_layout Standard
+בהינתן מסכה 
+\begin_inset Formula $B$
+\end_inset
+
+ ואובייקט 
+\begin_inset Formula $X$
+\end_inset
+
+ ניתן להרחיב את 
+\begin_inset Formula $X$
+\end_inset
+
+ ע"י 
+\begin_inset Formula $B$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X\oplus B=\bigcup_{b\in B}X_{b}=\left\{ z\ |\ \left(\hat{B}\right)_{z}\bigcap X\neq\emptyset\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כלומר - איחוד של כל ההזות של 
+\begin_inset Formula $X$
+\end_inset
+
+ לפי 
+\begin_inset Formula $B$
+\end_inset
+
+, או: אוסף הפיקסלים 
+\begin_inset Formula $z$
+\end_inset
+
+ כך שאם נשקף את 
+\begin_inset Formula $B$
+\end_inset
+
+, יהיה ל-
+\begin_inset Formula $B$
+\end_inset
+
+ המשוקף חיתוך עם 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+זו פעולה קומוטטיבית - 
+\begin_inset Formula $X\oplus B=B\oplus X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename dilation.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+הזזה ושכפול באמצעות
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+dilation
+\lang hebrew
+:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename dilation2.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+צמצום -
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Erosion
+\end_layout
+
+\begin_layout Standard
+בהינתן מסכה 
+\begin_inset Formula $B$
+\end_inset
+
+ ואובייקט 
+\begin_inset Formula $x$
+\end_inset
+
+ ניתן לצמצם את 
+\begin_inset Formula $X$
+\end_inset
+
+ לפי 
+\begin_inset Formula $B$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X\ominus B=\left\{ x\ |\ B_{x}\subseteq X\right\} =\left\{ x\ |\ B_{x}\bigcap X^{c}=\emptyset\right\} 
+\]
+
+\end_inset
+
+ כלומר, זהו אוסף הפיקסלים ב-
+\begin_inset Formula $X$
+\end_inset
+
+ שאם נציב את הראשית של 
+\begin_inset Formula $B$
+\end_inset
+
+ עליהם, 
+\begin_inset Formula $B$
+\end_inset
+
+ יהיה מוכל ב-
+\begin_inset Formula $X$
+\end_inset
+
+.
+ או: אוסף הפיקסלים 
+\begin_inset Formula $x$
+\end_inset
+
+ כך שאם נזיז את 
+\begin_inset Formula $B$
+\end_inset
+
+ ב-
+\begin_inset Formula $x$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+ לא יחתך עם פיקסלים שאינם ב-
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+דוגמה:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename erosion.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+הקשר בין הרחבה וצמצום
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(X\ominus B\right)^{c}=X^{c}\oplus\hat{B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+פתיחה
+\end_layout
+
+\begin_layout Standard
+פתיחה )
+\lang english
+Opening
+\lang hebrew
+( של אובייקט מוגדרת בתור צמצום ואז הרחבה של האובייקט לפי אותה מסכה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X\circ B=\left(X\ominus B\right)\oplus B
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לפרש זאת בתור כל הטרנסלציות האפשריות של 
+\begin_inset Formula $B$
+\end_inset
+
+ שמוכלות ב-
+\begin_inset Formula $X$
+\end_inset
+
+, כלומר: 
+\begin_inset Formula 
+\[
+X\circ B=\bigcup_{B_{z}\subseteq X}B_{z}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+האפקט של פתיחה הוא החלקת פינות פנימיות של האובייקט.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename opening.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+סגירה
+\end_layout
+
+\begin_layout Standard
+סגירה )
+\lang english
+Closing
+\lang hebrew
+( של אובייקט מוגדרת בתור הרבה ואז צמצום של האובייקט לפי אותה מסכה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X\bullet B=\left(X\oplus B\right)\ominus B
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לפרש זאת בתור המשלים של כל הטרנסלציות האפשריות של 
+\begin_inset Formula $B$
+\end_inset
+
+ במשלים של 
+\begin_inset Formula $X$
+\end_inset
+
+, כלומר: 
+\begin_inset Formula 
+\[
+\left(\bigcup_{B_{z}\subseteq X^{c}}B_{z}\right)^{c}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+האפקט של סגירה הוא מילוי חורים, או החלקת פינות "חיצוניות", כלומר פינות במשלים
+ של 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename closing.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+שימושים
+\end_layout
+
+\begin_layout Standard
+שחזור תמונות בינאריות - להעיף רעש באמצעות פתיחה, ואז להחזיר אזורים שהיו
+ מחוברים לאובייקט:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename binary_reconstruction.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+מורפולוגיית
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Greyscale
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+-
+\end_layout
+
+\begin_layout Standard
+הרחבה: 
+\begin_inset Formula $J\left(x,y\right)=I\oplus B=\underset{b\in B}{\max}\left\{ I\left(x+b_{x},y+b_{y}\right)\right\} $
+\end_inset
+
+ - מרחיב אזורים בהירים על חשבון כהים.
+\end_layout
+
+\begin_layout Standard
+צמצום: 
+\begin_inset Formula $J\left(x,y\right)=I\ominus B\underset{b\in B}{\min}\left\{ I\left(x+b_{x},y+b_{y}\right)\right\} $
+\end_inset
+
+ - מרחיב אזורים כהים על חשבון בהירים.
+\end_layout
+
+\begin_layout Standard
+זיהוי קצוות: 
+\begin_inset Formula $G=I\oplus B-I\ominus B$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+מציאת שלד
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Greyscale
+\end_layout
+
 \begin_layout Section
 סופר רזולוציה
+\end_layout
+
+\begin_layout Subsection
+מוטיבציה
+\end_layout
+
+\begin_layout Standard
+בהינתן אוסף תמונות ברזולוציה נמוכה, ליצור תמונה חדשה ברזולוציה גבוהה.
+\end_layout
+
+\begin_layout Subsection
+הרעיון
+\end_layout
+
+\begin_layout Standard
+אם רוצים תמונה שבה המרחק בין כל זוג דגימות הוא 
+\begin_inset Formula $d$
+\end_inset
+
+, ניתן לקחת אוסף תמונות שהמרחק בין הדגימות בהן הוא 
+\begin_inset Formula $2d$
+\end_inset
+
+, כל אחת בהיסט שונה, ולחבר בינהן.
+\end_layout
+
+\begin_layout Subsection
+המודל
+\end_layout
+
+\begin_layout Standard
+הנחת העבודה: נתונות 
+\begin_inset Formula $n$
+\end_inset
+
+ תמונות 
+\begin_inset Formula $Y_{1}\dots Y_{n}$
+\end_inset
+
+.
+ כל אחת מהן היא טרנספורמציה על התמונה המקורית 
+\begin_inset Formula $X$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Y_{k}=D_{k}H_{k}F_{k}X+V_{k}
+\]
+
+\end_inset
+
+ כאשר:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $D_{k}$
+\end_inset
+
+ הוא אופרטור דגימה )
+\lang english
+sampling / decimation
+\lang hebrew
+(.
+ לרוב - זהה לכל 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $H_{k}$
+\end_inset
+
+ הוא אופרטור טשטוש )
+\lang english
+blur
+\lang hebrew
+(.
+ ניתן למידול בתור קונבולוציה.
+ לרוב - זהה לכל 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $F_{k}$
+\end_inset
+
+ הוא אופרטור גאומטרי )הזזה, סיבוב וכו'(.
+ לרוב שונה בין 
+\begin_inset Formula $k$
+\end_inset
+
+-ים שונים.
+ ניתן למצוא באמצעות אלגוריתם נפרד )לדג'
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+LK
+\lang hebrew
+(.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $V_{k}$
+\end_inset
+
+ הוא רעש גאוסיאני אדיטיבי.
+ 
+\begin_inset Formula $V_{k}\sim N\left(0,\sigma^{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כעת המטרה שלנו היא למצוא את 
+\begin_inset Formula $X$
+\end_inset
+
+ הממזער את השגיאה הריבועית:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E\left(X\right)=\sum_{k=1}^{n}\left\Vert P_{k}\left(X\right)-y_{k}\right\Vert ^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כאשר 
+\begin_inset Formula $P_{k}$
+\end_inset
+
+ היא הטרנספורמציה הכוללת שהתבצעה על 
+\begin_inset Formula $X$
+\end_inset
+
+ )גאומטריה, טשטוש, דגימה ורעש(.
+\end_layout
+
+\begin_layout Standard
+ניתן לבצע בשיטה איטרטיבית:
+\end_layout
+
+\begin_layout Itemize
+אתחול - 
+\begin_inset Formula $\widehat{X}_{0}=X$
+\end_inset
+
+, 
+\begin_inset Formula $n=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+עבור 
+\begin_inset Formula $n=0\dots N$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+משערכים טרנספורמציה לכל 
+\begin_inset Formula $Y_{k}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+מחשבים את התמונה השיורית - 
+\begin_inset Formula $X_{r}=\sum_{k=1}^{N}F_{k}^{T}H^{T}D^{T}\left(DHF_{k}\widehat{X}_{n}-Y_{k}\right)$
+\end_inset
+
+ )כלומר - ההפרש בין מה ששיערכנו למה שקיבלנו בפועל(
+\end_layout
+
+\begin_layout Itemize
+מגדירים 
+\begin_inset Formula $\widehat{X}_{n+1}=\widehat{X}_{n}-\beta X_{r}$
+\end_inset
+
+ - כלומר, מתקנים את השערוך שלנו לפי התצפית.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+הגדלה של תמונה יחידה
+\end_layout
+
+\begin_layout Enumerate
+מגדילים את התמונה בצורה רגילה )
+\lang english
+upsampling
+\lang hebrew
+(
+\end_layout
+
+\begin_layout Enumerate
+לכל פיקסל בתמונה המוגדלת:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+מחפשים בלוקים דומים בתמונה המקורית, באזורים המקבילים לפיקסל הנוכחי.
+\end_layout
+
+\begin_layout Enumerate
+מוסיפים את התדרים הגבוהים של הבלוק המתאים ביותר.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+שיפורים אפשריים - 
+\end_layout
+
+\begin_layout Itemize
+לחפש כל פעם בתמונת המקור כולה
+\end_layout
+
+\begin_layout Itemize
+לחפש ב-
+\lang english
+DB
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+חיצוני
+\end_layout
+
+\begin_layout Standard
+שניהם נותנים תוצאות זהות או טובות פחות.
 \end_layout
 
 \begin_layout Section
@@ -2983,6 +4230,35 @@ Wavelets
 
 \begin_layout Section
 צבע
+\end_layout
+
+\begin_layout Section
+ייצוג
+\family roman
+\series bold
+\shape up
+\size larger
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Sparse
 \end_layout
 
 \end_body
