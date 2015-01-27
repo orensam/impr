@@ -3719,7 +3719,7 @@ X\circ B=\bigcup_{B_{z}\subseteq X}B_{z}
 \lang english
 Closing
 \lang hebrew
-( של אובייקט מוגדרת בתור הרבה ואז צמצום של האובייקט לפי אותה מסכה:
+( של אובייקט מוגדרת בתור הרחבה ואז צמצום של האובייקט לפי אותה מסכה:
 \end_layout
 
 \begin_layout Standard
@@ -3777,7 +3777,7 @@ X\bullet B=\left(X\oplus B\right)\ominus B
 שימושים
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 שחזור תמונות בינאריות - להעיף רעש באמצעות פתיחה, ואז להחזיר אזורים שהיו
  מחוברים לאובייקט:
 \end_layout
@@ -3793,8 +3793,271 @@ X\bullet B=\left(X\oplus B\right)\ominus B
 
 \end_layout
 
+\begin_layout Itemize
+מילוי חורים קטנים- ע"י סגירה
+\end_layout
+
+\begin_layout Itemize
+זיהוי קצוות של אובייקט 
+\begin_inset Formula $A$
+\end_inset
+
+ ע"י 
+\begin_inset Formula $A-\left(A\ominus B\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+ביצוע
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Flood Fill
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang hebrew
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+של חורים גדולים - מגדירים מסכה פשוטה 
+\begin_inset Formula $B$
+\end_inset
+
+ )
+\numeric on
+4
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+או
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+8
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+שכנים(.
+ בוחרים נקודה שרירותית 
+\begin_inset Formula $X_{0}$
+\end_inset
+
+ בחור של אובייקט 
+\begin_inset Formula $A$
+\end_inset
+
+, ומבצעים איטרטיבית: 
+\begin_inset Formula $X_{k}=\left(X_{k-1}\oplus B\right)\cap A^{c}$
+\end_inset
+
+ עד התכנסות.
+ 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+ הסופי הוא הפיקסלים של החור.
+\end_layout
+
+\begin_layout Itemize
+מציאת רכיב קשירות - כמו
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+מילוי חורים, רק עם 
+\begin_inset Formula $X_{0}$
+\end_inset
+
+ ששייכת לאובייקט: 
+\begin_inset Formula $X_{k}=\left(X_{k-1}\oplus B\right)\cap A$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+מציאת
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Medial Axis
+\end_layout
+
+\begin_layout Subsubsection
+שימושים עבור תמונות
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Greyscale
+\end_layout
+
 \begin_layout Standard
-מורפולוגיית
+התאמת ההגדרות עבור מורפולוגיית
 \family roman
 \series medium
 \shape up
@@ -3863,7 +4126,38 @@ Greyscale
  - מרחיב אזורים כהים על חשבון בהירים.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
+ניקוי רעשי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang english
+Salt & Pepper
+\lang hebrew
+ - פתיחה ואז סגירה, או להיפך
+\end_layout
+
+\begin_layout Itemize
 זיהוי קצוות: 
 \begin_inset Formula $G=I\oplus B-I\ominus B$
 \end_inset
@@ -3871,7 +4165,7 @@ Greyscale
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 מציאת שלד
 \family roman
 \series medium
