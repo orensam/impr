@@ -36,12 +36,7 @@ function [waveletDecomp] = DWT(image, lowFilt, highFilt, levels)
     
     end
     
-    waveletDecomp(1:height, 1:width) = LL;
-    
-    minVal = min(waveletDecomp(:));
-    maxVal = max(waveletDecomp(:));
-    figure;
-    imshow((waveletDecomp-minVal) / (maxVal-minVal));
+    waveletDecomp(1:height, 1:width) = LL;    
     
 end
 

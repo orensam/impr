@@ -49,9 +49,6 @@ function [image] = IDWT(waveletDecomp, lowFilt, highFilt, levels)
         h = h*2;
         w = w*2;
         
-    end
-    
-    figure;
-    imshow(image);
+    end    
     
 end
