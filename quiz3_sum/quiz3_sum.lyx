@@ -1581,8 +1581,6 @@ halos
 \lang hebrew
 .
  )הפרדה לתדרים גבוהים ונמוכים באמצעות פילטר גאוסיאני(.
-\numeric on
-7
 \end_layout
 
 \begin_layout Standard
@@ -2668,7 +2666,30 @@ Chain codes
 \end_layout
 
 \begin_layout Standard
-נרצה לבדוק אם שני ּ
+נרצה לבדוק אם שני
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 \lang english
 Chain codes
 \family roman
@@ -4487,72 +4508,6 @@ DB
 
 \begin_layout Standard
 שניהם נותנים תוצאות זהות או טובות פחות.
-\end_layout
-
-\begin_layout Section
-טרנספורם
-\family roman
-\series bold
-\shape up
-\size larger
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
- 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang english
-Wavelets
-\end_layout
-
-\begin_layout Section
-תמונות אינטגרל
-\end_layout
-
-\begin_layout Section
-צבע
-\end_layout
-
-\begin_layout Section
-ייצוג
-\family roman
-\series bold
-\shape up
-\size larger
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
- 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang english
-Sparse
 \end_layout
 
 \end_body
