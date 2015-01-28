@@ -56,7 +56,7 @@ function saveWave(wave, LLHeight, LLWidth, fn)
     minVal = min(wave(mask));
     maxVal = max(wave(mask));
     wave(mask) = (wave(mask) - minVal) / (maxVal-minVal);
-    % convert to integer, save and zip
+    % Convert to integer, save and zip
     wave = uint8(wave * 255);
     save(fn, 'wave', '-v6');
     gzip(fn);    
