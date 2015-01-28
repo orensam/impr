@@ -39,9 +39,3 @@ function [waveletDecomp] = DWT(image, lowFilt, highFilt, levels)
     waveletDecomp(1:height, 1:width) = LL;    
     
 end
-
-
-
-
-
-
