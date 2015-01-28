@@ -26,29 +26,38 @@ function [compressedImage, waveletDecompCompressed] = ...
     % Go from [-0.5 .. 0.5] to [0..1], quantize, 
     % then back to original range
     minVal = min(wdNew(:));
-    wdNew = wdNew - minVal;       
-    %size(unique(uint8(wdNew*255)))    
+    wdNew = wdNew - minVal;
     wdQuant = quantizeImage(wdNew, nQuant, quantIters);
-    wdQuant = wdQuant + minVal;
+    wdQuant = wdQuant + minVal;    
     
-    %size(unique(wdQuant))
-    
+    % Now we can get the actual compressed wavelet, and perform inverse DWT
+    % to get the compressed image.
     waveletDecompCompressed = [LL, reshape(wdQuant(1:topRightSize), LLHeight, (w-LLWidth)); ...
-                               reshape(wdQuant(topRightSize+1:end), (h-LLHeight), w)];        
-    
+                               reshape(wdQuant(topRightSize+1:end), (h-LLHeight), w)];            
     compressedImage = IDWT(waveletDecompCompressed, lowFilt, highFilt, levels);
     
-    waveletDecompInt = im2uint8(waveletDecomp);
-    save('beforeCompress.mat', 'waveletDecompInt', '-v6');
-    zip('beforeCompress.zip', 'beforeCompress.mat');
-    waveletDecompCompressedInt = im2uint8(waveletDecompCompressed);
-    save('afterCompress.mat', 'waveletDecompCompressedInt', '-v6');
-    zip('afterCompress.zip', 'afterCompress.mat');
+    % Save both wavelets to files
+    saveWave(waveletDecomp, LLHeight, LLWidth, 'beforeCompress.mat');
+    saveWave(waveletDecompCompressed, LLHeight, LLWidth, 'afterCompress.mat');
     
-%     minVal = min(wdQuant(:));
-%     maxVal = max(wdQuant(:));
-%     figure;
-%     imshow((wdQuant-minVal) / (maxVal-minVal));
+    % Display the result
+    figure;
+    imshow(compressedImage);
     
-    
+end
+
+function saveWave(wave, LLHeight, LLWidth, fn)
+% Converts the given wavelet to integers and save it to file <fn>
+% Uses the given LL height/width to decide which areas have which
+% ranges of values
+    mask = true(size(wave));
+    mask(1:LLHeight, 1:LLWidth) = false;
+    % Normalize the non-LL parts to 0..1
+    minVal = min(wave(mask));
+    maxVal = max(wave(mask));
+    wave(mask) = (wave(mask) - minVal) / (maxVal-minVal);
+    % convert to integer, save and zip
+    wave = uint8(wave * 255);
+    save(fn, 'wave', '-v6');
+    gzip(fn);    
 end
