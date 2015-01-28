@@ -3,7 +3,7 @@ function [denoiseImage] = denoising(image, lowFilt, highFilt, levels)
     
     [h, w] = size(image);
     % Threshold found by trial and error
-    threshold = 0.06;            
+    threshold = 0.09;            
     
     % Get wavelet representation
     wd = DWT(image, lowFilt, highFilt, levels);    
@@ -11,8 +11,8 @@ function [denoiseImage] = denoising(image, lowFilt, highFilt, levels)
     % Find position of non-LL coefficients
     LLHeight = h / 2^levels;
     LLWidth = w / 2^levels;    
-    mask = ones(size(image));
-    mask(1:LLHeight, 1:LLWidth) = 0;
+    mask = true(size(image));
+    mask(1:LLHeight, 1:LLWidth) = false;
     
     % perform thresholding
     wd((abs(wd) < threshold) & mask) = 0;
