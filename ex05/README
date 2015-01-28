@@ -5,11 +5,47 @@ orensam
 
 --- Submitted Files ---
 
+DWT.m                       - Generate Wavelet Transform of a given image
+IDWT.m                      - Recompose an image from a given wavelet transform
+waveletQuantization.m       - Compresses an image using Wavelet Transform and quantization
+deleteHorizontal.m          - Attempts to remove horizontal lines from a page image
+denoising.m                 - Denoises a given image using wavelet transform
+quantizeImage.m             - Performs optimal quantization on a given image
+filterNoisyImage.m          - Demonstrates the denoising operation
+myNoisyImage.png            - Input image for denoising demonstration
 README                       - This file
 
 --- MATLAB Version ---
 
---- Functionality ---
+Matlab R2012a on windows 7
 
 --- Answers to Questions ---
+Questions in section 3.1:
+1. Why do the 'beforeCompress.mat' and 'afterCompress.mat' have the same file size?
+   
+   Both 'beforeCompress.mat' and 'afterCompress.mat' are just matlab matrices that we saved
+   (without any compression) using matlab's save command. Both matrices contain integers and 
+   are the same size (same as the original image's size). Therefore, there is not reason for
+   them to have different sizes - the values inside those matrices have no effect on 
+   the resulting file size.
+
+2. Why do we get different file sizes when compressing the results with zip, although they are
+   the same resolution?
+    
+   When compressing with the 'gzip' command, we're compressing both the .mat files using entropy
+   compression (some LZW variant). Most of the matrix saved in 'afterCompress.mat' has been
+   quantized - therefore it contains a much smaller number of possible values. This means that the
+   entropy in 'afterCompress.mat' is significantly lower than the entropy in 'beforeCompress.mat'.
+   This enables the LZ compression to compress it to a much smaller size.
+
+3. Save and compress the input image.
+   Why do we get a different file size from the zip file containing 'afterCompress.mat'?
+
+   The difference is, once again, due to entropy - the information in 'afterCompress.mat' has a
+   very sparse histogram, whereas the original image can have a histogram with many bins that
+   have high values. This causes the entropy to be higher, and therefore the size after compression
+   to be higher.
+   Moreover, the very fact that 'afterCompress.mat' contains a wavelet representation of the image
+   means that it can be compressed more easily, since it diminishes the value range of the image,
+   while keeping the same amount of pixels.
  
