@@ -52,10 +52,8 @@ function saveWave(wave, LLHeight, LLWidth, fn)
 % ranges of values
     mask = true(size(wave));
     mask(1:LLHeight, 1:LLWidth) = false;
-    % Normalize the non-LL parts to 0..1
-    minVal = min(wave(mask));
-    maxVal = max(wave(mask));
-    wave(mask) = (wave(mask) - minVal) / (maxVal-minVal);
+    % Normalize the non-LL parts to 0..1    
+    wave(mask) = wave(mask) + 0.5;
     % convert to integer, save and zip
     wave = uint8(wave * 255);
     save(fn, 'wave', '-v6');
