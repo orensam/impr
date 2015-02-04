@@ -3,7 +3,7 @@ function [denoiseImage] = denoising(image, lowFilt, highFilt, levels)
     
     [h, w] = size(image);
     % Threshold found by trial and error
-    threshold = 0.06;            
+    threshold = 0.05;            
     
     % Get wavelet representation
     wd = DWT(image, lowFilt, highFilt, levels);    
