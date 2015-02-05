@@ -13,11 +13,11 @@ denoising.m                 - Denoises a given image using wavelet transform
 quantizeImage.m             - Performs optimal quantization on a given image
 filterNoisyImage.m          - Demonstrates the denoising operation
 myNoisyImage.png            - Input image for denoising demonstration
-README                       - This file
+README                      - This file
 
 --- MATLAB Version ---
 
-Matlab R2012a on windows 7
+Matlab R2012a on Windows 7
 
 --- Answers to Questions ---
 Questions in section 3.1:
